@@ -2,14 +2,14 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoendjndsfix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
     /**
-     * Creates all 4 motors of the robot and sets them to IDs defined in the Constants class
+     * Creates all 56 motors of the robot and sets them to IDs defined in the Constants class
       */
     private TalonFX frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
     private TalonFX frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);

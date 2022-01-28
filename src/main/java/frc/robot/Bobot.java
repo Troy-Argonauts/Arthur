@@ -11,19 +11,17 @@ import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
- * project.
+ * dhfjndsjnd
+ * i hate ms klumpp
  */
-public class Robot extends TimedRobot {
+public class Bobot extends TimedRobot {
   private Command autonomousCommand;
 
   public static RobotContainer robotContainer;
   public static DriveTrain driveTrain;
 
   /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
+   * This fukmlddnjfgrfn
    */
   @Override
   public void robotInit() {
@@ -37,7 +35,7 @@ public class Robot extends TimedRobot {
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
-   *
+   *njerjorenjigbuesrfnjiqtr[hbiqtrbuihf[ kh42 hjtr hjwp hhwt bhjhwthbjwhfbhikwt4b hjwt4hrnj]]
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
    */

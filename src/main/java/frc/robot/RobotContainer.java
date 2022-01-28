@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * "declarative" paradigm, very little robot logic should actually be handled in the {@link Bobot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
@@ -36,7 +36,7 @@ public class RobotContainer {
   private void configureButtonBindings() {}
 
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
+   * Use this to pass the autonomous command to the main {@link Bobot} class.
    *
    * @return the command to run in autonomous
    */
