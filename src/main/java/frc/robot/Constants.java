@@ -14,7 +14,7 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static int DT_FRONT_RIGHT = 1;
+    public static int DT_FRONT_RIGHT = 5;
     public static int DT_FRONT_LEFT = 2;
     public static int DT_REAR_RIGHT = 3;
     public static int DT_REAR_LEFT = 4;
