@@ -42,9 +42,9 @@ public class DriveTrain extends SubsystemBase {
      * @param turn Amount to turn the robot
      * @param speed Speed of robot
      */
-    public void cheesyDrive(double turn, double speed) {
-        frontLeft.set(ControlMode.PercentOutput, (speed-turn) / 2);
-        frontRight.set(ControlMode.PercentOutput, (speed+turn) / 2);
+    public void cheesyDrive(double speed, double turn) {
+        frontLeft.set(ControlMode.PercentOutput, (speed - turn) / 2);
+        frontRight.set(ControlMode.PercentOutput, (speed + turn) / 2);
     }
 
     public void breakMode() {
