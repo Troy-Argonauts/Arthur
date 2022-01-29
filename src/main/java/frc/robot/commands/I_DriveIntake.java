@@ -8,4 +8,9 @@ public class I_DriveIntake extends CommandBase {
     public I_DriveIntake() {
         addRequirements(Robot.intake);
     }
+
+    @Override
+    public void execute() {
+        
+    }
 }
