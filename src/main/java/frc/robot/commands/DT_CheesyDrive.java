@@ -7,9 +7,9 @@ import frc.robot.Robot;
 
 import java.util.Set;
 
-public class DT extends CommandBase {
+public class DT_CheesyDrive extends CommandBase {
 
-    public DT() {
+    public DT_CheesyDrive() {
         addRequirements(Robot.driveTrain);
     }
 
