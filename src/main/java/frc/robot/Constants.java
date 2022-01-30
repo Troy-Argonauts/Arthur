@@ -14,11 +14,16 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static int DT_FRONT_RIGHT = 1;
-    public static int DT_FRONT_LEFT = 2;
-    public static int DT_REAR_RIGHT = 3;
-    public static int DT_REAR_LEFT = 4;
-    public static int INTAKE = 5;
+    public static final int DT_FRONT_RIGHT = 1;
+    public static final int DT_FRONT_LEFT = 2;
+    public static final int DT_REAR_RIGHT = 3;
+    public static final int DT_REAR_LEFT = 4;
+    public static final int INTAKE = 5;
 
-    public static int CONTROLLER_PORT = 0;
+    public static final int CONTROLLER_PORT = 0;
+
+    public static final double LL_HEIGHT_ABOVE_GROUND = 2.5;
+    public static final double LL_TARGET_HEIGHT = 8.75;
+    public static final double LL_SHOT_HEIGHT = LL_TARGET_HEIGHT - LL_HEIGHT_ABOVE_GROUND;
+    
 }
