@@ -23,9 +23,4 @@ public final class Constants {
     public static final int S_LEFT = 7;
 
     public static final int CONTROLLER_PORT = 0;
-
-    public static final double LL_HEIGHT_ABOVE_GROUND = 2.5;
-    public static final double LL_TARGET_HEIGHT = 8.75;
-    public static final double LL_SHOT_HEIGHT = LL_TARGET_HEIGHT - LL_HEIGHT_ABOVE_GROUND;
-    
 }
