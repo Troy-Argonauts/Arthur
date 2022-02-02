@@ -19,6 +19,8 @@ public final class Constants {
     public static final int DT_REAR_RIGHT = 3;
     public static final int DT_REAR_LEFT = 4;
     public static final int INTAKE = 5;
+    public static final int S_RIGHT = 6;
+    public static final int S_LEFT = 7;
 
     public static final int CONTROLLER_PORT = 0;
 
