@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -12,10 +13,13 @@ public class DriveTrain extends SubsystemBase {
     /**
      * Creates all 4 motors of the robot and sets them to IDs defined in the Constants class
       */
-    private TalonFX frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
-    private TalonFX frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
-    private TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
-    private TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
+
+    private final TalonFX frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
+    private final TalonFX frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
+    @SuppressWarnings("FieldCanBeLocal")
+    private final TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
+    @SuppressWarnings("FieldCanBeLocal")
+    private final TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
 
     /**
      * Has the rear motors imitate the front motors to reduce lines of code
@@ -24,7 +28,8 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
 
-        setDefaultCommand(new DT_CheesyDrive());
+        frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        rearLeft.setInverted(TalonFXInvertType.FollowMaster);
     }
 
     /**
@@ -45,11 +50,6 @@ public class DriveTrain extends SubsystemBase {
     public void cheesyDrive(double turn, double speed) {
         frontLeft.set(ControlMode.PercentOutput, (speed-turn) / 2);
         frontRight.set(ControlMode.PercentOutput, (speed+turn) / 2);
-    }
-
-    public void breakMode() {
-        frontLeft.setNeutralMode(NeutralMode.Brake);
-        frontRight.setNeutralMode(NeutralMode.Brake);
     }
 
     @Override

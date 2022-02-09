@@ -1,26 +1,24 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
-
-import java.util.Set;
 
 public class DT_CheesyDrive extends CommandBase {
 
     public DT_CheesyDrive() {
-        addRequirements(Robot.driveTrain);
+        addRequirements(Robot.getDriveTrain());
     }
 
     @Override
     public void execute() {
-        Robot.driveTrain.cheesyDrive(Robot.robotContainer.controller.getLeftJoystickY(), Robot.robotContainer.controller.getRightJoystickX());
+        Robot.getDriveTrain().cheesyDrive(Robot.robotContainer.controller.getLeftJoystickX(), Robot.robotContainer.controller.getLeftJoystickY()
+
+        );
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.driveTrain.cheesyDrive(0.0, 0.0);
+        Robot.getDriveTrain().cheesyDrive(0.0, 0.0);
     }
 
     @Override
