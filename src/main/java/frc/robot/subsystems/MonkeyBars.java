@@ -1,4 +1,6 @@
 package frc.robot.subsystems;
 
-public class MonkeyBars {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class MonkeyBars extends SubsystemBase {
 }
