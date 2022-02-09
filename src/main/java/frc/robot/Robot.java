@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.I_DriveIntake;
+import frc.robot.commands.DT_CheesyDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.MonkeyBars;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,11 +22,11 @@ import frc.robot.subsystems.Intake;
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
 
-
-
   public static RobotContainer robotContainer;
-  public static DriveTrain driveTrain;
-  public static Intake intake;
+  private static DriveTrain driveTrain;
+  private static Intake intake;
+  private static Shooter shooter;
+  private static MonkeyBars monkeyBars;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,9 +37,12 @@ public class Robot extends TimedRobot {
     // Initialize Subsystems
     driveTrain = new DriveTrain();
     intake = new Intake();
+    shooter = new Shooter();
+    monkeyBars = new MonkeyBars();
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
+    CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DT_CheesyDrive());
   }
 
   /**
@@ -102,4 +107,24 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  public static DriveTrain getDriveTrain() {
+    if (driveTrain == null) driveTrain = new DriveTrain();
+    return driveTrain;
+  }
+
+  public static Intake getIntake() {
+    if (intake == null) intake = new Intake();
+    return intake;
+  }
+
+  public static Shooter getShooter() {
+    if (shooter == null) shooter = new Shooter();
+    return shooter;
+  }
+
+  public static MonkeyBars getMonkeyBars() {
+    if (monkeyBars == null) monkeyBars = new MonkeyBars();
+    return monkeyBars;
+  }
 }
