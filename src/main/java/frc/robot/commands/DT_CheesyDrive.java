@@ -11,7 +11,7 @@ public class DT_CheesyDrive extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.getDriveTrain().cheesyDrive(Robot.robotContainer.controller.getLeftJoystickX(), Robot.robotContainer.controller.getLeftJoystickY()
+        Robot.getDriveTrain().cheesyDrive(Robot.robotContainer.controller.getLeftJoystickX(), Robot.robotContainer.controller.getRightJoystickY()
 
         );
     }

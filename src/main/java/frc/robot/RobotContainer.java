@@ -7,9 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.libs.util.Controller;
 import frc.robot.commands.S_ShooterActivate;
 import frc.robot.commands.S_ShooterDeactivate;
+import frc.robot.commands.S_ShooterToggle;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,7 +38,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    controller.getXButton().whenPressed(new S_ShooterActivate()).whenPressed(new S_ShooterDeactivate());
+    controller.getXButton().whenPressed(new S_ShooterActivate());
+    controller.getYButton().whenPressed(new S_ShooterDeactivate());
   }
 
   /**
