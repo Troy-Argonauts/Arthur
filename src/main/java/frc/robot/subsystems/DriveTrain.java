@@ -1,12 +1,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.DT_CheesyDrive;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -14,12 +12,12 @@ public class DriveTrain extends SubsystemBase {
      * Creates all 4 motors of the robot and sets them to IDs defined in the Constants class
       */
 
-    private final TalonFX frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
-    private final TalonFX frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
+    private final TalonSRX frontLeft = new TalonSRX(Constants.DT_FRONT_LEFT);
+    private final TalonSRX frontRight = new TalonSRX(Constants.DT_FRONT_RIGHT);
     @SuppressWarnings("FieldCanBeLocal")
-    private final TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
+    private final TalonSRX rearLeft = new TalonSRX(Constants.DT_REAR_LEFT);
     @SuppressWarnings("FieldCanBeLocal")
-    private final TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
+    private final TalonSRX rearRight = new TalonSRX(Constants.DT_REAR_RIGHT);
 
     /**
      * Has the rear motors imitate the front motors to reduce lines of code
@@ -28,8 +26,8 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
 
-        frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
-        rearLeft.setInverted(TalonFXInvertType.FollowMaster);
+        frontLeft.setInverted(true);
+        rearLeft.setInverted(true);
     }
 
     /**
@@ -48,8 +46,8 @@ public class DriveTrain extends SubsystemBase {
      * @param speed Speed of robot
      */
     public void cheesyDrive(double turn, double speed) {
-        frontLeft.set(ControlMode.PercentOutput, (speed-turn) / 2);
-        frontRight.set(ControlMode.PercentOutput, (speed+turn) / 2);
+        frontLeft.set(ControlMode.PercentOutput, (speed - turn) / 2);
+        frontRight.set(ControlMode.PercentOutput, (speed + turn) / 2);
     }
 
     @Override
