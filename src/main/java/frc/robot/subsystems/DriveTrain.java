@@ -10,7 +10,8 @@ public class DriveTrain extends SubsystemBase {
 
     /**
      * Creates all 4 motors of the robot and sets them to IDs defined in the Constants class
-      */
+     * For main robot, motors will be TalonFX. Currently set to TalonSRX for training purposes.
+     */
 
     private final TalonSRX frontLeft = new TalonSRX(Constants.DT_FRONT_LEFT);
     private final TalonSRX frontRight = new TalonSRX(Constants.DT_FRONT_RIGHT);
