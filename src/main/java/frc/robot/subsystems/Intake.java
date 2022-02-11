@@ -12,12 +12,13 @@ public class Intake extends SubsystemBase {
 
     public void activate(double speed) {
         intakeMotor.set(speed);
+        indexerMotor.set(speed);
     }
 
     public void excecuteForward() {
-        Robot.getIntake().activate(Robot.robotContainer.controller.getRightTrigger()/50);
+        Robot.getIntake().activate(0.5);
     }
     public void excecuteBackward() {
-        Robot.getIntake().activate(-(Robot.robotContainer.controller.getLeftTrigger())/50);
+        Robot.getIntake().activate(-0.5);
     }
 }

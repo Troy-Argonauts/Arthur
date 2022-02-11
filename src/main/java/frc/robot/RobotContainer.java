@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.libs.util.Controller;
+import frc.robot.commands.I_IntakeBackward;
+import frc.robot.commands.I_IntakeForward;
 import frc.robot.commands.S_ShooterToggle;
 
 /**
@@ -21,10 +23,16 @@ public class RobotContainer {
 
   public Controller controller = new Controller(Constants.CONTROLLER_PORT);
   private final S_ShooterToggle s_shooterToggle;
+  private final I_IntakeForward i_intakeForward;
+  private final I_IntakeBackward i_intakeBackward;
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     s_shooterToggle = new S_ShooterToggle();
+    i_intakeForward = new I_IntakeForward();
+    i_intakeBackward = new I_IntakeBackward();
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -37,6 +45,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     controller.getXButton().toggleWhenPressed(s_shooterToggle);
+    controller.getRBButton().toggleWhenActive(i_intakeForward);
+    controller.getLBButton().toggleWhenActive(i_intakeBackward);
   }
 
   /**
