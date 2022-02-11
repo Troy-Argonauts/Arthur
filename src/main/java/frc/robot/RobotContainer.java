@@ -7,13 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.libs.util.Controller;
-import frc.robot.commands.I_Intake;
+import frc.robot.commands.I_IntakeBackward;
+import frc.robot.commands.I_IntakeForward;
 import frc.robot.commands.S_ShooterActivate;
-import frc.robot.commands.S_ShooterDeactivate;
 import frc.robot.commands.S_ShooterToggle;
-import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,11 +25,15 @@ public class RobotContainer {
   public Controller controller = new Controller(Constants.CONTROLLER_PORT);
   private S_ShooterActivate s_shooterActivate;
   private final S_ShooterToggle s_shooterToggle;
+  private final I_IntakeForward i_intakeForward;
+  private final I_IntakeBackward i_intakeBackward;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     s_shooterActivate = new S_ShooterActivate();
     s_shooterToggle = new S_ShooterToggle();
+    i_intakeForward = new I_IntakeForward();
+    i_intakeBackward = new I_IntakeBackward();
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -44,6 +46,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     controller.getXButton().toggleWhenPressed(s_shooterToggle);
+    controller.getRBButton().whenPressed(i_intakeForward);
+    controller.getLBButton().whenPressed(i_intakeBackward);
   }
 
   /**
