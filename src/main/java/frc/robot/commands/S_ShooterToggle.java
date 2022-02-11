@@ -9,6 +9,8 @@ import frc.robot.Robot;
 
 public class S_ShooterToggle extends CommandBase {
   /** Creates a new S_ShooterToggle. */
+  boolean active = false;
+
   public S_ShooterToggle() {
     addRequirements(Robot.getShooter());
   }
@@ -20,8 +22,7 @@ public class S_ShooterToggle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean active = false;
-    Robot.getShooter().toggle(active);
+    Robot.getShooter().toggle();
   }
 
   // Called once the command ends or is interrupted.
