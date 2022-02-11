@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.libs.util.Controller;
+import frc.robot.commands.I_Intake;
 import frc.robot.commands.S_ShooterActivate;
 import frc.robot.commands.S_ShooterDeactivate;
 import frc.robot.commands.S_ShooterToggle;
