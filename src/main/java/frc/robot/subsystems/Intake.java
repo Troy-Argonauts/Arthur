@@ -15,9 +15,9 @@ public class Intake extends SubsystemBase {
     }
 
     public void excecuteForward() {
-        Robot.getIntake().activate(Robot.robotContainer.controller.getRightTrigger());
+        Robot.getIntake().activate(Robot.robotContainer.controller.getRightTrigger()/50);
     }
     public void excecuteBackward() {
-        Robot.getIntake().activate(-(Robot.robotContainer.controller.getLeftTrigger()));
+        Robot.getIntake().activate(-(Robot.robotContainer.controller.getLeftTrigger())/50);
     }
 }
