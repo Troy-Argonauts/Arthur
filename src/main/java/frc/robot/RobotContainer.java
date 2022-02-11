@@ -24,9 +24,13 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   public Controller controller = new Controller(Constants.CONTROLLER_PORT);
+  private S_ShooterActivate s_shooterActivate;
+  private final S_ShooterToggle s_shooterToggle;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    s_shooterActivate = new S_ShooterActivate();
+    s_shooterToggle = new S_ShooterToggle();
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -38,8 +42,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    controller.getXButton().whenPressed(new S_ShooterActivate());
-    controller.getYButton().whenPressed(new S_ShooterDeactivate());
+    controller.getXButton().toggleWhenPressed(s_shooterToggle);
   }
 
   /**
