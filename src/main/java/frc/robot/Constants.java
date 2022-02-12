@@ -23,4 +23,6 @@ public final class Constants {
     public static int SHOOTER = 0;
 
     public static int CONTROLLER_PORT = 0;
+
+    public static double LL_SHOOTERTOHUB_Y = 8.75 - 2;
 }
