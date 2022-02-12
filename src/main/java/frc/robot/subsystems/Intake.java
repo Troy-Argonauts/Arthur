@@ -15,10 +15,10 @@ public class Intake extends SubsystemBase {
         indexerMotor.set(speed);
     }
 
-    public void excecuteForward() {
+    public void executeForward() {
         Robot.getIntake().activate(0.5);
     }
-    public void excecuteBackward() {
+    public void executeBackward() {
         Robot.getIntake().activate(-0.5);
     }
 }
