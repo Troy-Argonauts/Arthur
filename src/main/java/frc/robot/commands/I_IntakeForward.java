@@ -11,7 +11,7 @@ public class I_IntakeForward extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.getIntake().excecuteForward();
+        Robot.getIntake().executeForward();
     }
 
     @Override

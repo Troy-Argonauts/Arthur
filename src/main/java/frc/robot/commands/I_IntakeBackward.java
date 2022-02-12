@@ -11,7 +11,7 @@ public class I_IntakeBackward extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.getIntake().excecuteBackward();
+        Robot.getIntake().executeBackward();
     }
 
     @Override

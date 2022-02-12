@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,12 +15,12 @@ public class DriveTrain extends SubsystemBase {
      * For main robot, motors will be TalonFX. Currently set to TalonSRX for training purposes.
      */
 
-    private final TalonSRX frontLeft = new TalonSRX(Constants.DT_FRONT_LEFT);
-    private final TalonSRX frontRight = new TalonSRX(Constants.DT_FRONT_RIGHT);
+    private final TalonFX frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
+    private final TalonFX frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
     @SuppressWarnings("FieldCanBeLocal")
-    private final TalonSRX rearLeft = new TalonSRX(Constants.DT_REAR_LEFT);
+    private final TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
     @SuppressWarnings("FieldCanBeLocal")
-    private final TalonSRX rearRight = new TalonSRX(Constants.DT_REAR_RIGHT);
+    private final TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
 
     /**
      * Has the rear motors imitate the front motors to reduce lines of code
@@ -28,7 +30,7 @@ public class DriveTrain extends SubsystemBase {
         rearRight.follow(frontRight);
 
         frontLeft.setInverted(true);
-        rearLeft.setInverted(true);
+        rearLeft.setInverted(InvertType.FollowMaster);
     }
 
     /**
