@@ -15,25 +15,18 @@ public class Shooter extends SubsystemBase {
         active = false;
     }
 
-    public void activate() {
-        mainMotor.set(ControlMode.PercentOutput, 0.55);
-    }
-
-    public void deactivate() {
-        mainMotor.set(ControlMode.PercentOutput, 0);
-    }
-
-    public void toggle() {
+    @Override
+    public void periodic() {
         if (!active) {
-            activate();
+            mainMotor.set(ControlMode.PercentOutput, 0.55);
             active = true;
         } else {
-            deactivate();
+            mainMotor.set(ControlMode.PercentOutput, 0);
             active = false;
         }
     }
 
-    public boolean isActive() {
-        return active;
+    public void toggle() {
+        active = !active;
     }
 }
