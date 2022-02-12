@@ -11,6 +11,16 @@ public class I_IntakeForward extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.getIntake().activate(0.3);
+        Robot.getIntake().executeForward();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        Robot.getIntake().activate(0);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }
