@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.libs.util.Controller;
 import frc.robot.commands.I_IntakeBackward;
 import frc.robot.commands.I_IntakeForward;
+import frc.robot.commands.PS_ShiftIntake;
+import frc.robot.commands.PS_ToggleCompressor;
 import frc.robot.commands.S_ShooterToggle;
 
 /**
@@ -25,6 +27,8 @@ public class RobotContainer {
   private final S_ShooterToggle s_shooterToggle;
   private final I_IntakeForward i_intakeForward;
   private final I_IntakeBackward i_intakeBackward;
+  private final PS_ToggleCompressor ps_toggleCompressor;
+  private final PS_ShiftIntake ps_shiftIntake;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -32,6 +36,8 @@ public class RobotContainer {
     s_shooterToggle = new S_ShooterToggle();
     i_intakeForward = new I_IntakeForward();
     i_intakeBackward = new I_IntakeBackward();
+    ps_toggleCompressor = new PS_ToggleCompressor();
+    ps_shiftIntake = new PS_ShiftIntake();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -47,6 +53,8 @@ public class RobotContainer {
     controller.getXButton().toggleWhenPressed(s_shooterToggle);
     controller.getRBButton().toggleWhenActive(i_intakeForward);
     controller.getLBButton().toggleWhenActive(i_intakeBackward);
+    controller.getYButton().toggleWhenActive(ps_toggleCompressor);
+    controller.getAButton().toggleWhenActive(ps_shiftIntake);
   }
 
   /**
