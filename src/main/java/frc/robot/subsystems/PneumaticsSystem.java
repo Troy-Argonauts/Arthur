@@ -9,6 +9,7 @@ import frc.robot.Constants;
 public class PneumaticsSystem extends SubsystemBase {
     
     Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_SHIFTER_1, Constants.INTAKE_SHIFTER_2);
 
     public PneumaticsSystem() {
         compressor.enableDigital();
@@ -27,7 +28,7 @@ public class PneumaticsSystem extends SubsystemBase {
         solenoid.close();
     }
 
-    DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_SHIFTER_1, Constants.INTAKE_SHIFTER_2);
+
 
     public void shiftIntake() {
         if (DoubleSolenoid.Value.kOff == DoubleSolenoid.Value.kForward) {

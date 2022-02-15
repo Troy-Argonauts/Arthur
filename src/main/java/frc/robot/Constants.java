@@ -26,5 +26,7 @@ public final class Constants {
 
     public static int CONTROLLER_PORT = 0;
 
-    public static double LL_SHOOTERTOHUB_Y = 8.75 - 2;
+    public static double LIMELIGHT_HEIGHT = 0;
+    public static double VERTICAL_HUB_HEIGHT = 0;
+    public static double LIMELIGHT_ANGLE = 0;
 }
