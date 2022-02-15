@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -29,6 +29,11 @@ public class DriveTrain extends SubsystemBase {
 
         frontLeft.setInverted(true);
         rearLeft.setInverted(InvertType.FollowMaster);
+
+        frontLeft.setNeutralMode(NeutralMode.Coast);
+        frontRight.setNeutralMode(NeutralMode.Coast);
+        rearLeft.setNeutralMode(NeutralMode.Coast);
+        rearRight.setNeutralMode(NeutralMode.Coast);
     }
 
     /**

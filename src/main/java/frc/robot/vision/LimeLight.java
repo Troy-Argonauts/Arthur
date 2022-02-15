@@ -30,8 +30,8 @@ public class LimeLight {
         return getTable().getEntry("ta").getDouble(0.0);
     }
 
-    public double distance() {
-        return Constants.LL_SHOOTERTOHUB_Y / Math.sin(getYAngle());
+    public static double getDistance()  {
+        return (Constants.VERTICAL_HUB_HEIGHT - Constants.LIMELIGHT_HEIGHT) / Math.tan(Constants.LIMELIGHT_ANGLE + getYAngle());
     }
     
 }
