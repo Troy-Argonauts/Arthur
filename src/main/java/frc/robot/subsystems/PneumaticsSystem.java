@@ -36,13 +36,18 @@ public class PneumaticsSystem extends SubsystemBase {
     }
 
 
-    public void toggleSolenoids() {
+    public void dropIntake(){
+        if (currentState == DoubleSolenoid.Value.kReverse) {
+            currentState = DoubleSolenoid.Value.kForward;
+            updateState();
+        }
+    }
+
+    public void pickupIntake() {
         if (currentState == DoubleSolenoid.Value.kForward) {
             currentState = DoubleSolenoid.Value.kReverse;
-        } else {
-            currentState = DoubleSolenoid.Value.kForward;
+            updateState();
         }
-        updateState();
     }
 
     public void updateState() {
