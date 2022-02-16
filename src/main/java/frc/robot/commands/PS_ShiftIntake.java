@@ -11,7 +11,7 @@ public class PS_ShiftIntake extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.getPneumaticsSystem().shiftIntake();
+        Robot.getPneumaticsSystem().toggleSolenoids();
     }
 
     @Override
