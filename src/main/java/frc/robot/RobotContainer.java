@@ -23,7 +23,7 @@ import frc.robot.commands.S_ShooterToggle;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  public Controller controller = new Controller(Constants.CONTROLLER_PORT);
+  public final Controller controller;
   private final S_ShooterToggle s_shooterToggle;
   private final I_IntakeForward i_intakeForward;
   private final I_IntakeBackward i_intakeBackward;
@@ -33,6 +33,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    controller = new Controller(Constants.CONTROLLER_PORT);
+
     s_shooterToggle = new S_ShooterToggle();
     i_intakeForward = new I_IntakeForward();
     i_intakeBackward = new I_IntakeBackward();

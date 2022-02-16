@@ -9,10 +9,12 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
 
-    private final TalonFX mainMotor = new TalonFX(Constants.SHOOTER);
+    private final TalonFX mainMotor;
     private boolean active;
 
     public Shooter() {
+        mainMotor = new TalonFX(Constants.SHOOTER);
+
         mainMotor.configFactoryDefault();
 
         mainMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
