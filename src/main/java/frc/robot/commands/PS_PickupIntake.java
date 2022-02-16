@@ -1,9 +1,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class PS_PickupIntake extends CommandBase {
+public class PS_PickupIntake extends InstantCommand {
 
     public PS_PickupIntake() {
         // each subsystem used by the command must be passed into the
@@ -26,26 +27,6 @@ public class PS_PickupIntake extends CommandBase {
     @Override
     public void execute() {
         Robot.getPneumaticsSystem().pickupIntake();
-    }
-
-    /**
-     * <p>
-     * Returns whether this command has finished. Once a command finishes -- indicated by
-     * this method returning true -- the scheduler will call its {@link #end(boolean)} method.
-     * </p><p>
-     * Returning false will result in the command never ending automatically. It may still be
-     * cancelled manually or interrupted by another command. Hard coding this command to always
-     * return true will result in the command executing once and finishing immediately. It is
-     * recommended to use * {@link edu.wpi.first.wpilibj2.command.InstantCommand InstantCommand}
-     * for such an operation.
-     * </p>
-     *
-     * @return whether this command has finished.
-     */
-    @Override
-    public boolean isFinished() {
-        // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
     }
 
     /**

@@ -1,9 +1,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class PS_ToggleCompressor extends CommandBase {
+public class PS_ToggleCompressor extends InstantCommand {
 
     public PS_ToggleCompressor() {
         addRequirements(Robot.getPneumaticsSystem());
@@ -17,10 +18,5 @@ public class PS_ToggleCompressor extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Robot.getPneumaticsSystem().stop();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return false;
     }
 }
