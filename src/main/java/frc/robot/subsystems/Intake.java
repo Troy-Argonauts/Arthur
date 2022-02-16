@@ -8,22 +8,26 @@ import frc.robot.Robot;
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private final CANSparkMax indexerMotor;
+    private boolean active;
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
-        indexerMotor = new CANSparkMax(Constants.I_INDEXER, CANSparkMax.MotorType.kBrushless);
     }
 
-    public void activate(double speed) {
-        intakeMotor.set(speed);
-        indexerMotor.set(speed);
+    @Override
+    public void periodic() {
+        if (active) {
+            intakeMotor.set(-0.5);
+        } else {
+            intakeMotor.set(0.5);
+        }
     }
 
-    public void executeForward() {
-        Robot.getIntake().activate(0.5);
+    public void toggle() {
+        active = !active;
     }
-    public void executeBackward() {
-        Robot.getIntake().activate(-0.5);
+
+    public void disable() {
+        intakeMotor.set(0);
     }
 }
