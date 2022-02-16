@@ -7,8 +7,13 @@ import frc.robot.Robot;
 
 public class Intake extends SubsystemBase {
 
-    private final CANSparkMax intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
-    private final CANSparkMax indexerMotor = new CANSparkMax(Constants.I_INDEXER, CANSparkMax.MotorType.kBrushless);
+    private final CANSparkMax intakeMotor;
+    private final CANSparkMax indexerMotor;
+
+    public Intake() {
+        intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
+        indexerMotor = new CANSparkMax(Constants.I_INDEXER, CANSparkMax.MotorType.kBrushless);
+    }
 
     public void activate(double speed) {
         intakeMotor.set(speed);

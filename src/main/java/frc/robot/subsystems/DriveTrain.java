@@ -9,21 +9,23 @@ import frc.robot.Constants;
 public class DriveTrain extends SubsystemBase {
 
     /**
-     * Creates all 4 motors of the robot and sets them to IDs defined in the Constants class
-     * For main robot, motors will be TalonFX. Currently set to TalonSRX for training purposes.
+     * Creates all 2 main motors of the robot
      */
 
-    private final TalonFX frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
-    private final TalonFX frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
-    @SuppressWarnings("FieldCanBeLocal")
-    private final TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
-    @SuppressWarnings("FieldCanBeLocal")
-    private final TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
+    private final TalonFX frontLeft;
+    private final TalonFX frontRight;
 
     /**
-     * Has the rear motors imitate the front motors to reduce lines of code
+     * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
+     * Has rear motors follow front motors, and sets all motors to coast when stopped.
      */
     public DriveTrain() {
+        frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
+        frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
+        TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
+        TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
+
+
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
 
