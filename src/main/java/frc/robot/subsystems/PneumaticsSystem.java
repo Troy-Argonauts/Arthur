@@ -8,10 +8,17 @@ import frc.robot.Constants;
 
 public class PneumaticsSystem extends SubsystemBase {
     
-    Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_SHIFTER_1, Constants.INTAKE_SHIFTER_2);
+    private final Compressor compressor;
+    private final DoubleSolenoid solenoid;
+    private DoubleSolenoid.Value currentState;
 
     public PneumaticsSystem() {
+        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+
+        solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_SHIFTER_1, Constants.INTAKE_SHIFTER_2);
+        currentState = DoubleSolenoid.Value.kReverse;
+        updateState();
+
         compressor.enableDigital();
     }
 
@@ -29,13 +36,22 @@ public class PneumaticsSystem extends SubsystemBase {
     }
 
 
-
-    public void shiftIntake() {
-        if (DoubleSolenoid.Value.kOff == DoubleSolenoid.Value.kForward) {
-            solenoid.set(DoubleSolenoid.Value.kReverse);
-        } else {
-            solenoid.set(DoubleSolenoid.Value.kForward);
+    public void dropIntake(){
+        if (currentState == DoubleSolenoid.Value.kReverse) {
+            currentState = DoubleSolenoid.Value.kForward;
+            updateState();
         }
+    }
+
+    public void pickupIntake() {
+        if (currentState == DoubleSolenoid.Value.kForward) {
+            currentState = DoubleSolenoid.Value.kReverse;
+            updateState();
+        }
+    }
+
+    public void updateState() {
+        solenoid.set(currentState);
     }
 
 }
