@@ -52,7 +52,8 @@ public class RobotContainer {
     controller.getYButton().toggleWhenActive(ps_toggleCompressor);
     controller.getAButton().toggleWhenActive(i_intakeToggle);
     controller.getRBButton().toggleWhenActive(ps_dropIntake);
-    controller.getLBButton().toggleWhenActive(ps_pickupIntake);
+    controller.getLBButton().toggleWhenActive(ps_toggleCompressor);
+    controller.getAButton().whenHeld(i_intakeToggle);
   }
 
   /**
