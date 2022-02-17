@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DT_CheesyDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Intake_Indexer;
 import frc.robot.subsystems.MonkeyBars;
 import frc.robot.subsystems.PneumaticsSystem;
 import frc.robot.subsystems.Shooter;
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   private static Shooter shooter;
   private static MonkeyBars monkeyBars;
   private static PneumaticsSystem pneumaticsSystem;
+  private static Intake_Indexer intake_indexer;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
     shooter = new Shooter();
     monkeyBars = new MonkeyBars();
     pneumaticsSystem = new PneumaticsSystem();
+    intake_indexer = new Intake_Indexer();
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
@@ -138,5 +141,9 @@ public class Robot extends TimedRobot {
     if (pneumaticsSystem == null) pneumaticsSystem = new PneumaticsSystem();
     return pneumaticsSystem;
   }
-  
+
+  public static Intake_Indexer getIntakeIndexer() {
+    if (intake_indexer == null) intake_indexer = new Intake_Indexer();
+    return intake_indexer;
+  }
 }
