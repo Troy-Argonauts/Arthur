@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -30,11 +31,22 @@ public class DriveTrain extends SubsystemBase {
         rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
         rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
 
+        frontLeft.setSensorPhase(false);
+        frontRight.setSensorPhase(false);
+        rearLeft.setSensorPhase(false);
+        rearRight.setSensorPhase(false);
 
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
-        frontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
-        rearLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
-        rearRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
+        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
+        frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
+        rearLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
+        rearRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
+
+        frontRight.configFeedbackNotContinuous(false, 4);
+        frontLeft.configFeedbackNotContinuous(false, 4);
+        rearLeft.configFeedbackNotContinuous(false, 4);
+        rearRight.configFeedbackNotContinuous(false, 4);
+
+        frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
 
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
