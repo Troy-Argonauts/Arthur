@@ -20,7 +20,9 @@ import frc.robot.commands.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  public final Controller controller;
+  private final Controller driver;
+  private final Controller operator;
+
   private final S_ShooterToggle s_shooterToggle;
   private final I_IntakeToggle i_intakeToggle;
   private final PS_ToggleCompressor ps_toggleCompressor;
@@ -33,7 +35,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    controller = new Controller(Constants.CONTROLLER_PORT);
+    driver = new Controller(Constants.DRIVER_PORT);
+    operator = new Controller(Constants.OPERATOR_PORT);
 
     s_shooterToggle = new S_ShooterToggle();
     ps_toggleCompressor = new PS_ToggleCompressor();
@@ -55,15 +58,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Trigger rightTrigger = new Trigger( () -> controller.getRightTrigger() > 0);
-    Trigger leftTrigger = new Trigger(() -> controller.getLeftTrigger() > 0 );
+    Trigger rightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
+    Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
-    controller.getXButton().toggleWhenPressed(s_shooterToggle);
-    controller.getYButton().toggleWhenActive(ps_toggleCompressor);
-    controller.getAButton().toggleWhenActive(i_intakeToggle);
-    controller.getRBButton().toggleWhenActive(ps_dropIntake);
-    controller.getLBButton().toggleWhenActive(ps_pickupIntake);
-    controller.getAButton().whenHeld(i_intakeToggle);
+    operator.getXButton().toggleWhenPressed(s_shooterToggle);
+    operator.getYButton().toggleWhenActive(ps_toggleCompressor);
+    operator.getAButton().toggleWhenActive(i_intakeToggle);
+    operator.getRBButton().toggleWhenActive(ps_dropIntake);
+    operator.getLBButton().toggleWhenActive(ps_pickupIntake);
+    operator.getAButton().whenHeld(i_intakeToggle);
 
     rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
     leftTrigger.whenActive(mb_down).whenInactive(mb_stop);
@@ -77,5 +80,13 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return null;
+  }
+
+  public Controller getDriver() {
+    return driver;
+  }
+
+  public Controller getOperator() {
+    return operator;
   }
 }
