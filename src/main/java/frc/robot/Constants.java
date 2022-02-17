@@ -14,15 +14,17 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static int DT_FRONT_RIGHT = 1;
+    public static int DT_FRONT_RIGHT = 4;
     public static int DT_FRONT_LEFT = 2;
-    public static int DT_REAR_RIGHT = 5;
-    public static int DT_REAR_LEFT = 4;
-    public static int I_INTAKE = 3;
-    public static int I_INDEXER = 6;
+    public static int DT_REAR_RIGHT = 1;
+    public static int DT_REAR_LEFT = 3;
+    public static int I_INTAKE = 5;
+    public static int I_INDEXER_FLOOR = 6;
+    public static int I_INDEXER_UP = 7;
     public static int INTAKE_SHIFTER_1 = 0;
     public static int INTAKE_SHIFTER_2 = 1;
     public static int SHOOTER = 0;
+    public static int MONKEY_BARS = 10;
 
     public static int CONTROLLER_PORT = 0;
 

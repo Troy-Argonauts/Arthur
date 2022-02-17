@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.Controller;
 import frc.robot.commands.*;
 
@@ -25,6 +26,9 @@ public class RobotContainer {
   private final PS_ToggleCompressor ps_toggleCompressor;
   private final PS_PickupIntake ps_pickupIntake;
   private final PS_DropIntake ps_dropIntake;
+  private final MB_Down mb_down;
+  private final MB_Up mb_up;
+  private final MB_Stop mb_stop;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -36,6 +40,9 @@ public class RobotContainer {
     ps_pickupIntake = new PS_PickupIntake();
     ps_dropIntake = new PS_DropIntake();
     i_intakeToggle = new I_IntakeToggle();
+    mb_down = new MB_Down();
+    mb_up = new MB_Up();
+    mb_stop = new MB_Stop();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -48,12 +55,18 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    Trigger rightTrigger = new Trigger( () -> controller.getRightTrigger() > 0);
+    Trigger leftTrigger = new Trigger(() -> controller.getLeftTrigger() > 0 );
+
     controller.getXButton().toggleWhenPressed(s_shooterToggle);
     controller.getYButton().toggleWhenActive(ps_toggleCompressor);
     controller.getAButton().toggleWhenActive(i_intakeToggle);
     controller.getRBButton().toggleWhenActive(ps_dropIntake);
     controller.getLBButton().toggleWhenActive(ps_pickupIntake);
     controller.getAButton().whenHeld(i_intakeToggle);
+
+    rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
+    leftTrigger.whenActive(mb_down).whenInactive(mb_stop);
   }
 
   /**

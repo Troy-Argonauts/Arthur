@@ -133,5 +133,4 @@ public class Controller extends Joystick {
     public double getTriggers() {
         return getRightTrigger() - getLeftTrigger();
     }
-
 }
