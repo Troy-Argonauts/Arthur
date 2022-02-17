@@ -17,8 +17,6 @@ public class Shooter extends SubsystemBase {
 
         mainMotor.configFactoryDefault();
 
-        mainMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
-
         mainMotor.setSensorPhase(false);
         mainMotor.setInverted(false);
 

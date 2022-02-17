@@ -14,6 +14,8 @@ public class DriveTrain extends SubsystemBase {
 
     private final TalonFX frontLeft;
     private final TalonFX frontRight;
+    private final TalonFX rearLeft;
+    private final TalonFX rearRight;
 
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
@@ -22,9 +24,14 @@ public class DriveTrain extends SubsystemBase {
     public DriveTrain() {
         frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
         frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
-        TalonFX rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
-        TalonFX rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
+        rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
+        rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
 
+
+        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
+        frontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
+        rearLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
+        rearRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 50);
 
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
@@ -60,7 +67,14 @@ public class DriveTrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-
+        SmartDashboard.putNumber("Front Right Position" , frontRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Front Left Position" , frontLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Rear Right Position" , rearRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Rear Left Position" , rearLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Front Right Velocity" , frontRight.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Front Left Velocity" , frontLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Rear Right Velocity" , rearRight.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Rear Left Velocity" , rearLeft.getSelectedSensorVelocity());
     }
 
 
