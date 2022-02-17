@@ -13,8 +13,6 @@ public class Intake_Indexer extends SubsystemBase {
     public Intake_Indexer() {
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
-
-        active = false;
     }
 
     @Override
