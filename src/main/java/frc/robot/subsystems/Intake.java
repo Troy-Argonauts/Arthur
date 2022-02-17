@@ -8,7 +8,7 @@ import frc.robot.Robot;
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean active;
+    private boolean forward;
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
@@ -16,15 +16,17 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (active) {
-            intakeMotor.set(-0.5);
-        } else {
+        if (forward) {
             intakeMotor.set(0.5);
+            forward = true;
+        } else {
+            intakeMotor.set(-0.5);
+            forward = false;
         }
     }
 
     public void toggle() {
-        active = !active;
+        forward = !forward;
     }
 
     public void disable() {
