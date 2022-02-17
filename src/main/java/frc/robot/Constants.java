@@ -26,7 +26,8 @@ public final class Constants {
     public static int SHOOTER = 0;
     public static int MONKEY_BARS = 10;
 
-    public static int CONTROLLER_PORT = 0;
+    public static int DRIVER_PORT = 0;
+    public static int OPERATOR_PORT = 1;
 
     public static double LIMELIGHT_HEIGHT = 0;
     public static double VERTICAL_HUB_HEIGHT = 0;
