@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DT_CheesyDrive;
+import frc.robot.auton.DT_MoveToSetpoint;
 import frc.robot.subsystems.*;
 
 /**
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DT_CheesyDrive());
     SmartDashboard.putData("Auto mode", chooser);  
     chooser.setDefaultOption("Default", new WaitCommand(0));
+    chooser.setDefaultOption("Move off Tarmac", new DT_MoveToSetpoint(-1));
   }
 
   /**
