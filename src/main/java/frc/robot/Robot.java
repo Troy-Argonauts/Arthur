@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", chooser);  
     chooser.setDefaultOption("Default", new WaitCommand(0));
     chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1));
+    chooser.addOption("Simple Auto", new SimpleAuto());
     chooser.addOption("Shoot ball", new ShootBall());
   }
 
