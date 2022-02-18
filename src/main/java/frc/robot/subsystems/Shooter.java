@@ -39,7 +39,7 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            shooterMain.set(ControlMode.PercentOutput, 0.55);
+            activate();
             active = true;
         } else {
             shooterMain.set(ControlMode.PercentOutput, 0);
@@ -65,6 +65,10 @@ public class Shooter extends SubsystemBase {
     public boolean lockOn() {
         // TODO: Make lock on method so shooter speed can be made so that it can shoot from anywhere on the field
         return false;
+    }
+
+    public void activate() {
+        shooterMain.set(ControlMode.PercentOutput, 0.55);
     }
 
     public void toggle() {
