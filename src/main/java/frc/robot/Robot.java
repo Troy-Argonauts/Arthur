@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DT_CheesyDrive;
-import frc.robot.auton.DT_MoveToSetpoint;
-import frc.robot.auton.ShootBall;
+import frc.robot.auton.commands.*;
+import frc.robot.auton.routines.*;
 import frc.robot.subsystems.*;
 
 /**
