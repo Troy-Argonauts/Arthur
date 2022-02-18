@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DT_CheesyDrive;
 import frc.robot.auton.commands.*;
 import frc.robot.auton.routines.*;
+import frc.robot.auton.DT_MoveToSetpoint;
 import frc.robot.subsystems.*;
 
 /**
@@ -58,6 +59,7 @@ public class Robot extends TimedRobot {
     chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1));
     chooser.addOption("Simple Auto", new SimpleAuto());
     chooser.addOption("Shoot ball", new ShootBall());
+    chooser.setDefaultOption("Move off Tarmac", new DT_MoveToSetpoint(-1));
   }
 
   /**
