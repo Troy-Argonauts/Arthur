@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            mainMotor.set(ControlMode.PercentOutput, 0.55);
+            activate();
             active = true;
         } else {
             mainMotor.set(ControlMode.PercentOutput, 0);
@@ -36,6 +36,10 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("Temperature", mainMotor.getTemperature());
         SmartDashboard.putNumber("Current", mainMotor.getSupplyCurrent());
         SmartDashboard.putNumber("Voltage", mainMotor.getBusVoltage());
+    }
+
+    public void activate() {
+        mainMotor.set(ControlMode.PercentOutput, 0.55);
     }
 
     public void toggle() {
