@@ -34,9 +34,7 @@ public class Robot extends TimedRobot {
   private static PneumaticsSystem pneumaticsSystem;
   private static Intake_Indexer intake_indexer;
   
-  SendableChooser<Command> chooser = new SendableChooser<>();
-
-  SendableChooser<Command> chooser = new SendableChooser<>();
+  private final SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
