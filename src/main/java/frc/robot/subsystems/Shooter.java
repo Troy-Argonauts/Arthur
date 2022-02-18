@@ -71,6 +71,10 @@ public class Shooter extends SubsystemBase {
         shooterMain.set(ControlMode.PercentOutput, 0.55);
     }
 
+    public void activate() {
+        mainMotor.set(ControlMode.PercentOutput, 0.55);
+    }
+
     public void toggle() {
         active = !active;
     }
