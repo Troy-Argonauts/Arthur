@@ -32,7 +32,7 @@ public final class Constants {
     public static double LIMELIGHT_HEIGHT = 0;
     public static double VERTICAL_HUB_HEIGHT = 0;
     public static double LIMELIGHT_ANGLE = 0;
-  
+
     public static double DT_kWheelDiameterMeters = 0.2;
     public static double DT_kEncoderCPR = 2048;
     public static double DT_kEncoderDistancePerPulse = (DT_kWheelDiameterMeters * Math.PI)/ DT_kEncoderCPR;
@@ -42,7 +42,7 @@ public final class Constants {
     public static double DT_kD = 0;
 
     public static double DT_PIDTolerance = 0.5;
-  
+
     public static double SHOOTER_F = 0.05;
     public static double SHOOTER_P = 0;
     public static double SHOOTER_I = 0;
