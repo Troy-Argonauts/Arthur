@@ -19,8 +19,9 @@ public class SimpleAuto extends SequentialCommandGroup {
       // Pick up ball
       new I_StartIntake(),
       new DT_MoveToSetpoint(-1),
+      new I_StartIntake(),
       new I_StopIntake(),
-
+      new RunCommand(() -> Robot.getShooter().activate(), Robot.getShooter()).withTimeout(2),
       new RunCommand(() -> Robot.getIntakeIndexer().toggle(), Robot.getIntakeIndexer()).withTimeout(1)
       );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
