@@ -5,15 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DT_CheesyDrive;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake_Indexer;
-import frc.robot.subsystems.MonkeyBars;
-import frc.robot.subsystems.PneumaticsSystem;
-import frc.robot.subsystems.Shooter;
+import frc.robot.auton.commands.*;
+import frc.robot.auton.routines.*;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -31,6 +31,8 @@ public class Robot extends TimedRobot {
   private static MonkeyBars monkeyBars;
   private static PneumaticsSystem pneumaticsSystem;
   private static Intake_Indexer intake_indexer;
+  
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -49,6 +51,11 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DT_CheesyDrive());
+    SmartDashboard.putData("Auto mode", chooser);  
+    chooser.setDefaultOption("Default", new WaitCommand(0));
+    chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1));
+    chooser.addOption("Simple Auto", new SimpleAuto());
+    chooser.addOption("Shoot ball", new ShootBall());
   }
 
   /**
@@ -79,7 +86,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    autonomousCommand = robotContainer.getAutonomousCommand();
+    autonomousCommand = chooser.getSelected();
 
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {
