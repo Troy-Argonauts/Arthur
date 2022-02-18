@@ -32,4 +32,11 @@ public final class Constants {
     public static double LIMELIGHT_HEIGHT = 0;
     public static double VERTICAL_HUB_HEIGHT = 0;
     public static double LIMELIGHT_ANGLE = 0;
+
+    public static double SHOOTER_F = 0.05;
+    public static double SHOOTER_P = 0;
+    public static double SHOOTER_I = 0;
+    public static double SHOOTER_D = 0;
+
+    public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
 }
