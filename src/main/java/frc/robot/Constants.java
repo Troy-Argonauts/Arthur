@@ -52,4 +52,6 @@ public final class Constants {
 
     public static int BOTTOMINDEXERSENSOR_PING = 1;
     public static int BOTTOMINDEXERSENSOR_RESPONSE = 2;
+    
+    public static double CONTROLLER_DRIFT = 0.01;
 }
