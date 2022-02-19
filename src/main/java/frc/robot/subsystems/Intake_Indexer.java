@@ -22,7 +22,7 @@ public class Intake_Indexer extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            if (bottomIndexerSensor.getRangeInches() > 1) {
+            if (/*bottomIndexerSensor.getRangeInches() > 1*/ true) {
                 activate();
                 active = true;
             }
