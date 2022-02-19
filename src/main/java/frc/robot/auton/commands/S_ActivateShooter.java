@@ -4,29 +4,15 @@
 
 package frc.robot.auton.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 
-public class S_ActivateShooter extends CommandBase {
-
+public class S_ActivateShooter extends SequentialCommandGroup {
   public S_ActivateShooter() {
+    addCommands(
+      new RunCommand(() -> Robot.getShooter().activate(), Robot.getShooter()).withTimeout(2)
+    );
     addRequirements(Robot.getShooter());
   }
-
-  
-  @Override
-  public void initialize() {
-    withTimeout(2);
-  }
-
-  @Override
-  public void execute() {
-    Robot.getShooter().activate();
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-    Robot.getShooter().stop();
-  }
-
 }

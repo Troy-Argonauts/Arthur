@@ -4,15 +4,14 @@
 
 package frc.robot.auton.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-
-public class DT_ZeroEncoders extends ParallelCommandGroup {
-  public DT_ZeroEncoders() {
+public class I_StartIndexer extends SequentialCommandGroup {
+  public I_StartIndexer() {
     addCommands(
-      new RunCommand(() -> Robot.getDriveTrain().zeroEncoders(), Robot.getDriveTrain())
+      new RunCommand(() -> Robot.getIntakeIndexer().activate(), Robot.getIntakeIndexer())
     );
-    addRequirements(Robot.getDriveTrain());
+    addRequirements(Robot.getIntakeIndexer());
   }
 }

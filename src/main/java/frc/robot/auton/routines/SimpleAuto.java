@@ -4,7 +4,6 @@
 
 package frc.robot.auton.routines;
 
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.auton.commands.*;
@@ -14,17 +13,19 @@ public class SimpleAuto extends SequentialCommandGroup {
   public SimpleAuto() {
     addCommands(
       new DT_ZeroEncoders(),
+      new I_StartIndexer(),
       new S_ActivateShooter(),
+      new S_DeactivateShooter(),
 
       // Pick up ball
       new I_StartIntake(),
       new DT_MoveToSetpoint(-1),
       new I_StopIntake(),
-
-      new RunCommand(() -> Robot.getIntakeIndexer().toggle(), Robot.getIntakeIndexer()).withTimeout(1),
+      new I_StopIndexer(),
 
       new DT_MoveToSetpoint(1),
-      new S_ActivateShooter()
+      new S_ActivateShooter(),
+      new S_DeactivateShooter()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }

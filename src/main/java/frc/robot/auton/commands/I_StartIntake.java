@@ -16,9 +16,8 @@ public class I_StartIntake extends SequentialCommandGroup {
     addCommands(
       new RunCommand(() -> Robot.getPneumaticsSystem().toggleCompressor(), Robot.getPneumaticsSystem()).withTimeout(1),
       new RunCommand(() -> Robot.getPneumaticsSystem().dropIntake(), Robot.getPneumaticsSystem()).withTimeout(1), 
-      new RunCommand(() -> Robot.getIntake().forward(), Robot.getIntake()).withTimeout(2),
-      new RunCommand(() -> Robot.getIntakeIndexer().activate(), Robot.getIntakeIndexer()).withTimeout(2)
+      new RunCommand(() -> Robot.getIntake().forward(), Robot.getIntake()).withTimeout(2)
     );
-    addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake(), Robot.getIntakeIndexer());
+    addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake());
   }
 }
