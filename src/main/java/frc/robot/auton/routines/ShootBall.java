@@ -14,7 +14,6 @@ public class ShootBall extends SequentialCommandGroup {
     addCommands(
       new DT_ZeroEncoders(), 
       new S_ActivateShooter(),
-      new S_DeactivateShooter(), 
       new DT_MoveToSetpoint(-1)
     );
     addRequirements(Robot.getDriveTrain(), Robot.getShooter());
