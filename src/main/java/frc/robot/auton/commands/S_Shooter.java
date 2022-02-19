@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 
-public class S_ActivateShooter extends SequentialCommandGroup {
-  public S_ActivateShooter() {
+public class S_Shooter extends SequentialCommandGroup {
+  public S_Shooter() {
     addCommands(
       new RunCommand(() -> Robot.getShooter().activate(), Robot.getShooter()).withTimeout(2),
       new RunCommand(() -> Robot.getShooter().stop(), Robot.getShooter())

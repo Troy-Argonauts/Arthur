@@ -14,7 +14,7 @@ public class SimpleAuto extends SequentialCommandGroup {
     addCommands(
       new DT_ZeroEncoders(),
       new I_StartIndexer(),
-      new S_ActivateShooter(),
+      new S_Shooter(),
 
       // Pick up ball
       new I_StartIntake(),
@@ -23,7 +23,7 @@ public class SimpleAuto extends SequentialCommandGroup {
       new I_StopIndexer(),
 
       new DT_MoveToSetpoint(1),
-      new S_ActivateShooter()
+      new S_Shooter()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }
