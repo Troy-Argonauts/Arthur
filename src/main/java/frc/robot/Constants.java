@@ -32,4 +32,6 @@ public final class Constants {
     public static double LIMELIGHT_HEIGHT = 0;
     public static double VERTICAL_HUB_HEIGHT = 0;
     public static double LIMELIGHT_ANGLE = 0;
+
+    public static double CONTROLLER_DRIFT = 0.01;
 }
