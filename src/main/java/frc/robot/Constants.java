@@ -14,10 +14,10 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static int DT_FRONT_RIGHT = 4;
-    public static int DT_FRONT_LEFT = 2;
-    public static int DT_REAR_RIGHT = 1;
-    public static int DT_REAR_LEFT = 3;
+    public static int DT_FRONT_RIGHT = 3;
+    public static int DT_FRONT_LEFT = 1;
+    public static int DT_REAR_RIGHT = 4;
+    public static int DT_REAR_LEFT = 2;
     public static int I_INTAKE = 5;
     public static int I_INDEXER_FLOOR = 6;
     public static int I_INDEXER_UP = 7;
@@ -33,5 +33,25 @@ public final class Constants {
     public static double VERTICAL_HUB_HEIGHT = 0;
     public static double LIMELIGHT_ANGLE = 0;
 
+    public static double DT_kWheelDiameterMeters = 0.2;
+    public static double DT_kEncoderCPR = 2048;
+    public static double DT_kEncoderDistancePerPulse = (DT_kWheelDiameterMeters * Math.PI)/ DT_kEncoderCPR;
+
+    public static double DT_kP = 0.1;
+    public static double DT_kI = 0;
+    public static double DT_kD = 0;
+
+    public static double DT_PIDTolerance = 0.5;
+
+    public static double SHOOTER_F = 0.05;
+    public static double SHOOTER_P = 0;
+    public static double SHOOTER_I = 0;
+    public static double SHOOTER_D = 0;
+
+    public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
+
+    public static int BOTTOMINDEXERSENSOR_PING = 1;
+    public static int BOTTOMINDEXERSENSOR_RESPONSE = 2;
+    
     public static double CONTROLLER_DRIFT = 0.01;
 }
