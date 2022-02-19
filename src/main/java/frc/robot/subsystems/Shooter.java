@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -38,10 +39,10 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            activate();
+            shooterMain.set(ControlMode.PercentOutput, 0.55);
             active = true;
         } else {
-            stop();
+            shooterMain.set(ControlMode.PercentOutput, 0);
             active = false;
         }
 
@@ -76,7 +77,7 @@ public class Shooter extends SubsystemBase {
     public void stop() {
         shooterMain.set(ControlMode.PercentOutput, 0);
     }
-
+)
     public void toggle() {
         active = !active;
     }

@@ -18,7 +18,8 @@ public class Intake_Indexer extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            activate();
+            floorMotor.set(0.55);
+            upMotor.set(0.55);
             active = true;
         } else {
             floorMotor.set(0);
@@ -27,10 +28,6 @@ public class Intake_Indexer extends SubsystemBase {
         }
     }
 
-    public void activate() {
-        floorMotor.set(0.55);
-        upMotor.set(0.55);
-    }
     public void toggle() {
         active = !active;
     }
