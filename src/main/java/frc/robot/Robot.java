@@ -5,8 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DT_CheesyDrive;
 import frc.robot.auton.commands.*;
 import frc.robot.auton.routines.*;
@@ -50,6 +53,11 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DT_CheesyDrive());
+    SmartDashboard.putData("Auto mode", chooser);  
+    chooser.setDefaultOption("Default", new WaitCommand(0));
+    chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
+    chooser.addOption("Simple Auto", new SimpleAuto().withTimeout(15));
+    chooser.addOption("Shoot ball", new ShootBall().withTimeout(15));
   }
 
   /**
@@ -80,7 +88,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    autonomousCommand = robotContainer.getAutonomousCommand();
+    autonomousCommand = chooser.getSelected();
 
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {

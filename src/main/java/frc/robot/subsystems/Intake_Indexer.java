@@ -27,12 +27,20 @@ public class Intake_Indexer extends SubsystemBase {
                 active = true;
             }
         } else {
-            floorMotor.set(0);
-            upMotor.set(0);
+            deactivate();
             active = false;
         }
     }
 
+    public void activate() {
+        floorMotor.set(0.55);
+        upMotor.set(0.55);
+    }
+
+    public void deactivate() {
+        floorMotor.set(0);
+        upMotor.set(0);
+    }
     public void toggle() {
         active = !active;
     }

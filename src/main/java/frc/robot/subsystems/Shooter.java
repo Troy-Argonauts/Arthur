@@ -39,10 +39,10 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            shooterMain.set(ControlMode.PercentOutput, 0.55);
+            activate();
             active = true;
         } else {
-            shooterMain.set(ControlMode.PercentOutput, 0);
+            stop();
             active = false;
         }
 
@@ -71,13 +71,10 @@ public class Shooter extends SubsystemBase {
         shooterMain.set(ControlMode.PercentOutput, 0.55);
     }
 
-    public void activate() {
-        mainMotor.set(ControlMode.PercentOutput, 0.55);
-
     public void stop() {
         shooterMain.set(ControlMode.PercentOutput, 0);
     }
-)
+
     public void toggle() {
         active = !active;
     }
