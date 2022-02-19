@@ -8,6 +8,7 @@ public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
     private boolean forward;
+    
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);

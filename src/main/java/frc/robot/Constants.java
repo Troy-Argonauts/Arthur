@@ -49,4 +49,7 @@ public final class Constants {
     public static double SHOOTER_D = 0;
 
     public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
+
+    public static int BOTTOMINDEXERSENSOR_PING = 1;
+    public static int BOTTOMINDEXERSENSOR_RESPONSE = 2;
 }
