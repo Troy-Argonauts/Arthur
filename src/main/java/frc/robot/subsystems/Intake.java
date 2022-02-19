@@ -3,12 +3,11 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean active;
+    private boolean forward;
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
@@ -16,17 +15,27 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (active) {
-            intakeMotor.set(-0.5);
+        if (forward) {
+            forward();
+            forward = true;
         } else {
-            intakeMotor.set(0.5);
+            backward();
+            forward = false;
         }
     }
 
     public void toggle() {
-        active = !active;
+        forward = !forward;
     }
 
+    public void forward() {
+        intakeMotor.set(0.5);
+    }
+
+    public void backward() {
+        intakeMotor.set(-0.5);
+    }
+    
     public void disable() {
         intakeMotor.set(0);
     }
