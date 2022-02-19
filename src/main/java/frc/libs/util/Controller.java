@@ -108,25 +108,25 @@ public class Controller extends Joystick {
     }
 
     public double getLeftJoystickX() {
-        if (getX() > Constants.CONTROLLER_DRIFT) {
-            return getX();
-        }
-        return 0;
+        return getX();
     }
 
     public double getLeftJoystickY() {
-        return getY();
+        if (getY() > Constants.CONTROLLER_DRIFT) {
+            return getY();
+        }
+        return 0;
     }
 
     public double getRightJoystickX() {
-        return getRawAxis(4);
+        if (getRawAxis(4) > Constants.CONTROLLER_DRIFT) {
+            return getRawAxis(4);
+        }
+        return 0;
     }
 
     public double getRightJoystickY() {
-        if (getRawAxis(5) > Constants.CONTROLLER_DRIFT) {
-            return getRawAxis(5);
-        }
-        return 0;
+        return getRawAxis(5);
     }
 
     public double getLeftTrigger() {
