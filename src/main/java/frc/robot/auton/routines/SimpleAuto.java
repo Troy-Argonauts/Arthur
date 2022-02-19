@@ -21,7 +21,10 @@ public class SimpleAuto extends SequentialCommandGroup {
       new DT_MoveToSetpoint(-1),
       new I_StopIntake(),
 
-      new RunCommand(() -> Robot.getIntakeIndexer().toggle(), Robot.getIntakeIndexer()).withTimeout(1)
+      new RunCommand(() -> Robot.getIntakeIndexer().toggle(), Robot.getIntakeIndexer()).withTimeout(1),
+
+      new DT_MoveToSetpoint(1),
+      new RunCommand(() -> Robot.getShooter().activate(), Robot.getShooter()).withTimeout(2)
       );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }
