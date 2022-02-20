@@ -18,6 +18,7 @@ public class Pickup2 extends SequentialCommandGroup {
 
       new I_StartIntake(),
       new DT_MoveToSetpoint(-1),
+
       new DT_TurnToTarget(-1, 0.5),
       new DT_MoveToSetpoint(-1),
 
