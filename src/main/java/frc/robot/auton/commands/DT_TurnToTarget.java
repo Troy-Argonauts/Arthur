@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 
-public class I_StartIndexer extends SequentialCommandGroup {
-  public I_StartIndexer() {
+public class DT_TurnToTarget extends SequentialCommandGroup {
+
+  public DT_TurnToTarget(int direction, double time) {
     addCommands(
-      new RunCommand(() -> Robot.getIntakeIndexer().activate(), Robot.getIntakeIndexer())
+      new RunCommand(() -> Robot.getDriveTrain().cheesyDrive(0, 0.5 * direction), Robot.getDriveTrain()).withTimeout(time)
     );
-    addRequirements(Robot.getIntakeIndexer());
   }
 }

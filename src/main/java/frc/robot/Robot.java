@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
     chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
     chooser.addOption("Simple Auto", new SimpleAuto().withTimeout(15));
     chooser.addOption("Shoot ball", new ShootBall().withTimeout(15));
+    chooser.addOption("Pickup 2", new Pickup2().withTimeout(2));
   }
 
   /**
