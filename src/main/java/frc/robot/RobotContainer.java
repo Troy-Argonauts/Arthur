@@ -32,6 +32,7 @@ public class RobotContainer {
   private final MB_Up mb_up;
   private final MB_Stop mb_stop;
   private final I_IndexerToggle i_indexerToggle;
+  private final I_IntakeStop i_intakeStop;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -48,6 +49,7 @@ public class RobotContainer {
     mb_up = new MB_Up();
     mb_stop = new MB_Stop();
     i_indexerToggle = new I_IndexerToggle();
+    i_intakeStop = new I_IntakeStop();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -65,10 +67,10 @@ public class RobotContainer {
 
     operator.getXButton().toggleWhenPressed(s_shooterToggle);
     operator.getYButton().toggleWhenActive(ps_toggleCompressor);
-    operator.getAButton().toggleWhenActive(i_intakeToggle);
+    operator.getAButton().whenPressed(i_intakeStop);
     operator.getRBButton().toggleWhenActive(ps_dropIntake);
     operator.getLBButton().toggleWhenActive(ps_pickupIntake);
-    operator.getAButton().whenHeld(i_intakeToggle);
+    operator.getAButton().toggleWhenActive(i_intakeToggle);
     operator.getBButton().toggleWhenPressed(i_indexerToggle);
 
     rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
