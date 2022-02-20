@@ -25,7 +25,6 @@ public class RobotContainer {
 
   private final S_ShooterToggle s_shooterToggle;
   private final I_IntakeToggle i_intakeToggle;
-  private final PS_ToggleCompressor ps_toggleCompressor;
   private final PS_PickupIntake ps_pickupIntake;
   private final PS_DropIntake ps_dropIntake;
   private final MB_Down mb_down;
@@ -40,7 +39,6 @@ public class RobotContainer {
     operator = new Controller(Constants.OPERATOR_PORT);
 
     s_shooterToggle = new S_ShooterToggle();
-    ps_toggleCompressor = new PS_ToggleCompressor();
     ps_pickupIntake = new PS_PickupIntake();
     ps_dropIntake = new PS_DropIntake();
     i_intakeToggle = new I_IntakeToggle();
@@ -64,7 +62,6 @@ public class RobotContainer {
     Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
     operator.getXButton().toggleWhenPressed(s_shooterToggle);
-    operator.getYButton().toggleWhenActive(ps_toggleCompressor);
     operator.getAButton().toggleWhenActive(i_intakeToggle);
     operator.getRBButton().toggleWhenActive(ps_dropIntake);
     operator.getLBButton().toggleWhenActive(ps_pickupIntake);
