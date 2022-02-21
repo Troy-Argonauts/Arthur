@@ -28,6 +28,7 @@ public final class Constants {
     public static int SHOOTER = 0;
     public static int MONKEY_BARS = 10;
     public static I2C.Port[] INDEXER_SENSORS = new I2C.Port[2];
+    //Sensor Port TBD
 
     public static int DRIVER_PORT = 0;
     public static int OPERATOR_PORT = 1;

@@ -38,6 +38,7 @@ public class I_CheckIfFilled{
         
         Color detectedColor = m_colorSensor.getColor();
 
+        // Values to determine if there is a ball in the location are tbd
         return false;
 
     }
