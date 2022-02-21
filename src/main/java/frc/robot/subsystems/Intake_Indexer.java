@@ -17,13 +17,14 @@ public class Intake_Indexer extends SubsystemBase {
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
         bottomIndexerSensor = new Ultrasonic(Constants.BOTTOMINDEXERSENSOR_PING, Constants.BOTTOMINDEXERSENSOR_RESPONSE);
+
     }
 
     @Override
     public void periodic() {
         if (!active) {
             if (bottomIndexerSensor.getRangeInches() > 1) {
-                activate();
+
                 active = true;
             }
         } else {
