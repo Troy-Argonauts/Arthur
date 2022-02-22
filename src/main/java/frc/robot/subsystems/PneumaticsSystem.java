@@ -19,14 +19,10 @@ public class PneumaticsSystem extends SubsystemBase {
         currentState = DoubleSolenoid.Value.kReverse;
         updateState();
 
-        compressor.enableDigital();
-    }
-
-    public void toggleCompressor() {
-        if (compressor.enabled()) {
-            compressor.disable();
-        } else {
+        if (compressor.getPressure() < 110) {
             compressor.enableDigital();
+        } else if (compressor.getPressure() > 120) {
+            compressor.disable();
         }
     }
 
