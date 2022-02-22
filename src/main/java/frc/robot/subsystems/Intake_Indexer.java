@@ -22,7 +22,7 @@ public class Intake_Indexer extends SubsystemBase {
     @Override
     public void periodic() {
         if (!active) {
-            if (/*bottomIndexerSensor.getRangeInches() > 1*/ true) {
+            if (bottomIndexerSensor.getRangeInches() > 1) {
                 activate();
                 active = true;
             }
@@ -41,6 +41,7 @@ public class Intake_Indexer extends SubsystemBase {
         floorMotor.set(0);
         upMotor.set(0);
     }
+  
     public void toggle() {
         active = !active;
     }
