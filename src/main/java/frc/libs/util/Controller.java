@@ -2,6 +2,7 @@ package frc.libs.util;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 
 /**
  * Wrapper class for FRC joysticks.
@@ -111,11 +112,17 @@ public class Controller extends Joystick {
     }
 
     public double getLeftJoystickY() {
-        return getY();
+        if (getY() > Constants.CONTROLLER_DRIFT) {
+            return getY();
+        }
+        return 0;
     }
 
     public double getRightJoystickX() {
-        return getRawAxis(4);
+        if (getRawAxis(4) > Constants.CONTROLLER_DRIFT) {
+            return getRawAxis(4);
+        }
+        return 0;
     }
 
     public double getRightJoystickY() {

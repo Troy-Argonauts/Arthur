@@ -41,7 +41,7 @@ public class Intake_Indexer extends SubsystemBase {
         floorMotor.set(0);
         upMotor.set(0);
     }
-
+  
     public void toggle() {
         active = !active;
     }
