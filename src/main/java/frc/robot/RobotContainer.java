@@ -69,7 +69,7 @@ public class RobotContainer {
     operator.getAButton().whenPressed(i_intakeStop);
     operator.getRBButton().toggleWhenPressed(ps_dropIntake);
     operator.getLBButton().toggleWhenPressed(ps_pickupIntake);
-    operator.getAButton().whenHeld(i_intakeToggle);
+    operator.getYButton().toggleWhenPressed(i_intakeToggle);
     operator.getBButton().toggleWhenPressed(i_indexerToggle);
 
     rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
