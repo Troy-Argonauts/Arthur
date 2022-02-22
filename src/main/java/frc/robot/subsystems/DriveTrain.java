@@ -92,6 +92,18 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Rear Left Velocity" , rearLeft.getSelectedSensorVelocity());
     }
 
+    public double getLocation() {
+        return Constants.DT_kEncoderDistancePerPulse * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+    }
+
+    public void zeroEncoders() {
+        frontRight.setSelectedSensorPosition(0);
+        frontLeft.setSelectedSensorPosition(0);
+        rearRight.setSelectedSensorPosition(0);
+        rearLeft.setSelectedSensorPosition(0);
+    }
+
+
 
     @Override
     public void simulationPeriodic() {
