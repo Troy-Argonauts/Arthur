@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   private static PneumaticsSystem pneumaticsSystem;
   private static Intake_Indexer intake_indexer;
   
-  SendableChooser<Command> chooser = new SendableChooser<>();
+  private final SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    autonomousCommand = chooser.getSelected();
+    autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {

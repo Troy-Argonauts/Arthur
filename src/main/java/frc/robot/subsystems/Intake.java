@@ -8,6 +8,7 @@ public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
     private boolean forward;
+    
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
@@ -16,10 +17,10 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         if (forward) {
-            forward();
+            intakeMotor.set(0.5);
             forward = true;
         } else {
-            backward();
+            intakeMotor.set(-0.5);
             forward = false;
         }
     }
@@ -28,13 +29,6 @@ public class Intake extends SubsystemBase {
         forward = !forward;
     }
 
-    public void forward() {
-        intakeMotor.set(0.5);
-    }
-
-    public void backward() {
-        intakeMotor.set(-0.5);
-    }
     public void disable() {
         intakeMotor.set(0);
     }
