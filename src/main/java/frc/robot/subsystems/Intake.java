@@ -17,16 +17,24 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         if (forward) {
-            intakeMotor.set(0.5);
+            forward();
             forward = true;
         } else {
-            intakeMotor.set(-0.5);
+            backward();
             forward = false;
         }
     }
 
     public void toggle() {
         forward = !forward;
+    }
+
+    public void forward() {
+        intakeMotor.set(0.5);
+    }
+
+    public void backward() {
+        intakeMotor.set(-0.5);
     }
 
     public void disable() {

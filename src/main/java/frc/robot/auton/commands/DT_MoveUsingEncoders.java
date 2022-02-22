@@ -12,7 +12,7 @@ public class DT_MoveUsingEncoders extends InstantCommand {
     public DT_MoveUsingEncoders(double revolutions) {
         addRequirements(Robot.getDriveTrain());
 
-        this.revolutions = revolutions;
+        DT_MoveUsingEncoders.revolutions = revolutions;
     }
 
     @Override

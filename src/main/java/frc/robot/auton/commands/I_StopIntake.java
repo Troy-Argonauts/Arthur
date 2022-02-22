@@ -11,12 +11,13 @@ import frc.robot.Robot;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class I_StartIntake extends SequentialCommandGroup {
-  public I_StartIntake() {
-    addCommands(
-      new RunCommand(() -> Robot.getPneumaticsSystem().dropIntake(), Robot.getPneumaticsSystem()).withTimeout(1), 
-      new RunCommand(() -> Robot.getIntake().forward(), Robot.getIntake()).withTimeout(2)
-    );
-    addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake());
-  }
+public class I_StopIntake extends SequentialCommandGroup {
+
+    public I_StopIntake() {
+        addCommands(
+                new RunCommand(() -> Robot.getIntake().disable(), Robot.getIntake()).withTimeout(2),
+                new RunCommand(() -> Robot.getPneumaticsSystem().pickupIntake(), Robot.getPneumaticsSystem()).withTimeout(1)
+        );
+        addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake());
+    }
 }
