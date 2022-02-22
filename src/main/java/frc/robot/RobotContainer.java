@@ -66,10 +66,10 @@ public class RobotContainer {
     Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
     operator.getXButton().toggleWhenPressed(s_shooterToggle);
-    operator.getAButton().toggleWhenActive(i_intakeToggle);
-    operator.getRBButton().toggleWhenActive(ps_dropIntake);
-    operator.getLBButton().toggleWhenActive(ps_pickupIntake);
-    operator.getAButton().toggleWhenActive(i_intakeToggle);
+    operator.getAButton().whenPressed(i_intakeStop);
+    operator.getRBButton().toggleWhenPressed(ps_dropIntake);
+    operator.getLBButton().toggleWhenPressed(ps_pickupIntake);
+    operator.getAButton().whenHeld(i_intakeToggle);
     operator.getBButton().toggleWhenPressed(i_indexerToggle);
 
     rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
