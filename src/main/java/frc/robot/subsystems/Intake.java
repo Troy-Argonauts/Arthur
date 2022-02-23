@@ -9,25 +9,30 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean forward;
+    private boolean forward = true;
     private boolean stopped;
     
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
 
+        intakeMotor.setInverted(true);
+
         intakeMotor.setIdleMode(IdleMode.kCoast);
     }
 
     @Override
     public void periodic() {
-        if (stopped) return;
-        if (forward) {
-            forward();
-            forward = true;
+        if (!stopped) {
+            if (forward) {
+                forward();
+                forward = true;
+            } else {
+                backward();
+                forward = false;
+            }
         } else {
-            backward();
-            forward = false;
+            disable();
         }
     }
 
@@ -41,11 +46,11 @@ public class Intake extends SubsystemBase {
     }
 
     public void forward() {
-        intakeMotor.set(0.5);
+        intakeMotor.set(0.8);
     }
 
     public void backward() {
-        intakeMotor.set(-0.5);
+        intakeMotor.set(-0.8);
     }
 
     public void disable() {
