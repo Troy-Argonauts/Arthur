@@ -26,6 +26,14 @@ public class PneumaticsSystem extends SubsystemBase {
         }
     }
 
+    public void toggleCompressor() {
+        if(compressor.enabled()){
+            compressor.disable();
+        } else {
+            compressor.enableDigital();
+        }
+    }
+
     public void stop() {
         compressor.disable();
         solenoid.close();
