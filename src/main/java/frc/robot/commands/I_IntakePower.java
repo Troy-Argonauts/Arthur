@@ -7,15 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class I_IntakeToggle extends InstantCommand {
-
-  public I_IntakeToggle() {
+public class I_IntakePower extends InstantCommand {
+  public I_IntakePower() {
     addRequirements(Robot.getIntake());
   }
 
   @Override
+  public void initialize() {}
+
+  @Override
   public void execute() {
-    Robot.getIntake().toggle();
+    Robot.getIntake().togglePower();
   }
 
   @Override

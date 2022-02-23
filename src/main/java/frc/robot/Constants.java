@@ -21,11 +21,11 @@ public final class Constants {
     public static int DT_REAR_RIGHT = 4;
     public static int DT_REAR_LEFT = 2;
     public static int I_INTAKE = 5;
-    public static int I_INDEXER_FLOOR = 6;
-    public static int I_INDEXER_UP = 7;
+    public static int I_INDEXER_FLOOR = 9;
+    public static int I_INDEXER_UP = 10;
     public static int INTAKE_SHIFTER_1 = 0;
     public static int INTAKE_SHIFTER_2 = 1;
-    public static int SHOOTER = 0;
+    public static int SHOOTER = 20;
     public static int MONKEY_BARS = 10;
     public static I2C.Port[] INDEXER_SENSORS = new I2C.Port[2];
     //Sensor Port TBD

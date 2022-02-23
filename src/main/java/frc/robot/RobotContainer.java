@@ -24,14 +24,14 @@ public class RobotContainer {
   private final Controller operator;
 
   private final S_ShooterToggle s_shooterToggle;
-  private final I_IntakeToggle i_intakeToggle;
+  private final I_IntakeToggleDirection i_intakeToggleDirection;
   private final PS_PickupIntake ps_pickupIntake;
   private final PS_DropIntake ps_dropIntake;
   private final MB_Down mb_down;
   private final MB_Up mb_up;
   private final MB_Stop mb_stop;
   private final I_IndexerToggle i_indexerToggle;
-  private final I_IntakeStop i_intakeStop;
+  private final I_IntakePower i_intakePower;
   private final PS_ToggleCompressor ps_toggleCompressor;
 
 
@@ -43,12 +43,12 @@ public class RobotContainer {
     s_shooterToggle = new S_ShooterToggle();
     ps_pickupIntake = new PS_PickupIntake();
     ps_dropIntake = new PS_DropIntake();
-    i_intakeToggle = new I_IntakeToggle();
+    i_intakeToggleDirection = new I_IntakeToggleDirection();
     mb_down = new MB_Down();
     mb_up = new MB_Up();
     mb_stop = new MB_Stop();
     i_indexerToggle = new I_IndexerToggle();
-    i_intakeStop = new I_IntakeStop();
+    i_intakePower = new I_IntakePower();
     ps_toggleCompressor = new PS_ToggleCompressor();
 
     // Configure the button bindings
@@ -68,10 +68,10 @@ public class RobotContainer {
     Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
     operator.getXButton().toggleWhenPressed(s_shooterToggle);
-    operator.getAButton().whenPressed(i_intakeStop);
+    operator.getAButton().whenPressed(i_intakePower);
     operator.getRBButton().toggleWhenPressed(ps_dropIntake);
     operator.getLBButton().toggleWhenPressed(ps_pickupIntake);
-    operator.getYButton().toggleWhenPressed(i_intakeToggle);
+    operator.getYButton().toggleWhenPressed(i_intakeToggleDirection);
     operator.getBButton().toggleWhenPressed(i_indexerToggle);
 
     driver.getAButton().toggleWhenPressed(ps_toggleCompressor);
