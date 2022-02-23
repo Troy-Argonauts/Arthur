@@ -10,7 +10,7 @@ public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
     private boolean forward = true;
-    private boolean stopped;
+    private boolean stopped = true;
     
 
     public Intake() {
