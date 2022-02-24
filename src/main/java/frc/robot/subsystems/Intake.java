@@ -28,10 +28,8 @@ public class Intake extends SubsystemBase {
         if (!stopped) {
             if (forward) {
                 forward();
-                forward = true;
             } else {
                 backward();
-                forward = false;
             }
         } else {
             disable();
