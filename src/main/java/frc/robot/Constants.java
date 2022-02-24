@@ -30,18 +30,18 @@ public final class Constants {
     //Sensor Port TBD
 
     // Indexer Ports
-    public static int I_INDEXER_FLOOR = 9;
-    public static int I_INDEXER_UP = 10;
+    public static int I_INDEXER_FLOOR = 6;
+    public static int I_INDEXER_UP = 7;
 
     // Shifter Ports
     public static int INTAKE_SHIFTER_1 = 0;
     public static int INTAKE_SHIFTER_2 = 1;
 
     // Shooter Ports
-    public static int SHOOTER = 20;
+    public static int SHOOTER = 9;
 
     // Monkey Bars Ports
-    public static int MONKEY_BARS = 10;
+    public static int MONKEY_BARS = 8;
 
     // Controller Variables
     public static int DRIVER_PORT = 0;

@@ -20,15 +20,6 @@ public class PneumaticsSystem extends SubsystemBase {
         updateState();
     }
 
-    @Override
-    public void periodic() {
-        if (compressor.getPressure() < 110) {
-            compressor.enableDigital();
-        } else if (compressor.getPressure() > 120) {
-            compressor.disable();
-        }
-    }
-
     public void toggleCompressor() {
         if(compressor.enabled()){
             compressor.disable();
