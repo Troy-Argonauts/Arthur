@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,10 +16,7 @@ public class DriveTrain extends SubsystemBase {
      * Creates all 2 main motors of the robot
      */
 
-    private final TalonFX frontLeft;
-    private final TalonFX frontRight;
-    private final TalonFX rearLeft;
-    private final TalonFX rearRight;
+    private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
 
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.

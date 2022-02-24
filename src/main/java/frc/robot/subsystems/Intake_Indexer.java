@@ -8,12 +8,13 @@ import frc.robot.Constants;
 
 public class Intake_Indexer extends SubsystemBase {
 
-    private final CANSparkMax floorMotor;
-    private final CANSparkMax upMotor;
+    private final CANSparkMax floorMotor, upMotor;
     private Ultrasonic bottomIndexerSensor;
     private boolean active;
 
     public Intake_Indexer() {
+        active = false;
+
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
         bottomIndexerSensor = new Ultrasonic(Constants.BOTTOMINDEXERSENSOR_PING, Constants.BOTTOMINDEXERSENSOR_RESPONSE);
@@ -21,7 +22,7 @@ public class Intake_Indexer extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (active) {
+        if (!active) {
             if (bottomIndexerSensor.getRangeInches() > 1) {
                 activate();
                 active = true;

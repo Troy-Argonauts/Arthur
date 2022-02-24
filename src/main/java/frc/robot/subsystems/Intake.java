@@ -9,11 +9,13 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean forward = true;
-    private boolean stopped = true;
+    private boolean forward, stopped;
     
 
     public Intake() {
+        forward = true;
+        stopped = true;
+
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
 
         intakeMotor.setInverted(true);
