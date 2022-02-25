@@ -24,7 +24,6 @@ public class RobotContainer {
   private final Controller driver;
   private final Controller operator;
 
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driver = new Controller(Constants.DRIVER_PORT);
