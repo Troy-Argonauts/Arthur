@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.DT_CheesyDrive;
-import frc.robot.auton.commands.*;
-import frc.robot.auton.routines.*;
+import frc.robot.auton.commands.DT_MoveToSetpoint;
+import frc.robot.auton.routines.Pickup2;
+import frc.robot.auton.routines.ShootBall;
+import frc.robot.auton.routines.SimpleAuto;
 import frc.robot.subsystems.*;
 
 /**
@@ -50,7 +51,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
-    CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DT_CheesyDrive());
     SmartDashboard.putData("Auto mode", chooser);
 
     chooser.setDefaultOption("Default", new WaitCommand(0));

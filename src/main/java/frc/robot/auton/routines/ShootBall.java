@@ -6,7 +6,9 @@ package frc.robot.auton.routines;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.auton.commands.*;
+import frc.robot.auton.commands.DT_MoveToSetpoint;
+import frc.robot.auton.commands.DT_ZeroEncoders;
+import frc.robot.auton.commands.S_Shooter;
 
 public class ShootBall extends SequentialCommandGroup {
 
