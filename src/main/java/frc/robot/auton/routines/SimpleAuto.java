@@ -16,14 +16,16 @@ public class SimpleAuto extends SequentialCommandGroup {
       new I_StartIndexer(),
       new S_Shooter(),
 
-      // Pick up ball
       new I_StartIntake(),
-      new DT_MoveToSetpoint(-1),
+      new DT_TurnToTarget(1,1),
+      new DT_MoveToSetpoint(1),
+      new DT_TurnToTarget(-1,1),
       new I_StopIntake(),
-      new I_StopIndexer(),
 
       new DT_MoveToSetpoint(1),
-      new S_Shooter()
+      new S_Shooter(),
+
+      new I_StopIndexer()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }
