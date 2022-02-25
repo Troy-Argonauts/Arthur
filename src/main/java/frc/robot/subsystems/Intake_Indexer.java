@@ -31,13 +31,8 @@ public class Intake_Indexer extends SubsystemBase {
     }
 
     public void activate() {
-<<<<<<< Updated upstream
         floorMotor.set(0.55);
         upMotor.set(0.55);
-=======
-        floorMotor.set(0.5);
-        upMotor.set(0.4);
->>>>>>> Stashed changes
     }
 
     public void deactivate() {
