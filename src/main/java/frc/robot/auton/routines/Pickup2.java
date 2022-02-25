@@ -17,10 +17,11 @@ public class Pickup2 extends SequentialCommandGroup {
       new S_Shooter(),
 
       new I_StartIntake(),
-      new DT_MoveToSetpoint(-1),
+      new DT_TurnToTarget(-1, 1),
+      new DT_MoveToSetpoint(1),
 
       new DT_TurnToTarget(-1, 0.5),
-      new DT_MoveToSetpoint(-1),
+      new DT_MoveToSetpoint(1),
 
       new I_StopIntake(),
       new I_StopIndexer(),
