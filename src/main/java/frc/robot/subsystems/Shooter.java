@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -19,6 +20,8 @@ public class Shooter extends SubsystemBase {
         shooterMain = new TalonFX(Constants.SHOOTER);
 
         shooterMain.configFactoryDefault();
+
+        shooterMain.setNeutralMode(NeutralMode.Coast);
 
         shooterMain.setSensorPhase(false);
         shooterMain.setInverted(false);
@@ -68,7 +71,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void activate() {
-        shooterMain.set(ControlMode.PercentOutput, 0.55);
+        shooterMain.set(ControlMode.PercentOutput, 0.8);
     }
 
     public void stop() {
