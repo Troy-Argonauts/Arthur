@@ -24,11 +24,11 @@ public class Pickup2 extends SequentialCommandGroup {
       new DT_MoveToSetpoint(1),
 
       new I_StopIntake(),
-      new I_StopIndexer(),
 
       new DT_TurnToTarget(1, 0.5),
       new DT_MoveToSetpoint(1),
-      new S_Shooter()
+      new S_Shooter(),
+      new I_StopIndexer()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }
