@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
+
 public class PS_PickupIntake extends InstantCommand {
 
     public PS_PickupIntake() {
@@ -25,7 +26,7 @@ public class PS_PickupIntake extends InstantCommand {
      */
     @Override
     public void execute() {
-        Robot.getPneumaticsSystem().pickupIntake();
+        Robot.getPneumaticsSystem().dropIntake();
     }
 
     /**

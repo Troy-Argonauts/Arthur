@@ -74,7 +74,7 @@ public class RobotContainer {
     operator.getYButton().toggleWhenPressed(i_intakeToggleDirection);
     operator.getBButton().toggleWhenPressed(i_indexerToggle);
 
-    driver.getAButton().toggleWhenPressed(ps_toggleCompressor);
+    operator.getSTARTButton().toggleWhenPressed(ps_toggleCompressor);
 
     rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
     leftTrigger.whenActive(mb_down).whenInactive(mb_stop);

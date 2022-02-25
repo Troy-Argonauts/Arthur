@@ -16,7 +16,7 @@ public class PneumaticsSystem extends SubsystemBase {
         compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_SHIFTER_1, Constants.INTAKE_SHIFTER_2);
-        currentState = DoubleSolenoid.Value.kReverse;
+        currentState = DoubleSolenoid.Value.kForward;
         updateState();
     }
 
