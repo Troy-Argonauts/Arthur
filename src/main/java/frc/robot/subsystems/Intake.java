@@ -1,43 +1,62 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean forward;
+    private boolean forward, stopped;
     
 
     public Intake() {
+        forward = true;
+        stopped = true;
+
         intakeMotor = new CANSparkMax(Constants.I_INTAKE, CANSparkMax.MotorType.kBrushless);
+
+        intakeMotor.setInverted(true);
+
+        intakeMotor.setIdleMode(IdleMode.kCoast);
     }
 
     @Override
     public void periodic() {
-        if (forward) {
-            forward();
-            forward = true;
+        if (!stopped) {
+            if (forward) {
+                forward();
+            } else {
+                backward();
+            }
         } else {
-            backward();
-            forward = false;
+            disable();
         }
+        // SmartDashboard.putNumber("Intake Temperature", intakeMotor.getMotorTemperature());
     }
 
-    public void toggle() {
+    public void toggleDirection() {
         forward = !forward;
     }
 
+    public void togglePower() {
+        stopped = !stopped;
+        forward = true;
+    }
+
     public void forward() {
-        intakeMotor.set(0.5);
+        intakeMotor.set(0.8);
     }
 
     public void backward() {
-        intakeMotor.set(-0.5);
+        intakeMotor.set(-0.8);
     }
 
     public void disable() {
         intakeMotor.set(0);
+        stopped = true;
     }
 }

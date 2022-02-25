@@ -3,13 +3,13 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake_Indexer extends SubsystemBase {
 
-    private final CANSparkMax floorMotor;
-    private final CANSparkMax upMotor;
+    private final CANSparkMax floorMotor, upMotor;
     private Ultrasonic bottomIndexerSensor;
     private boolean active;
 
@@ -21,15 +21,13 @@ public class Intake_Indexer extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (!active) {
-            if (bottomIndexerSensor.getRangeInches() > 1) {
-                activate();
-                active = true;
-            }
+        if (active) {
+            activate();
         } else {
             deactivate();
-            active = false;
         }
+        // SmartDashboard.putNumber("Indexer Floor Temperature", floorMotor.getMotorTemperature());
+        // SmartDashboard.putNumber("Indexer Up Temperature", upMotor.getMotorTemperature());
     }
 
     public void activate() {

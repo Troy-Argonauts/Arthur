@@ -51,7 +51,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DT_CheesyDrive());
-    SmartDashboard.putData("Auto mode", chooser);  
+    SmartDashboard.putData("Auto mode", chooser);
+
     chooser.setDefaultOption("Default", new WaitCommand(0));
     chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
     chooser.addOption("Simple Auto", new SimpleAuto().withTimeout(15));

@@ -12,17 +12,19 @@ public class PneumaticsSystem extends SubsystemBase {
     private final DoubleSolenoid solenoid;
     private DoubleSolenoid.Value currentState;
 
-    public PneumaticsSystem() {
+    public PneumaticsSystem() { 
         compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_SHIFTER_1, Constants.INTAKE_SHIFTER_2);
-        currentState = DoubleSolenoid.Value.kReverse;
+        currentState = DoubleSolenoid.Value.kForward;
         updateState();
+    }
 
-        if (compressor.getPressure() < 110) {
-            compressor.enableDigital();
-        } else if (compressor.getPressure() > 120) {
+    public void toggleCompressor() {
+        if(compressor.enabled()){
             compressor.disable();
+        } else {
+            compressor.enableDigital();
         }
     }
 
