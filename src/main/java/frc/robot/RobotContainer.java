@@ -7,9 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.Controller;
-import frc.robot.commands.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,33 +24,11 @@ public class RobotContainer {
   private final Controller driver;
   private final Controller operator;
 
-  private final S_ShooterToggle s_shooterToggle;
-  private final I_IntakeToggleDirection i_intakeToggleDirection;
-  private final PS_PickupIntake ps_pickupIntake;
-  private final PS_DropIntake ps_dropIntake;
-  private final MB_Down mb_down;
-  private final MB_Up mb_up;
-  private final MB_Stop mb_stop;
-  private final I_IndexerToggle i_indexerToggle;
-  private final I_IntakePower i_intakePower;
-  private final PS_ToggleCompressor ps_toggleCompressor;
-
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driver = new Controller(Constants.DRIVER_PORT);
     operator = new Controller(Constants.OPERATOR_PORT);
-
-    s_shooterToggle = new S_ShooterToggle();
-    ps_pickupIntake = new PS_PickupIntake();
-    ps_dropIntake = new PS_DropIntake();
-    i_intakeToggleDirection = new I_IntakeToggleDirection();
-    mb_down = new MB_Down();
-    mb_up = new MB_Up();
-    mb_stop = new MB_Stop();
-    i_indexerToggle = new I_IndexerToggle();
-    i_intakePower = new I_IntakePower();
-    ps_toggleCompressor = new PS_ToggleCompressor();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -67,17 +46,86 @@ public class RobotContainer {
     Trigger rightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
     Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
-    operator.getXButton().toggleWhenPressed(s_shooterToggle);
-    operator.getAButton().toggleWhenPressed(i_intakePower);
-    operator.getRBButton().toggleWhenPressed(ps_dropIntake);
-    operator.getLBButton().toggleWhenPressed(ps_pickupIntake);
-    operator.getYButton().toggleWhenPressed(i_intakeToggleDirection);
-    operator.getBButton().toggleWhenPressed(i_indexerToggle);
+    // Driver Controls
+    new RunCommand( () ->
+            Robot.getDriveTrain().cheesyDrive(getDriver().getRightJoystickX(), driver.getLeftJoystickY()),
+            Robot.getDriveTrain()
+    );
 
-    operator.getSTARTButton().toggleWhenPressed(ps_toggleCompressor);
+    // Shooter Toggle
+    operator.getXButton().toggleWhenPressed(
+            new InstantCommand( () -> Robot.getShooter().toggle(), Robot.getShooter())
+    );
 
-    rightTrigger.whenActive(mb_up).whenInactive(mb_stop);
-    leftTrigger.whenActive(mb_down).whenInactive(mb_stop);
+    // Toggle Intake Power
+    operator.getAButton().toggleWhenPressed(
+            new InstantCommand( () -> Robot.getIntake().togglePower(), Robot.getIntake())
+    );
+
+    // Toggle Intake Direction
+    operator.getYButton().toggleWhenPressed(
+            new InstantCommand(
+                    () -> Robot.getIntake().toggleDirection(),
+                    Robot.getIntake()
+            )
+    );
+
+    // Pneumatics Drop Intake
+    operator.getRBButton().toggleWhenPressed(
+            new InstantCommand(
+                    () -> Robot.getPneumaticsSystem().dropIntake(),
+                    Robot.getPneumaticsSystem())
+    );
+
+    // Pneumatics Pickup Intake
+    operator.getLBButton().toggleWhenPressed(
+            new InstantCommand(
+                    () -> Robot.getPneumaticsSystem().pickupIntake(),
+                    Robot.getPneumaticsSystem())
+    );
+
+
+    // Toggle Indexer Toggle
+    operator.getBButton().toggleWhenPressed(
+            new InstantCommand(
+                    () -> Robot.getIntakeIndexer().toggle(),
+                    Robot.getIntakeIndexer()
+            )
+    );
+
+    // Toggle Compressor
+    operator.getSTARTButton().toggleWhenPressed(
+            new InstantCommand(
+                    () -> Robot.getPneumaticsSystem().toggleCompressor(),
+                    Robot.getPneumaticsSystem()
+            )
+    );
+
+    // MonkeyBars Up
+    rightTrigger.whenActive(
+            new InstantCommand(
+                    () -> Robot.getMonkeyBars().up(),
+                    Robot.getMonkeyBars()
+            )
+    ).whenInactive(
+            new InstantCommand(
+                    () -> Robot.getMonkeyBars().stop(),
+                    Robot.getMonkeyBars()
+            )
+    );
+
+    // MonkeyBars Down
+    leftTrigger.whenActive(
+            new InstantCommand(
+                    () -> Robot.getMonkeyBars().down(),
+                    Robot.getMonkeyBars()
+            )
+    ).whenInactive(
+            new InstantCommand(
+                    () -> Robot.getMonkeyBars().stop(),
+                    Robot.getMonkeyBars()
+            )
+    );
   }
 
   /**
