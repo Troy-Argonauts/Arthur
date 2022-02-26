@@ -10,8 +10,7 @@ public class Intake_Indexer extends SubsystemBase {
 
     private final CANSparkMax floorMotor, upMotor;
     private Ultrasonic bottomIndexerSensor;
-    private boolean floorActive;
-    private boolean upActive;
+    private boolean floorActive, upActive;
 
     public Intake_Indexer() {
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
@@ -39,6 +38,7 @@ public class Intake_Indexer extends SubsystemBase {
     public void activateFloor() {
         floorMotor.set(0.55);
     }
+
     public void activateUp() {
         upMotor.set(0.55);
     }
@@ -46,6 +46,7 @@ public class Intake_Indexer extends SubsystemBase {
     public void deactivateFloor() {
         floorMotor.set(0);
     }
+
     public void deactivateUp() {
         upMotor.set(0);
     }
