@@ -34,14 +34,14 @@ public class PneumaticsSystem extends SubsystemBase {
     }
 
 
-    public void dropIntake(){
+    public void pickupIntake(){
         if (currentState == DoubleSolenoid.Value.kReverse) {
             currentState = DoubleSolenoid.Value.kForward;
             updateState();
         }
     }
 
-    public void pickupIntake() {
+    public void dropIntake() {
         if (currentState == DoubleSolenoid.Value.kForward) {
             currentState = DoubleSolenoid.Value.kReverse;
             updateState();
