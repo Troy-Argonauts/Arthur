@@ -31,8 +31,8 @@ public class Intake_Indexer extends SubsystemBase {
         } else {
             deactivateUp();
         }
-        // SmartDashboard.putNumber("Indexer Floor Temperature", floorMotor.getMotorTemperature());
-        // SmartDashboard.putNumber("Indexer Up Temperature", upMotor.getMotorTemperature());
+        SmartDashboard.putNumber("Indexer Floor Temperature:  ", floorMotor.getMotorTemperature());
+        SmartDashboard.putNumber("Indexer Up Temperature:  ", upMotor.getMotorTemperature());
     }
 
     public void activateFloor() {

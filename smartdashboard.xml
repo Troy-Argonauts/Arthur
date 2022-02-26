@@ -1,0 +1,21 @@
+<xml version="1.0">
+    <dashboard>
+
+        <static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+            <location x="685" y="0"/>
+        </static-widget>
+
+        <widget field="Indexer Floor Temperature:  " type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="0" y="25"/>
+        </widget>
+        <widget field="Indexer Up Temperature:  " type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+            <location x="0" y="50"/>
+        </widget>
+
+        <widget field="Auto mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+            <location x="0" y="75"/>
+        </widget>
+    </dashboard>
+    <live-window>
+    </live-window>
+</xml>
