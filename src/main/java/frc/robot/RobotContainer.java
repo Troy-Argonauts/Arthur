@@ -49,7 +49,7 @@ public class RobotContainer {
     new RunCommand( () ->
             Robot.getDriveTrain().cheesyDrive(getDriver().getRightJoystickX(), driver.getLeftJoystickY()),
             Robot.getDriveTrain()
-    );
+    ).execute();
 
     // Shooter Toggle
     operator.getXButton().toggleWhenPressed(
