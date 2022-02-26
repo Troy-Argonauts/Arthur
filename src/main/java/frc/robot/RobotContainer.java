@@ -47,14 +47,14 @@ public class RobotContainer {
 
     // Driver Controls
     new RunCommand( () ->
-            Robot.getDriveTrain().cheesyDrive(getDriver().getRightJoystickX(), driver.getLeftJoystickY()),
+            Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
             Robot.getDriveTrain()
     ).execute();
 
     // Shooter Toggle
     operator.getXButton().toggleWhenPressed(
             new InstantCommand( () -> Robot.getShooter().toggle(), Robot.getShooter())
-                    .alongWith(new InstantCommand( () -> Robot.getIntakeIndexer().toggleUp(), Robot.getIntakeIndexer()))
+                .alongWith(new InstantCommand( () -> Robot.getIntakeIndexer().toggleUp(), Robot.getIntakeIndexer()))
     );
 
     // Toggle Intake Power
@@ -72,16 +72,14 @@ public class RobotContainer {
 
     // Pneumatics Drop Intake
     operator.getRBButton().toggleWhenPressed(
-            new InstantCommand(
-                    () -> Robot.getPneumaticsSystem().dropIntake(),
-                    Robot.getPneumaticsSystem())
+            new InstantCommand( () -> Robot.getPneumaticsSystem().dropIntake(), Robot.getPneumaticsSystem())
+                .alongWith(new InstantCommand( () -> Robot.getIntake().backward(), Robot.getIntake()))
     );
 
     // Pneumatics Pickup Intake
     operator.getLBButton().toggleWhenPressed(
-            new InstantCommand(
-                    () -> Robot.getPneumaticsSystem().pickupIntake(),
-                    Robot.getPneumaticsSystem())
+            new InstantCommand( () -> Robot.getPneumaticsSystem().pickupIntake(), Robot.getPneumaticsSystem())
+                .alongWith(new InstantCommand( () -> Robot.getIntake().disable(), Robot.getIntake()))
     );
 
 
