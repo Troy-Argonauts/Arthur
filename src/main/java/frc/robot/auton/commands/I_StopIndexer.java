@@ -10,7 +10,7 @@ import frc.robot.Robot;
 public class I_StopIndexer extends SequentialCommandGroup {
   public I_StopIndexer() {
     addCommands(
-      new RunCommand(() -> Robot.getIntakeIndexer().deactivate(), Robot.getIntakeIndexer())
+      new RunCommand(() -> Robot.getIntakeIndexer().deactivateFloor(), Robot.getIntakeIndexer())
     );
     addRequirements(Robot.getIntakeIndexer());
   }

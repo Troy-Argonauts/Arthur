@@ -11,7 +11,9 @@ import frc.robot.Robot;
 public class S_Shooter extends SequentialCommandGroup {
   public S_Shooter() {
     addCommands(
+      new RunCommand(() -> Robot.getIntakeIndexer().activateUp(), Robot.getIntakeIndexer()),
       new RunCommand(() -> Robot.getShooter().activate(), Robot.getShooter()).withTimeout(2),
+      new RunCommand(() -> Robot.getIntakeIndexer().deactivateUp(), Robot.getIntakeIndexer()),
       new RunCommand(() -> Robot.getShooter().stop(), Robot.getShooter())
     );
     addRequirements(Robot.getShooter());

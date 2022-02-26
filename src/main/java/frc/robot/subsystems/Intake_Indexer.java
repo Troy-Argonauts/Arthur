@@ -10,7 +10,8 @@ public class Intake_Indexer extends SubsystemBase {
 
     private final CANSparkMax floorMotor, upMotor;
     private Ultrasonic bottomIndexerSensor;
-    private boolean active;
+    private boolean floorActive;
+    private boolean upActive;
 
     public Intake_Indexer() {
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
@@ -20,26 +21,37 @@ public class Intake_Indexer extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (active) {
-            activate();
+        if (floorActive) {
+            activateFloor();
         } else {
-            deactivate();
+            deactivateFloor();
+        }
+
+        if (upActive) {
+            activateUp();
+        } else {
+            deactivateUp();
         }
         // SmartDashboard.putNumber("Indexer Floor Temperature", floorMotor.getMotorTemperature());
         // SmartDashboard.putNumber("Indexer Up Temperature", upMotor.getMotorTemperature());
     }
 
-    public void activate() {
+    public void activateFloor() {
         floorMotor.set(0.55);
+    }
+    public void activateUp() {
         upMotor.set(0.55);
     }
 
-    public void deactivate() {
+    public void deactivateFloor() {
         floorMotor.set(0);
+    }
+    public void deactivateUp() {
         upMotor.set(0);
     }
   
-    public void toggle() {
-        active = !active;
+    public void toggleFloor() {
+        floorActive = !floorActive;
     }
+    public void toggleUp() {upActive = !upActive;}
 }

@@ -54,6 +54,7 @@ public class RobotContainer {
     // Shooter Toggle
     operator.getXButton().toggleWhenPressed(
             new InstantCommand( () -> Robot.getShooter().toggle(), Robot.getShooter())
+                    .alongWith(new InstantCommand( () -> Robot.getIntakeIndexer().toggleUp(), Robot.getIntakeIndexer()))
     );
 
     // Toggle Intake Power
@@ -87,7 +88,7 @@ public class RobotContainer {
     // Toggle Indexer Toggle
     operator.getBButton().toggleWhenPressed(
             new InstantCommand(
-                    () -> Robot.getIntakeIndexer().toggle(),
+                    () -> Robot.getIntakeIndexer().toggleFloor(),
                     Robot.getIntakeIndexer()
             )
     );
