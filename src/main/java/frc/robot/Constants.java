@@ -46,7 +46,6 @@ public final class Constants {
     // Controller Variables
     public static int DRIVER_PORT = 0;
     public static int OPERATOR_PORT = 1;
-    public static double CONTROLLER_DRIFT = 0.1;
 
     // Limelight Variables
     public static double LIMELIGHT_HEIGHT = 0;
