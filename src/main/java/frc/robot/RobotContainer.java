@@ -46,10 +46,13 @@ public class RobotContainer {
         Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
         // Driver Controls
-        new RunCommand(
-                () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
-                Robot.getDriveTrain()
-        ).execute();
+
+      Robot.getDriveTrain().setDefaultCommand(
+              new RunCommand(
+                      () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
+                      Robot.getDriveTrain()
+              )
+      );
 
         // Shooter Toggle
         operator.getXButton().toggleWhenPressed(

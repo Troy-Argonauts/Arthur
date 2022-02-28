@@ -36,7 +36,7 @@ public class Intake_Indexer extends SubsystemBase {
     }
 
     public void activateFloor() {
-        floorMotor.set(0.55);
+        floorMotor.set(0.3);
     }
 
     public void activateUp() {
