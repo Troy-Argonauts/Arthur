@@ -21,8 +21,8 @@ import frc.libs.util.Controller;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
 
-    private final Controller driver;
-    private final Controller operator;
+    public static Controller driver;
+    public static Controller operator;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -130,11 +130,11 @@ public class RobotContainer {
         return null;
     }
 
-    public Controller getDriver() {
+    public static Controller getDriver() {
         return driver;
     }
 
-    public Controller getOperator() {
+    public static Controller getOperator() {
         return operator;
     }
 }

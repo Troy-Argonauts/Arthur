@@ -51,8 +51,10 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
-    SmartDashboard.putData("Auto mode", chooser);
 
+    driveTrain.zeroEncoders();
+
+    SmartDashboard.putData("Autonomous modes", chooser);
     chooser.setDefaultOption("Default", new WaitCommand(0));
     chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
     chooser.addOption("Simple Auto", new SimpleAuto().withTimeout(15));
@@ -74,6 +76,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    SmartDashboard.putNumber("Driver Right Joystick X Value", RobotContainer.getDriver().getRightJoystickX());
+    SmartDashboard.putNumber("Driver Left Joystick Y Value", RobotContainer.getDriver().getLeftJoystickY());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

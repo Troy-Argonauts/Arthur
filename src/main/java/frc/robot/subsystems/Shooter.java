@@ -50,11 +50,8 @@ public class Shooter extends SubsystemBase {
         }
 
         SmartDashboard.putNumber("Shooter Temperature", shooterMain.getTemperature());
-        SmartDashboard.putNumber("Shooter Current", shooterMain.getSupplyCurrent());
-        SmartDashboard.putNumber("Shooter Voltage", shooterMain.getBusVoltage());
         SmartDashboard.putNumber("Shooter RPM", getRPM());
-        SmartDashboard.putNumber("Shooter Stator Current", shooterMain.getStatorCurrent());
-        SmartDashboard.putNumber("Shooter Supply Current", shooterMain.getSupplyCurrent());
+        SmartDashboard.putNumber("Shooter Velocity", shooterMain.getSelectedSensorVelocity());
     }
 
     public double rpmToNativeUnits(double rpm) {
