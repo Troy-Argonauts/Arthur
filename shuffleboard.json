@@ -163,7 +163,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature:  ",
+              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature",
               "_title": "Indexer Floor Temp"
             }
           },
@@ -174,7 +174,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Up Temperature:  ",
+              "_source0": "network_table:///SmartDashboard/Indexer Up Temperature",
               "_title": "Indexer Up Temp"
             }
           },
@@ -184,7 +184,7 @@
               1
             ],
             "content": {
-              "_type": "Text View",
+              "_type": "Number Bar",
               "_source0": "network_table:///SmartDashboard/Driver Right Joystick X Value",
               "_title": "Right Joystick X"
             }
@@ -195,7 +195,7 @@
               1
             ],
             "content": {
-              "_type": "Text View",
+              "_type": "Number Bar",
               "_source0": "network_table:///SmartDashboard/Driver Left Joystick Y Value",
               "_title": "Left Joystick Y"
             }
@@ -255,8 +255,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Up Percentage:  ",
-              "_title": "Indexer Up Percentage:  "
+              "_source0": "network_table:///SmartDashboard/Indexer Up Percentage",
+              "_title": "Indexer Up Percentage"
             }
           },
           "12,1": {
@@ -266,8 +266,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Floor Percentage:  ",
-              "_title": "Indexer Floor Percentage:  "
+              "_source0": "network_table:///SmartDashboard/Indexer Floor Percentage",
+              "_title": "Indexer Floor Percentage"
             }
           },
           "3,2": {
