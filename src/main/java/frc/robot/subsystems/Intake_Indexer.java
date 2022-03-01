@@ -10,7 +10,7 @@ public class Intake_Indexer extends SubsystemBase {
 
     private final CANSparkMax floorMotor, upMotor;
     private Ultrasonic bottomIndexerSensor;
-    private boolean floorActive, upActive;
+    private boolean floorActive, upActive, floorForward, upForward;
 
     public Intake_Indexer() {
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
@@ -21,16 +21,25 @@ public class Intake_Indexer extends SubsystemBase {
     @Override
     public void periodic() {
         if (floorActive) {
-            activateFloor();
+            if (floorForward) {
+                activateFloorForward();
+            } else {
+                activateFloorBackward();
+            }
         } else {
             deactivateFloor();
         }
 
         if (upActive) {
-            activateUp();
+            if (upForward) {
+                activateUpForward();
+            } else {
+                activateUpBackward();
+            }
         } else {
             deactivateUp();
         }
+
         SmartDashboard.putNumber("Indexer Floor Temperature", floorMotor.getMotorTemperature());
         SmartDashboard.putNumber("Indexer Floor Percentage", (floorMotor.get() * 100));
         SmartDashboard.putBoolean("Indexer Floor Active", floorActive);
@@ -39,20 +48,40 @@ public class Intake_Indexer extends SubsystemBase {
         SmartDashboard.putBoolean("Indexer Up Active", upActive);
     }
 
-    public void activateFloor() {
+    public void activateFloorForward() {
         floorMotor.set(0.3);
+        floorActive = true;
+        floorForward = true;
     }
 
-    public void activateUp() {
+    public void activateUpForward() {
         upMotor.set(0.55);
+        upActive = true;
+        upForward = true;
+    }
+
+    public void activateFloorBackward() {
+        floorMotor.set(-0.3);
+        floorActive = true;
+        floorForward = false;
+    }
+
+    public void activateUpBackward() {
+        upMotor.set(-0.55);
+        upActive = true;
+        upForward = false;
     }
 
     public void deactivateFloor() {
         floorMotor.set(0);
+        floorActive = false;
+        floorForward = true;
     }
 
     public void deactivateUp() {
         upMotor.set(0);
+        upActive = false;
+        upForward = false;
     }
   
     public void toggleFloor() {

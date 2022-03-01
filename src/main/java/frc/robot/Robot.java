@@ -11,9 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
-import frc.robot.auton.routines.Pickup2;
-import frc.robot.auton.routines.ShootBall;
-import frc.robot.auton.routines.SimpleAuto;
+import frc.robot.auton.routines.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -58,11 +56,15 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Robot On", robotOn);
 
     SmartDashboard.putData("Autonomous modes", chooser);
-    chooser.setDefaultOption("Default", new WaitCommand(0));
+    chooser.setDefaultOption("Nothing", new WaitCommand(0));
     chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
-    chooser.addOption("Simple Auto", new SimpleAuto().withTimeout(15));
-    chooser.addOption("Shoot ball", new ShootBall().withTimeout(15));
-    chooser.addOption("Pickup 2", new Pickup2().withTimeout(2));
+    chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
+    chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
+    chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
+    chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
+    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
+    chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
+    chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
   }
 
   /**

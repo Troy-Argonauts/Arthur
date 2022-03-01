@@ -10,14 +10,14 @@ import frc.robot.auton.commands.DT_MoveToSetpoint;
 import frc.robot.auton.commands.DT_ZeroEncoders;
 import frc.robot.auton.commands.S_Shooter;
 
-public class ShootBall extends SequentialCommandGroup {
+public class ShootAndMove extends SequentialCommandGroup {
 
-  public ShootBall() {
+  public ShootAndMove() {
     addCommands(
       new DT_ZeroEncoders(), 
       new S_Shooter(),
       new DT_MoveToSetpoint(-1)
     );
-    addRequirements(Robot.getDriveTrain(), Robot.getShooter());
+    addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());
   }
 }

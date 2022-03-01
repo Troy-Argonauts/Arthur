@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.auton.commands.*;
 
-public class Pickup2 extends SequentialCommandGroup {
+public class Shoot3 extends SequentialCommandGroup {
 
-  public Pickup2() {
+  public Shoot3() {
     addCommands(
       new DT_ZeroEncoders(),
-      new I_StartIndexer(),
       new S_Shooter(),
 
+      new I_StartIndexer(),
       new I_StartIntake(),
       new DT_TurnToTarget(-1, 1),
       new DT_MoveToSetpoint(1),
@@ -27,8 +27,7 @@ public class Pickup2 extends SequentialCommandGroup {
 
       new DT_TurnToTarget(1, 0.5),
       new DT_MoveToSetpoint(1),
-      new S_Shooter(),
-      new I_StopIndexer()
+      new S_Shooter()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }

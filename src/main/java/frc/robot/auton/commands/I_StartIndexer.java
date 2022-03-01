@@ -11,7 +11,8 @@ import frc.robot.Robot;
 public class I_StartIndexer extends SequentialCommandGroup {
   public I_StartIndexer() {
     addCommands(
-      new RunCommand(() -> Robot.getIntakeIndexer().activateFloor(), Robot.getIntakeIndexer())
+      new RunCommand(() -> Robot.getIntakeIndexer().activateFloorForward(), Robot.getIntakeIndexer()),
+      new RunCommand(() -> Robot.getIntakeIndexer().activateUpForward(), Robot.getIntakeIndexer())
     );
     addRequirements(Robot.getIntakeIndexer());
   }
