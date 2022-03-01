@@ -2,7 +2,6 @@ package frc.libs.util;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants;
 
 /**
  * Wrapper class for FRC joysticks.

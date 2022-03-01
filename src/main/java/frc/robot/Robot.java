@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
   private static MonkeyBars monkeyBars;
   private static PneumaticsSystem pneumaticsSystem;
   private static Intake_Indexer intake_indexer;
+  public boolean robotOn;
   
   private final SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -51,8 +52,10 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
+    robotOn = true;
 
     driveTrain.zeroEncoders();
+    SmartDashboard.putBoolean("Robot On", robotOn);
 
     SmartDashboard.putData("Autonomous modes", chooser);
     chooser.setDefaultOption("Default", new WaitCommand(0));
@@ -88,7 +91,9 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    robotOn = false;
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override

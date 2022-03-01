@@ -11,15 +11,15 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "12,0": {
+          "7,0": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
               "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto mode",
-              "_title": "Auto mode"
+              "_source0": "network_table:///SmartDashboard/Autonomous modes",
+              "_title": "Auton"
             }
           },
           "0,0": {
@@ -110,40 +110,42 @@
               "_title": "Rear Left V"
             }
           },
-          "5,1": {
+          "5,2": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Shooter Temperature",
-              "_title": "Shooter Temperature"
+              "_title": "Shooter Temp"
             }
           },
-          "7,1": {
+          "7,2": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Current",
-              "_title": "Shooter Current"
+              "_source0": "network_table:///SmartDashboard/Shooter Velocity",
+              "_title": "Shooter Velocity"
             }
           },
-          "8,1": {
+          "9,2": {
             "size": [
               1,
               1
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Voltage",
-              "_title": "Shooter Voltage"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Robot On",
+              "_title": "Robot On",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,1": {
+          "6,2": {
             "size": [
               1,
               1
@@ -154,59 +156,26 @@
               "_title": "Shooter RPM"
             }
           },
-          "7,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Stator Current",
-              "_title": "Shooter Stator Current"
-            }
-          },
-          "5,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Supply Current",
-              "_title": "Shooter Supply Current"
-            }
-          },
           "2,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature:  ",
-              "_title": "Indexer Floor Temperature:  "
-            }
-          },
-          "0,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Up Temperature:  ",
-              "_title": "Indexer Up Temperature:  "
-            }
-          },
-          "4,0": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turn",
-              "_title": "Turn"
+              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature:  ",
+              "_title": "Indexer Floor Temp"
+            }
+          },
+          "0,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Indexer Up Temperature:  ",
+              "_title": "Indexer Up Temp"
             }
           },
           "9,0": {
@@ -216,11 +185,22 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Speed",
-              "_title": "Speed"
+              "_source0": "network_table:///SmartDashboard/Driver Right Joystick X Value",
+              "_title": "Right Joystick X"
             }
           },
-          "10,0": {
+          "9,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Driver Left Joystick Y Value",
+              "_title": "Left Joystick Y"
+            }
+          },
+          "0,3": {
             "size": [
               1,
               1
@@ -228,7 +208,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Intake Temperature",
-              "_title": "Intake Temperature"
+              "_title": "Intake Temp"
             }
           },
           "11,0": {
@@ -242,7 +222,7 @@
               "_title": "Intake Percentage"
             }
           },
-          "4,1": {
+          "1,3": {
             "size": [
               1,
               1
@@ -255,7 +235,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "10,1": {
+          "2,3": {
             "size": [
               1,
               1
@@ -290,7 +270,7 @@
               "_title": "Indexer Floor Percentage:  "
             }
           },
-          "4,2": {
+          "3,2": {
             "size": [
               1,
               1
@@ -303,7 +283,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "5,2": {
+          "1,2": {
             "size": [
               1,
               1
@@ -311,7 +291,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Elevator Active",
-              "_title": "Elevator Active",
+              "_title": "Up Active",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -482,9 +462,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 1.0,
-    "y": 1.0,
-    "width": 1918.0,
-    "height": 1030.0
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 830.4000244140625
   }
 }
