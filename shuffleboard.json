@@ -252,8 +252,8 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake Stopped",
-              "_title": "Intake Stopped",
+              "_source0": "network_table:///SmartDashboard/Intake Active",
+              "_title": "Intake Active",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
