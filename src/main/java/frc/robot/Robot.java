@@ -7,9 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
 import frc.robot.auton.routines.*;
 import frc.robot.subsystems.*;
@@ -21,150 +19,154 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command autonomousCommand;
+	private Command autonomousCommand;
 
-  public static RobotContainer robotContainer;
-  private static DriveTrain driveTrain;
-  private static Intake intake;
-  private static Shooter shooter;
-  private static MonkeyBars monkeyBars;
-  private static PneumaticsSystem pneumaticsSystem;
-  private static Intake_Indexer intake_indexer;
-  public boolean robotOn;
-  
-  private final SendableChooser<Command> chooser = new SendableChooser<>();
+	public static RobotContainer robotContainer;
+	private static DriveTrain driveTrain;
+	private static Intake intake;
+	private static Shooter shooter;
+	private static MonkeyBars monkeyBars;
+	private static PneumaticsSystem pneumaticsSystem;
+	private static Intake_Indexer intake_indexer;
+	public boolean robotOn;
 
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
-  @Override
-  public void robotInit() {
-    // Initialize Subsystems
-    driveTrain = new DriveTrain();
-    intake = new Intake();
-    shooter = new Shooter();
-    monkeyBars = new MonkeyBars();
-    pneumaticsSystem = new PneumaticsSystem();
-    intake_indexer = new Intake_Indexer();
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    robotContainer = new RobotContainer();
-    robotOn = true;
+	private final SendableChooser<Command> chooser = new SendableChooser<>();
 
-    driveTrain.zeroEncoders();
-    SmartDashboard.putBoolean("Robot On", robotOn);
+	/**
+	 * This function is run when the robot is first started up and should be used for any
+	 * initialization code.
+	 */
+	@Override
+	public void robotInit() {
+		// Initialize Subsystems
+		driveTrain = new DriveTrain();
+		intake = new Intake();
+		shooter = new Shooter();
+		monkeyBars = new MonkeyBars();
+		pneumaticsSystem = new PneumaticsSystem();
+		intake_indexer = new Intake_Indexer();
+		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+		// autonomous chooser on the dashboard.
+		robotContainer = new RobotContainer();
+		robotOn = true;
 
-    SmartDashboard.putData("Autonomous modes", chooser);
-    chooser.setDefaultOption("Nothing", new WaitCommand(0));
-    chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
-    chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
-    chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
-    chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
-    chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
-    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
-    chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
-    chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
-  }
+		driveTrain.zeroEncoders();
+		SmartDashboard.putBoolean("Robot On", robotOn);
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
-   * SmartDashboard integrated updating.
-   */
-  @Override
-  public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
-    // block in order for anything in the Command-based framework to work.
-    CommandScheduler.getInstance().run();
+		SmartDashboard.putData("Autonomous modes", chooser);
+//    chooser.setDefaultOption("Nothing", new WaitCommand(0));
+//    chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
+//    chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
+//    chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
+//    chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
+//    chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
+//    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
+//    chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
+//    chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
+	}
 
-    SmartDashboard.putNumber("Driver Right Joystick X Value", RobotContainer.getDriver().getRightJoystickX());
-    SmartDashboard.putNumber("Driver Left Joystick Y Value", RobotContainer.getDriver().getLeftJoystickY());
-  }
+	/**
+	 * This function is called every robot packet, no matter the mode. Use this for items like
+	 * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
+	 *
+	 * <p>This runs after the mode specific periodic functions, but before LiveWindow and
+	 * SmartDashboard integrated updating.
+	 */
+	@Override
+	public void robotPeriodic() {
+		// Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
+		// commands, running already-scheduled commands, removing finished or interrupted commands,
+		// and running subsystem periodic() methods.  This must be called from the robot's periodic
+		// block in order for anything in the Command-based framework to work.
+		CommandScheduler.getInstance().run();
 
-  /** This function is called once each time the robot enters Disabled mode. */
-  @Override
-  public void disabledInit() {
-    
-  }
+		SmartDashboard.putNumber("Driver Right Joystick X Value", RobotContainer.getDriver().getRightJoystickX());
+		SmartDashboard.putNumber("Driver Left Joystick Y Value", RobotContainer.getDriver().getLeftJoystickY());
+	}
 
-  @Override
-  public void disabledPeriodic() {
-    robotOn = false;
-  }
+	/** This function is called once each time the robot enters Disabled mode. */
+	@Override
+	public void disabledInit() {
+		new InstantCommand(Robot.getIntake()::disable)
+				.alongWith(new InstantCommand(Robot.getShooter()::stop))
+				.alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+				.alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp));
 
-  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
-  @Override
-  public void autonomousInit() {
-    autonomousCommand = robotContainer.getAutonomousCommand();
+	}
 
-    // schedule the autonomous command (example)
-    if (autonomousCommand != null) {
-      autonomousCommand.schedule();
-    }
-  }
+	@Override
+	public void disabledPeriodic() {
+		robotOn = false;
+	}
 
-  /** This function is called periodically during autonomous. */
-  @Override
-  public void autonomousPeriodic() {}
+	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+	@Override
+	public void autonomousInit() {
+		autonomousCommand = robotContainer.getAutonomousCommand();
 
-  @Override
-  public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (autonomousCommand != null) {
-      autonomousCommand.cancel();
-    }
-  }
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null) {
+			autonomousCommand.schedule();
+		}
+	}
 
-  /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {
-  }
+	/** This function is called periodically during autonomous. */
+	@Override
+	public void autonomousPeriodic() {}
 
-  @Override
-  public void testInit() {
-    // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
-  }
+	@Override
+	public void teleopInit() {
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null) {
+			autonomousCommand.cancel();
+		}
+	}
 
-  /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {}
+	/** This function is called periodically during operator control. */
+	@Override
+	public void teleopPeriodic() {
+	}
 
-  public static DriveTrain getDriveTrain() {
-    if (driveTrain == null) driveTrain = new DriveTrain();
-    return driveTrain;
-  }
+	@Override
+	public void testInit() {
+		// Cancels all running commands at the start of test mode.
+		CommandScheduler.getInstance().cancelAll();
+	}
 
-  public static Intake getIntake() {
-    if (intake == null) intake = new Intake();
-    return intake;
-  }
+	/** This function is called periodically during test mode. */
+	@Override
+	public void testPeriodic() {}
 
-  public static Shooter getShooter() {
-    if (shooter == null) shooter = new Shooter();
-    return shooter;
-  }
+	public static DriveTrain getDriveTrain() {
+		if (driveTrain == null) driveTrain = new DriveTrain();
+		return driveTrain;
+	}
 
-  public static MonkeyBars getMonkeyBars() {
-    if (monkeyBars == null) monkeyBars = new MonkeyBars();
-    return monkeyBars;
-  }
+	public static Intake getIntake() {
+		if (intake == null) intake = new Intake();
+		return intake;
+	}
 
-  public static PneumaticsSystem getPneumaticsSystem() {
-    if (pneumaticsSystem == null) pneumaticsSystem = new PneumaticsSystem();
-    return pneumaticsSystem;
-  }
+	public static Shooter getShooter() {
+		if (shooter == null) shooter = new Shooter();
+		return shooter;
+	}
 
-  public static Intake_Indexer getIntakeIndexer() {
-    if (intake_indexer == null) intake_indexer = new Intake_Indexer();
-    return intake_indexer;
-  }
+	public static MonkeyBars getMonkeyBars() {
+		if (monkeyBars == null) monkeyBars = new MonkeyBars();
+		return monkeyBars;
+	}
+
+	public static PneumaticsSystem getPneumaticsSystem() {
+		if (pneumaticsSystem == null) pneumaticsSystem = new PneumaticsSystem();
+		return pneumaticsSystem;
+	}
+
+	public static Intake_Indexer getIntakeIndexer() {
+		if (intake_indexer == null) intake_indexer = new Intake_Indexer();
+		return intake_indexer;
+	}
 }
