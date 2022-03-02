@@ -37,7 +37,7 @@ public class Intake extends SubsystemBase {
         SmartDashboard.putNumber("Intake Temperature", intakeMotor.getMotorTemperature());
         SmartDashboard.putNumber("Intake Percentage", (intakeMotor.get() * 100));
         SmartDashboard.putBoolean("Intake Forward", forward);
-        SmartDashboard.putBoolean("Intake Stopped", stopped);
+        SmartDashboard.putBoolean("Intake Active", !stopped);
     }
 
     public void toggleDirection() {
