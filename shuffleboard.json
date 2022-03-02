@@ -110,7 +110,7 @@
               "_title": "Rear Left V"
             }
           },
-          "5,2": {
+          "5,3": {
             "size": [
               1,
               1
@@ -121,7 +121,7 @@
               "_title": "Shooter Temp"
             }
           },
-          "7,2": {
+          "7,3": {
             "size": [
               1,
               1
@@ -145,7 +145,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "6,2": {
+          "6,3": {
             "size": [
               1,
               1
@@ -186,7 +186,12 @@
             "content": {
               "_type": "Number Bar",
               "_source0": "network_table:///SmartDashboard/Driver Right Joystick X Value",
-              "_title": "Right Joystick X"
+              "_title": "Right Joystick X",
+              "Range/Min": -1.0,
+              "Range/Max": 1.0,
+              "Range/Center": 0.0,
+              "Visuals/Num tick marks": 5,
+              "Visuals/Show text": true
             }
           },
           "9,1": {
@@ -197,7 +202,12 @@
             "content": {
               "_type": "Number Bar",
               "_source0": "network_table:///SmartDashboard/Driver Left Joystick Y Value",
-              "_title": "Left Joystick Y"
+              "_title": "Left Joystick Y",
+              "Range/Min": -1.0,
+              "Range/Max": 1.0,
+              "Range/Center": 0.0,
+              "Visuals/Num tick marks": 5,
+              "Visuals/Show text": true
             }
           },
           "0,3": {
@@ -211,7 +221,7 @@
               "_title": "Intake Temp"
             }
           },
-          "11,0": {
+          "3,3": {
             "size": [
               1,
               1
@@ -248,7 +258,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "11,1": {
+          "4,2": {
             "size": [
               1,
               1
@@ -259,7 +269,7 @@
               "_title": "Indexer Up Percentage"
             }
           },
-          "12,1": {
+          "5,2": {
             "size": [
               1,
               1
@@ -462,9 +472,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.2,
-    "y": -7.2,
-    "width": 1550.4,
-    "height": 830.4
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 830.4000244140625
   }
 }
