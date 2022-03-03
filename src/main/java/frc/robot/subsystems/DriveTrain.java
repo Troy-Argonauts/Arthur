@@ -94,6 +94,10 @@ public class DriveTrain extends SubsystemBase {
         return Constants.DT_kEncoderDistancePerPulse * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
     }
 
+    public double getRevolutions() {
+        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2) / Constants.DT_kEncoderCPR;
+    }
+
     public void zeroEncoders() {
         frontRight.setSelectedSensorPosition(0);
         frontLeft.setSelectedSensorPosition(0);

@@ -56,13 +56,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Autonomous modes", chooser);
     	chooser.setDefaultOption("Nothing", new WaitCommand(15));
 		chooser.addOption("Move off Tarmac", new Move());
-//		chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
-//		chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
-//		chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
-//		chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
-//	    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
-//		chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
-//		chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
+		chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
+		chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
+		chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
+		chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
+	    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
+		chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
+		chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
 	}
 
 	/**
