@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
+import frc.robot.auton.commands.DT_MoveUsingEncoders;
 import frc.robot.auton.routines.*;
 import frc.robot.subsystems.*;
 
@@ -48,21 +49,20 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		robotContainer = new RobotContainer();
-		robotOn = true;
 
 		driveTrain.zeroEncoders();
 		SmartDashboard.putBoolean("Robot On", robotOn);
 
 		SmartDashboard.putData("Autonomous modes", chooser);
-//    chooser.setDefaultOption("Nothing", new WaitCommand(0));
-//    chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-1).withTimeout(15));
-//    chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
-//    chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
-//    chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
-//    chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
-//    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
-//    chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
-//    chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
+    	chooser.setDefaultOption("Nothing", new WaitCommand(15));
+		chooser.addOption("Move off Tarmac", new Move());
+//		chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
+//		chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
+//		chooser.addOption("3 Ball", new Shoot3().withTimeout(15));
+//		chooser.addOption("4 Ball", new Shoot4().withTimeout(15));
+//	    chooser.addOption("Remove Preloaded Ball", new Extake().withTimeout(15));
+//		chooser.addOption("Intake Red Ball", new IntakeRedBall().withTimeout(15));
+//		chooser.addOption("Intake Red Balls", new Intake2RedBalls().withTimeout(15));
 	}
 
 	/**
@@ -82,6 +82,8 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Driver Right Joystick X Value", RobotContainer.getDriver().getRightJoystickX());
 		SmartDashboard.putNumber("Driver Left Joystick Y Value", RobotContainer.getDriver().getLeftJoystickY());
+
+		robotOn = true;
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
@@ -102,7 +104,7 @@ public class Robot extends TimedRobot {
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = robotContainer.getAutonomousCommand();
+		autonomousCommand = chooser.getSelected();
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
