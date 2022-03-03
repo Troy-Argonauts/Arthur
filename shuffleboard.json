@@ -156,7 +156,7 @@
               "_title": "Shooter RPM"
             }
           },
-          "2,2": {
+          "3,2": {
             "size": [
               1,
               1
@@ -164,7 +164,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature",
-              "_title": "Indexer Floor Temp"
+              "_title": "Floor Temp"
             }
           },
           "0,2": {
@@ -258,7 +258,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "4,2": {
+          "2,2": {
             "size": [
               1,
               1
@@ -266,7 +266,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Indexer Up Percentage",
-              "_title": "Indexer Up Percentage"
+              "_title": "Up Percentage"
             }
           },
           "5,2": {
@@ -277,20 +277,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Indexer Floor Percentage",
-              "_title": "Indexer Floor Percentage"
-            }
-          },
-          "3,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Floor Active",
-              "_title": "Floor Active",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_title": "Floor Percentage"
             }
           },
           "1,2": {
@@ -300,8 +287,21 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator Active",
-              "_title": "Up Active",
+              "_source0": "network_table:///SmartDashboard/Indexer Up Active",
+              "_title": "Indexer Up Active",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Indexer Floor Active",
+              "_title": "Floor Active",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -472,9 +472,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.199999809265137,
-    "y": -7.199999809265137,
-    "width": 1550.4000244140625,
-    "height": 830.4000244140625
+    "x": 121.0,
+    "y": 240.0,
+    "width": 1551.0,
+    "height": 831.0
   }
 }

@@ -12,10 +12,16 @@ public class Intake_Indexer extends SubsystemBase {
     private Ultrasonic bottomIndexerSensor;
     private boolean floorActive, upActive, floorForward, upForward;
 
+
     public Intake_Indexer() {
+        floorForward = true;
+        upForward = true;
+
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
         bottomIndexerSensor = new Ultrasonic(Constants.BOTTOMINDEXERSENSOR_PING, Constants.BOTTOMINDEXERSENSOR_RESPONSE);
+
+        upMotor.setInverted(true);
     }
 
     @Override
@@ -81,11 +87,15 @@ public class Intake_Indexer extends SubsystemBase {
     public void deactivateUp() {
         upMotor.set(0);
         upActive = false;
-        upForward = false;
+        upForward = true;
     }
   
     public void toggleFloor() {
         floorActive = !floorActive;
     }
     public void toggleUp() {upActive = !upActive;}
+    public void toggleAll() {
+        toggleFloor();
+        toggleUp();
+    }
 }
