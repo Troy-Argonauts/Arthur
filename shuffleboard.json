@@ -156,28 +156,6 @@
               "_title": "Shooter RPM"
             }
           },
-          "3,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature",
-              "_title": "Floor Temp"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Up Temperature",
-              "_title": "Indexer Up Temp"
-            }
-          },
           "9,0": {
             "size": [
               1,
@@ -217,17 +195,6 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake Temperature",
-              "_title": "Intake Temp"
-            }
-          },
-          "3,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Intake Percentage",
               "_title": "Intake Percentage"
             }
@@ -258,7 +225,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "2,2": {
+          "1,2": {
             "size": [
               1,
               1
@@ -269,7 +236,7 @@
               "_title": "Up Percentage"
             }
           },
-          "5,2": {
+          "3,2": {
             "size": [
               1,
               1
@@ -280,7 +247,7 @@
               "_title": "Floor Percentage"
             }
           },
-          "1,2": {
+          "0,2": {
             "size": [
               1,
               1
@@ -293,7 +260,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "4,2": {
+          "2,2": {
             "size": [
               1,
               1
@@ -304,52 +271,6 @@
               "_title": "Floor Active",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto mode",
-              "_title": "Auto mode"
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake Stopped",
-              "_title": "Intake Stopped",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature:  ",
-              "_title": "Indexer Floor Temperature:  "
-            }
-          },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Indexer Up Temperature:  ",
-              "_title": "Indexer Up Temperature:  "
             }
           },
           "11,0": {
@@ -374,33 +295,7 @@
               "_title": "Indexer Floor Percentage:  "
             }
           },
-          "4,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Floor Active",
-              "_title": "Floor Active",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "5,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator Active",
-              "_title": "Elevator Active",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,1": {
+          "7,1": {
             "size": [
               1,
               1
@@ -411,7 +306,7 @@
               "_title": "Turn"
             }
           },
-          "7,1": {
+          "8,1": {
             "size": [
               1,
               1
@@ -588,9 +483,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 121.0,
-    "y": 240.0,
-    "width": 1551.0,
-    "height": 831.0
+    "x": -18.399999618530273,
+    "y": 0.0,
+    "width": 1551.199951171875,
+    "height": 831.2000122070312
   }
 }
