@@ -14,6 +14,8 @@ public class MonkeyBars extends SubsystemBase {
         mainMotor = new TalonFX(Constants.MONKEY_BARS);
 
         mainMotor.setNeutralMode(NeutralMode.Coast);
+
+        mainMotor.setInverted(false);
     }
 
     public void up() {

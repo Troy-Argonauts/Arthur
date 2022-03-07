@@ -67,6 +67,10 @@ public class Shooter extends SubsystemBase {
         return false;
     }
 
+    public void stage1() {
+        shooterMain.set(ControlMode.PercentOutput, 0.25);
+    }
+
     public void activate() {
         shooterMain.set(ControlMode.PercentOutput, 0.8);
     }

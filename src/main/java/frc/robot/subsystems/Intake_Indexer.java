@@ -21,7 +21,8 @@ public class Intake_Indexer extends SubsystemBase {
         upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
         bottomIndexerSensor = new Ultrasonic(Constants.BOTTOMINDEXERSENSOR_PING, Constants.BOTTOMINDEXERSENSOR_RESPONSE);
 
-        upMotor.setInverted(true);
+        floorMotor.setInverted(false);
+        upMotor.setInverted(false);
     }
 
     @Override

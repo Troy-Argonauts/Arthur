@@ -51,6 +51,8 @@ public class DriveTrain extends SubsystemBase {
 
         frontLeft.setInverted(true);
         rearLeft.setInverted(InvertType.FollowMaster);
+        frontRight.setInverted(false);
+        rearRight.setInverted(InvertType.FollowMaster);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
         frontRight.setNeutralMode(NeutralMode.Coast);
