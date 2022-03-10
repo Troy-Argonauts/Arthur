@@ -12,7 +12,7 @@ public class DT_TurnToTarget extends SequentialCommandGroup {
 
   public DT_TurnToTarget(int direction, double time) {
     addCommands(
-      new RunCommand(() -> Robot.getDriveTrain().cheesyDrive(0.5 * direction, 0), Robot.getDriveTrain()).withTimeout(time)
+      new RunCommand(() -> Robot.getDriveTrain().cheesyDrive(0.3 * direction, 0), Robot.getDriveTrain()).withTimeout(time)
     );
   }
 }

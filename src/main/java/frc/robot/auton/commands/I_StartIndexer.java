@@ -4,15 +4,15 @@
 
 package frc.robot.auton.commands;
 
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 
 public class I_StartIndexer extends SequentialCommandGroup {
   public I_StartIndexer() {
     addCommands(
-      new RunCommand(() -> Robot.getIntakeIndexer().activateFloorForward(), Robot.getIntakeIndexer()),
-      new RunCommand(() -> Robot.getIntakeIndexer().activateUpForward(), Robot.getIntakeIndexer())
+            new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward),
+            new InstantCommand(Robot.getIntakeIndexer()::activateUpForward)
     );
     addRequirements(Robot.getIntakeIndexer());
   }

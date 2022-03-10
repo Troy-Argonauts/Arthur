@@ -4,6 +4,7 @@
 
 package frc.robot.auton.routines;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
@@ -14,9 +15,9 @@ public class ShootAndMove extends SequentialCommandGroup {
 
   public ShootAndMove() {
     addCommands(
-      new DT_ZeroEncoders(), 
-      new S_Shooter(),
-      new DT_MoveToSetpoint(-1)
+            new DT_ZeroEncoders(),
+            new S_Shooter(),
+            new DT_MoveToSetpoint(-33)
     );
     addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());
   }

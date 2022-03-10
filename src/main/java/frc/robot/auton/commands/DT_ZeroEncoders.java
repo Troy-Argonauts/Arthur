@@ -11,7 +11,7 @@ import frc.robot.Robot;
 public class DT_ZeroEncoders extends ParallelCommandGroup {
   public DT_ZeroEncoders() {
     addCommands(
-      new RunCommand(() -> Robot.getDriveTrain().zeroEncoders(), Robot.getDriveTrain())
+      new RunCommand(Robot.getDriveTrain()::zeroEncoders)
     );
     addRequirements(Robot.getDriveTrain());
   }

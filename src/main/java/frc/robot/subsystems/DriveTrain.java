@@ -86,10 +86,6 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Front Left Position" , frontLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("Rear Right Position" , rearRight.getSelectedSensorPosition());
         SmartDashboard.putNumber("Rear Left Position" , rearLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("Front Right Velocity" , frontRight.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Front Left Velocity" , frontLeft.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Rear Right Velocity" , rearRight.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Rear Left Velocity" , rearLeft.getSelectedSensorVelocity());
     }
 
     public double getLocation() {

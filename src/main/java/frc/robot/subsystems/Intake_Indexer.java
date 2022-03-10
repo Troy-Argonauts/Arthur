@@ -9,7 +9,6 @@ import frc.robot.Constants;
 public class Intake_Indexer extends SubsystemBase {
 
     private final CANSparkMax floorMotor, upMotor;
-    private Ultrasonic bottomIndexerSensor;
     private boolean floorActive, upActive, floorForward, upForward;
 
 
@@ -19,10 +18,11 @@ public class Intake_Indexer extends SubsystemBase {
 
         floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
-        bottomIndexerSensor = new Ultrasonic(Constants.BOTTOMINDEXERSENSOR_PING, Constants.BOTTOMINDEXERSENSOR_RESPONSE);
 
         floorMotor.setInverted(false);
         upMotor.setInverted(false);
+
+        upMotor.setSmartCurrentLimit(20);
     }
 
     @Override
@@ -50,7 +50,6 @@ public class Intake_Indexer extends SubsystemBase {
         SmartDashboard.putNumber("Indexer Floor Temperature", floorMotor.getMotorTemperature());
         SmartDashboard.putNumber("Indexer Floor Percentage", (floorMotor.get() * 100));
         SmartDashboard.putBoolean("Indexer Floor Active", floorActive);
-        SmartDashboard.putNumber("Indexer Up Temperature", upMotor.getMotorTemperature());
         SmartDashboard.putNumber("Indexer Up Percentage", (upMotor.get() * 100));
         SmartDashboard.putBoolean("Indexer Up Active", upActive);
     }

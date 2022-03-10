@@ -4,17 +4,22 @@
 
 package frc.robot.auton.commands;
 
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 
 public class S_Shooter extends SequentialCommandGroup {
   public S_Shooter() {
     addCommands(
-      new RunCommand(() -> Robot.getIntakeIndexer().activateUpForward(), Robot.getIntakeIndexer()),
-      new RunCommand(() -> Robot.getShooter().activate(), Robot.getShooter()).withTimeout(2),
-      new RunCommand(() -> Robot.getIntakeIndexer().deactivateUp(), Robot.getIntakeIndexer()),
-      new RunCommand(() -> Robot.getShooter().stop(), Robot.getShooter())
+            new InstantCommand(Robot.getShooter()::stage1),
+            new WaitCommand(0.5),
+            new InstantCommand(Robot.getShooter()::activate),
+            new WaitCommand(1),
+            new InstantCommand(Robot.getIntakeIndexer()::activateUpForward),
+            new WaitCommand(2),
+            new InstantCommand(Robot.getIntakeIndexer()::deactivateUp),
+            new InstantCommand(Robot.getShooter()::stop)
     );
     addRequirements(Robot.getShooter());
   }

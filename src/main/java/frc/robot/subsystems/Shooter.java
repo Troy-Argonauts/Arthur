@@ -49,9 +49,9 @@ public class Shooter extends SubsystemBase {
             stop();
         }
 
-        SmartDashboard.putNumber("Shooter Temperature", shooterMain.getTemperature());
         SmartDashboard.putNumber("Shooter RPM", getRPM());
-        SmartDashboard.putNumber("Shooter Velocity", shooterMain.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Shooter Percentage", shooterMain.getMotorOutputPercent());
+        SmartDashboard.putBoolean("Shooter Activated", active);
     }
 
     public double rpmToNativeUnits(double rpm) {
@@ -69,6 +69,7 @@ public class Shooter extends SubsystemBase {
 
     public void stage1() {
         shooterMain.set(ControlMode.PercentOutput, 0.25);
+        active = true;
     }
 
     public void activate() {

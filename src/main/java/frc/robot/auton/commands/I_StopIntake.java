@@ -4,8 +4,8 @@
 
 package frc.robot.auton.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Robot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -15,8 +15,8 @@ public class I_StopIntake extends ParallelCommandGroup {
 
     public I_StopIntake() {
         addCommands(
-                new RunCommand(() -> Robot.getIntake().disable(), Robot.getIntake()),
-                new RunCommand(() -> Robot.getPneumaticsSystem().pickupIntake(), Robot.getPneumaticsSystem()).withTimeout(1)
+                new InstantCommand(Robot.getIntake()::disable),
+                new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
         );
         addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake());
     }
