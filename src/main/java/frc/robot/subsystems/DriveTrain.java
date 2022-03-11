@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -58,16 +57,6 @@ public class DriveTrain extends SubsystemBase {
         frontRight.setNeutralMode(NeutralMode.Coast);
         rearLeft.setNeutralMode(NeutralMode.Coast);
         rearRight.setNeutralMode(NeutralMode.Coast);
-    }
-
-    /**
-     * Has the robot move at a certain speed output, usually using input from Joysticks
-     * @param left Sets the left side motors to a certain percent output
-     * @param right Sets the right side motors to a certain percent output
-     */
-    public void tankDrive(double left, double right) {
-        frontLeft.set(ControlMode.PercentOutput, left);
-        frontRight.set(ControlMode.PercentOutput, right);
     }
 
     /**

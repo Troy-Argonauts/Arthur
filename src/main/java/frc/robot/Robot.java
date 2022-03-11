@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
-import frc.robot.auton.routines.*;
+import frc.robot.auton.routines.Shoot2;
+import frc.robot.auton.routines.ShootAndMove;
+import frc.robot.auton.routines.ShootAndPush;
 import frc.robot.subsystems.*;
 
 /**

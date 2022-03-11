@@ -44,11 +44,6 @@ public class Intake extends SubsystemBase {
         forward = !forward;
     }
 
-    public void togglePower() {
-        stopped = !stopped;
-        forward = true;
-    }
-
     public void forward() {
         intakeMotor.set(0.8);
         stopped = false;
