@@ -74,10 +74,12 @@ public class Shooter extends SubsystemBase {
 
     public void activate() {
         shooterMain.set(ControlMode.PercentOutput, 0.8);
+        active = true;
     }
 
     public void stop() {
         shooterMain.set(ControlMode.PercentOutput, 0);
+        active = false;
     }
 
     public void toggle() {
