@@ -43,8 +43,6 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-        Trigger rightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
-        Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
         // Driver Controls
 
@@ -129,18 +127,12 @@ public class RobotContainer {
         );
 
         // MonkeyBars Up
-        rightTrigger.whenActive(
-                new InstantCommand(Robot.getMonkeyBars()::up)
-        ).whenInactive(
-                new InstantCommand(Robot.getMonkeyBars()::stop)
-        );
+        driver.getRBButton().whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
+                .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
 
         // MonkeyBars Down
-        leftTrigger.whenActive(
-                new InstantCommand(Robot.getMonkeyBars()::down)
-        ).whenInactive(
-                new InstantCommand(Robot.getMonkeyBars()::stop)
-        );
+        driver.getLBButton().whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
+                .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
     }
 
     /**

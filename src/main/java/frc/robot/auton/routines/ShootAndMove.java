@@ -17,7 +17,7 @@ public class ShootAndMove extends SequentialCommandGroup {
     addCommands(
             new DT_ZeroEncoders(),
             new S_Shooter(),
-            new DT_MoveToSetpoint(-33)
+            new DT_MoveToSetpoint(-40)
     );
     addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());
   }

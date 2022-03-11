@@ -53,9 +53,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putBoolean("Robot On", robotOn);
 
         SmartDashboard.putData("Autonomous modes", chooser);
-        chooser.setDefaultOption("Nothing", new WaitCommand(15));
+        chooser.setDefaultOption("Shoot and Move", new ShootAndMove().withTimeout(15));
+        chooser.addOption("Nothing", new WaitCommand(15));
         chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-20));
-        chooser.addOption("Shoot and Move", new ShootAndMove().withTimeout(15));
         chooser.addOption("Shoot and Push", new ShootAndPush().withTimeout(15));
         chooser.addOption("2 Ball", new Shoot2().withTimeout(15));
 //		chooser.addOption("3 Ball", new Shoot3().withTimeout(15));

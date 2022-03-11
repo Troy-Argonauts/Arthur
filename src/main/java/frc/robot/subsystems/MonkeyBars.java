@@ -32,11 +32,11 @@ public class MonkeyBars extends SubsystemBase {
     }
 
     public void up() {
-        mainMotor.set(ControlMode.PercentOutput, 0.15);
+        mainMotor.set(ControlMode.PercentOutput, 0.3);
         active = true;
     }
     public void down() {
-        mainMotor.set(ControlMode.PercentOutput, -0.15);
+        mainMotor.set(ControlMode.PercentOutput, -0.3);
         active = true;
     }
     public void stop() {
