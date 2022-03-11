@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -49,12 +48,9 @@ public class Shooter extends SubsystemBase {
             stop();
         }
 
-        SmartDashboard.putNumber("Shooter Temperature", shooterMain.getTemperature());
-        SmartDashboard.putNumber("Shooter Current", shooterMain.getSupplyCurrent());
-        SmartDashboard.putNumber("Shooter Voltage", shooterMain.getBusVoltage());
         SmartDashboard.putNumber("Shooter RPM", getRPM());
-        SmartDashboard.putNumber("Shooter Stator Current", shooterMain.getStatorCurrent());
-        SmartDashboard.putNumber("Shooter Supply Current", shooterMain.getSupplyCurrent());
+        SmartDashboard.putNumber("Shooter Percentage", shooterMain.getMotorOutputPercent());
+        SmartDashboard.putBoolean("Shooter Activated", active);
     }
 
     public double rpmToNativeUnits(double rpm) {
@@ -70,12 +66,19 @@ public class Shooter extends SubsystemBase {
         return false;
     }
 
+    public void stage1() {
+        shooterMain.set(ControlMode.PercentOutput, 0.25);
+        active = true;
+    }
+
     public void activate() {
         shooterMain.set(ControlMode.PercentOutput, 0.8);
+        active = true;
     }
 
     public void stop() {
         shooterMain.set(ControlMode.PercentOutput, 0);
+        active = false;
     }
 
     public void toggle() {

@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -51,21 +50,13 @@ public class DriveTrain extends SubsystemBase {
 
         frontLeft.setInverted(true);
         rearLeft.setInverted(InvertType.FollowMaster);
+        frontRight.setInverted(false);
+        rearRight.setInverted(InvertType.FollowMaster);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
         frontRight.setNeutralMode(NeutralMode.Coast);
         rearLeft.setNeutralMode(NeutralMode.Coast);
         rearRight.setNeutralMode(NeutralMode.Coast);
-    }
-
-    /**
-     * Has the robot move at a certain speed output, usually using input from Joysticks
-     * @param left Sets the left side motors to a certain percent output
-     * @param right Sets the right side motors to a certain percent output
-     */
-    public void tankDrive(double left, double right) {
-        frontLeft.set(ControlMode.PercentOutput, left);
-        frontRight.set(ControlMode.PercentOutput, right);
     }
 
     /**
@@ -84,14 +75,14 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Front Left Position" , frontLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("Rear Right Position" , rearRight.getSelectedSensorPosition());
         SmartDashboard.putNumber("Rear Left Position" , rearLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("Front Right Velocity" , frontRight.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Front Left Velocity" , frontLeft.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Rear Right Velocity" , rearRight.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Rear Left Velocity" , rearLeft.getSelectedSensorVelocity());
     }
 
     public double getLocation() {
         return Constants.DT_kEncoderDistancePerPulse * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+    }
+
+    public double getRevolutions() {
+        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2) / Constants.DT_kEncoderCPR;
     }
 
     public void zeroEncoders() {

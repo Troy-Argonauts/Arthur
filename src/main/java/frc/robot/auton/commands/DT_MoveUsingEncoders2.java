@@ -1,13 +1,14 @@
 package frc.robot.auton.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Robot;
 
 
-public class DT_MoveUsingEncoders extends SequentialCommandGroup {
+public class DT_MoveUsingEncoders2 extends CommandBase {
+    double revolutions;
 
-    public double revolutions;
-    public DT_MoveUsingEncoders(double revolutions) {
+    public DT_MoveUsingEncoders2(double revolutions) {
         addRequirements(Robot.getDriveTrain());
 
         this.revolutions = revolutions;
@@ -15,21 +16,21 @@ public class DT_MoveUsingEncoders extends SequentialCommandGroup {
 
     @Override
     public void initialize() {
-        Robot.getDriveTrain().zeroEncoders();
+        new RunCommand(Robot.getDriveTrain()::zeroEncoders);
     }
 
     @Override
     public void execute() {
-        Robot.getDriveTrain().zeroEncoders();
+        new RunCommand(Robot.getDriveTrain()::zeroEncoders);
 
         if (revolutions > 0) {
-            if (Robot.getDriveTrain().getLocation() < revolutions) {
+            if (Robot.getDriveTrain().getRevolutions() < revolutions) {
                 Robot.getDriveTrain().cheesyDrive(0, 0.1);
             } else {
                 end(true);
             }
         } else if (revolutions < 0) {
-            if (Robot.getDriveTrain().getLocation() > revolutions) {
+            if (Robot.getDriveTrain().getRevolutions() > revolutions) {
                 Robot.getDriveTrain().cheesyDrive(0, -0.1);
             } else {
                 end(true);
@@ -43,4 +44,6 @@ public class DT_MoveUsingEncoders extends SequentialCommandGroup {
     public void end(boolean interrupted) {
         Robot.getDriveTrain().cheesyDrive(0,0);
     }
+
 }
+

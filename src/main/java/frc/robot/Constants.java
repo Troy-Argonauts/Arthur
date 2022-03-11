@@ -46,6 +46,7 @@ public final class Constants {
     // Controller Variables
     public static int DRIVER_PORT = 0;
     public static int OPERATOR_PORT = 1;
+    public static double CONTROLLER_DRIFT = 0.07;
 
     // Limelight Variables
     public static double LIMELIGHT_HEIGHT = 0;
@@ -56,7 +57,7 @@ public final class Constants {
     public static double DT_kWheelDiameterMeters = 0.2;
     public static double DT_kEncoderCPR = 2048;
     public static double DT_kEncoderDistancePerPulse = (DT_kWheelDiameterMeters * Math.PI)/ DT_kEncoderCPR;
-    public static double DT_kP = 0.1;
+    public static double DT_kP = 0.02;
     public static double DT_kI = 0;
     public static double DT_kD = 0;
     public static double DT_PIDTolerance = 0.5;
@@ -67,8 +68,4 @@ public final class Constants {
     public static double SHOOTER_I = 0;
     public static double SHOOTER_D = 0;
     public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
-
-    // Indexer Variables
-    public static int BOTTOMINDEXERSENSOR_PING = 1;
-    public static int BOTTOMINDEXERSENSOR_RESPONSE = 2;
 }

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.libs.util.Controller;
 
 /**
@@ -21,8 +21,8 @@ import frc.libs.util.Controller;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
 
-    private final Controller driver;
-    private final Controller operator;
+    public static Controller driver;
+    public static Controller operator;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -42,79 +42,89 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-        Trigger rightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
-        Trigger leftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
-
         // Driver Controls
-        new RunCommand(
-                () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
-                Robot.getDriveTrain()
-        ).execute();
+
+        Robot.getDriveTrain().setDefaultCommand(
+                new RunCommand(
+                        () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
+                        Robot.getDriveTrain()
+                )
+        );
+
+        driver.getBButton().toggleWhenPressed(
+                new InstantCommand(Robot.getIntake()::disable)
+                        .alongWith(new InstantCommand(Robot.getShooter()::stop))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
+        );
+
+        operator.getAButton().toggleWhenPressed(
+                // Stage 1 ~ Accelerate
+                // Deactivate intake motor in case
+                new InstantCommand(Robot.getIntake()::disable)
+                        // Pickup intake just in case
+                        .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
+                        // Deactivate floor in case
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        // Rev up to full speed
+                        .andThen(new InstantCommand(Robot.getShooter()::activate))
+                        // pause for 1 second
+                        .andThen(new WaitCommand(1.25))
+                        // Turn on up indexer (shoot 1st ball)
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
+                        .andThen(new WaitCommand(0.25))
+                        // Turn on floor indexer (shoot 2nd ball)
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .andThen(new WaitCommand(2))
+                        // Turn Off all motors
+                        .andThen(new InstantCommand(Robot.getShooter()::stop))
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+        );
+
+        operator.getRBButton().toggleWhenPressed(
+                new InstantCommand(
+                        Robot.getPneumaticsSystem()::dropIntake)
+                        .alongWith(new InstantCommand(Robot.getIntake()::forward))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+        );
+
+        operator.getLBButton().toggleWhenPressed(
+                new InstantCommand(
+                        Robot.getPneumaticsSystem()::pickupIntake)
+                        .andThen(new InstantCommand(Robot.getIntake()::disable))
+                        .andThen(new WaitCommand(1.25))
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+        );
 
         // Shooter Toggle
         operator.getXButton().toggleWhenPressed(
-                new InstantCommand( () -> Robot.getShooter().toggle(), Robot.getShooter())
-                        .alongWith(new InstantCommand( () -> Robot.getIntakeIndexer().toggleUp(), Robot.getIntakeIndexer()))
+                // 25%
+                new InstantCommand(Robot.getShooter()::stage1)
         );
 
         // Toggle Intake Power
-        operator.getAButton().toggleWhenPressed(
-                new InstantCommand( () -> Robot.getIntake().togglePower(), Robot.getIntake())
+        driver.getAButton().toggleWhenPressed(
+                new InstantCommand(Robot.getIntakeIndexer()::activateUpForward)
         );
 
         // Toggle Intake Direction
         operator.getYButton().toggleWhenPressed(
-                new InstantCommand( () -> Robot.getIntake().toggleDirection(), Robot.getIntake())
-        );
-
-        // Pneumatics Drop Intake
-        operator.getRBButton().toggleWhenPressed(
-                new InstantCommand( () -> Robot.getPneumaticsSystem().dropIntake(), Robot.getPneumaticsSystem())
-                        .alongWith(new InstantCommand( () -> Robot.getIntake().forward(), Robot.getIntake()))
-        );
-
-        // Pneumatics Pickup Intake
-        operator.getLBButton().toggleWhenPressed(
-                new InstantCommand( () -> Robot.getPneumaticsSystem().pickupIntake(), Robot.getPneumaticsSystem())
-                        .alongWith(new InstantCommand( () -> Robot.getIntake().disable(), Robot.getIntake()))
-        );
-
-
-        // Toggle Indexer Toggle
-        operator.getBButton().toggleWhenPressed(
-                new InstantCommand( () -> Robot.getIntakeIndexer().toggleFloor(), Robot.getIntakeIndexer())
+                new InstantCommand(Robot.getIntake()::toggleDirection)
         );
 
         // Toggle Compressor
         operator.getSTARTButton().toggleWhenPressed(
-                new InstantCommand(
-                        () -> Robot.getPneumaticsSystem().toggleCompressor(),
-                        Robot.getPneumaticsSystem()
-                )
+                new InstantCommand(Robot.getPneumaticsSystem()::toggleCompressor)
         );
 
         // MonkeyBars Up
-        rightTrigger.whenActive(
-                new InstantCommand(
-                        () -> Robot.getMonkeyBars().up(),
-                        Robot.getMonkeyBars())
-        ).whenInactive(
-                new InstantCommand(
-                        () -> Robot.getMonkeyBars().stop(),
-                        Robot.getMonkeyBars())
-        );
+        driver.getRBButton().whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
+                .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
 
         // MonkeyBars Down
-        leftTrigger.whenActive(
-                new InstantCommand(
-                    () -> Robot.getMonkeyBars().down(),
-                    Robot.getMonkeyBars())
-        ).whenInactive(
-                new InstantCommand(
-                        () -> Robot.getMonkeyBars().stop(),
-                        Robot.getMonkeyBars()
-                )
-        );
+        driver.getLBButton().whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
+                .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
     }
 
     /**
@@ -127,11 +137,11 @@ public class RobotContainer {
         return null;
     }
 
-    public Controller getDriver() {
+    public static Controller getDriver() {
         return driver;
     }
 
-    public Controller getOperator() {
+    public static Controller getOperator() {
         return operator;
     }
 }

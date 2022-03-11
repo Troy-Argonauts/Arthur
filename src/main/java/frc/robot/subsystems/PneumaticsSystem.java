@@ -28,12 +28,6 @@ public class PneumaticsSystem extends SubsystemBase {
         }
     }
 
-    public void stop() {
-        compressor.disable();
-        solenoid.close();
-    }
-
-
     public void pickupIntake(){
         if (currentState == DoubleSolenoid.Value.kReverse) {
             currentState = DoubleSolenoid.Value.kForward;

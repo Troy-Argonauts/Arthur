@@ -11,7 +11,7 @@ public class DT_MoveToSetpoint extends PIDCommand {
         super(
             new PIDController(Constants.DT_kP, Constants.DT_kI, Constants.DT_kD),
             Robot.getDriveTrain()::getLocation,
-            setpoint,
+            -setpoint,
             output -> Robot.getDriveTrain().cheesyDrive(0, output),
             Robot.getDriveTrain()
         );
