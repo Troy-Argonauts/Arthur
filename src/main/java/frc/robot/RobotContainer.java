@@ -22,8 +22,8 @@ import frc.libs.util.Controller;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
 
-    public static Controller driver;
-    public static Controller operator;
+    public static final Controller driver;
+    public static final Controller operator;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -43,7 +43,6 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-
         // Driver Controls
 
         Robot.getDriveTrain().setDefaultCommand(
@@ -64,20 +63,19 @@ public class RobotContainer {
                 // Stage 1 ~ Accelerate
                 // Deactivate intake motor in case
                 new InstantCommand(Robot.getIntake()::disable)
-//                        /// Pickup intake just in case
+                        // Pickup intake just in case
                         .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
-//                        // Deactivate floor in case
+                        // Deactivate floor in case
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
                         // Rev up to full speed
                         .andThen(new InstantCommand(Robot.getShooter()::activate))
                         // pause for 1 second
                         .andThen(new WaitCommand(1.25))
-                        // Turn on floor indexer (shoot balls)
+                        // Turn on up indexer (shoot 1st ball)
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
-                        .andThen(new WaitCommand(0.75))
+                        .andThen(new WaitCommand(0.25))
+                        // Turn on floor indexer (shoot 2nd ball)
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
-                        // Turn on up indexer
-                        // Period to shoot balls and run all of these motors
                         .andThen(new WaitCommand(2))
                         // Turn Off all motors
                         .andThen(new InstantCommand(Robot.getShooter()::stop))
@@ -105,21 +103,16 @@ public class RobotContainer {
                 // 25%
                 new InstantCommand(Robot.getShooter()::stage1)
         );
-//
-//        // Toggle Intake Power
+
+        // Toggle Intake Power
         driver.getAButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntakeIndexer()::activateUpForward)
         );
-//
-//        // Toggle Intake Direction
+
+        // Toggle Intake Direction
         operator.getYButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::toggleDirection)
         );
-//
-//        // Toggle Indexer Toggle
-//        operator.getBButton().toggleWhenPressed(
-//                new InstantCommand( () -> Robot.getIntakeIndexer().toggleFloor(), Robot.getIntakeIndexer())
-//        );
 
         // Toggle Compressor
         operator.getSTARTButton().toggleWhenPressed(
