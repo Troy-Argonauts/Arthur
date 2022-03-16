@@ -61,6 +61,7 @@ public final class Constants {
     public static double DT_kI = 0;
     public static double DT_kD = 0;
     public static double DT_PIDTolerance = 0.5;
+    public static double DT_NEUTRALTORAMPSECONDS = 1;
 
     // Shooter Variables
     public static double SHOOTER_F = 0.05;
