@@ -10,7 +10,7 @@ public class Intake2RedBalls extends SequentialCommandGroup {
     public Intake2RedBalls() {
         addCommands(
                 new DT_ZeroEncoders(),
-                new S_Shooter(),
+                new S_ShooterHigh(),
 
                 new DT_TurnToTarget(-1,1),
                 new I_StartIntake(),

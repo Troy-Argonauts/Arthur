@@ -13,7 +13,7 @@ public class Shoot3 extends SequentialCommandGroup {
   public Shoot3() {
     addCommands(
       new DT_ZeroEncoders(),
-      new S_Shooter(),
+      new S_ShooterHigh(),
 
       new I_StartIndexer(),
       new I_StartIntake(),
@@ -27,7 +27,7 @@ public class Shoot3 extends SequentialCommandGroup {
 
       new DT_TurnToTarget(1, 0.5),
       new DT_MoveToSetpoint(1),
-      new S_Shooter()
+      new S_ShooterHigh()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }

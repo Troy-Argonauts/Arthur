@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
 import frc.robot.auton.routines.Shoot2;
-import frc.robot.auton.routines.ShootAndMove;
+import frc.robot.auton.routines.ShootAndMoveHigh;
+import frc.robot.auton.routines.ShootAndMoveLow;
 import frc.robot.auton.routines.ShootAndPush;
 import frc.robot.subsystems.*;
 
@@ -55,7 +56,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putBoolean("Robot On", robotOn);
 
         SmartDashboard.putData("Autonomous modes", chooser);
-        chooser.setDefaultOption("Shoot and Move", new ShootAndMove().withTimeout(15));
+        chooser.setDefaultOption("Shoot and Move Low", new ShootAndMoveLow().withTimeout(15));
+        chooser.addOption("Shoot and Move High", new ShootAndMoveHigh().withTimeout(15));
         chooser.addOption("Nothing", new WaitCommand(15));
         chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-20));
         chooser.addOption("Shoot and Push", new ShootAndPush().withTimeout(15));

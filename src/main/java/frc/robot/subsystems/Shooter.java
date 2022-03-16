@@ -42,11 +42,11 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (active) {
-            activate();
-        } else {
-            stop();
-        }
+//        if (active) {
+//            highGoal();
+//        } else {
+//            stop();
+//        }
 
         SmartDashboard.putNumber("Shooter RPM", getRPM());
         SmartDashboard.putNumber("Shooter Percentage", shooterMain.getMotorOutputPercent());
@@ -66,12 +66,12 @@ public class Shooter extends SubsystemBase {
         return false;
     }
 
-    public void stage1() {
-        shooterMain.set(ControlMode.PercentOutput, 0.25);
+    public void lowGoal() {
+        shooterMain.set(ControlMode.PercentOutput, 0.45);
         active = true;
     }
 
-    public void activate() {
+    public void highGoal() {
         shooterMain.set(ControlMode.PercentOutput, 0.8);
         active = true;
     }

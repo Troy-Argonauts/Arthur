@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 
-public class S_Shooter extends SequentialCommandGroup {
-  public S_Shooter() {
+public class S_ShooterLow extends SequentialCommandGroup {
+  public S_ShooterLow() {
     addCommands(
-            new InstantCommand(Robot.getShooter()::stage1),
-            new WaitCommand(0.5),
-            new InstantCommand(Robot.getShooter()::activate),
+            //new InstantCommand(Robot.getShooter()::highGoal),
+            //new WaitCommand(0.5),
+            new InstantCommand(Robot.getShooter()::lowGoal),
             new WaitCommand(1),
             new InstantCommand(Robot.getIntakeIndexer()::activateUpForward),
             new WaitCommand(2),
