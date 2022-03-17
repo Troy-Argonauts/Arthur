@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -43,10 +44,10 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.configFeedbackNotContinuous(false, 4);
         rearRight.configFeedbackNotContinuous(false, 4);
 
-        frontRight.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        frontLeft.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        rearRight.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        rearLeft.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        frontRight.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        frontLeft.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        rearRight.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        rearLeft.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
 
         frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
         frontLeft.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
@@ -98,10 +99,7 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.setSelectedSensorPosition(0);
     }
 
-
-
     @Override
     public void simulationPeriodic() {
-
     }
 }
