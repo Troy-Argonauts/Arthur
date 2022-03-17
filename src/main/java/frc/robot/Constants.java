@@ -61,7 +61,7 @@ public final class Constants {
     public static double DT_kI = 0;
     public static double DT_kD = 0;
     public static double DT_PIDTolerance = 0.5;
-    public static double DT_NEUTRALTORAMPSECONDS = 1;
+    public static double DT_NEUTRALTORAMPSECONDS = 0.75;
 
     // Shooter Variables
     public static double SHOOTER_F = 0.05;
@@ -69,4 +69,5 @@ public final class Constants {
     public static double SHOOTER_I = 0;
     public static double SHOOTER_D = 0;
     public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
+    public static double SHOOTER_NUETRALTORAMPSECONDS = 1.25;
 }

@@ -38,6 +38,8 @@ public class Shooter extends SubsystemBase {
         shooterMain.config_kI(0, Constants.SHOOTER_I);
         shooterMain.config_kD(0, Constants.SHOOTER_D);
 
+        shooterMain.configClosedloopRamp(Constants.SHOOTER_NUETRALTORAMPSECONDS);
+        shooterMain.configOpenloopRamp(Constants.SHOOTER_NUETRALTORAMPSECONDS);
     }
 
     @Override

@@ -48,6 +48,10 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
         rearRight.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
         rearLeft.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        frontRight.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        frontLeft.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        rearRight.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        rearLeft.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
 
         frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
         frontLeft.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
