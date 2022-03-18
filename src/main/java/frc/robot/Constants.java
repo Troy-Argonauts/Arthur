@@ -69,5 +69,5 @@ public final class Constants {
     public static double SHOOTER_I = 0;
     public static double SHOOTER_D = 0;
     public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
-    public static double SHOOTER_NUETRALTORAMPSECONDS = 2;
+    public static double SHOOTER_NUETRALTORAMPSECONDS = 1.75;
 }
