@@ -100,7 +100,7 @@ public class RobotContainer {
         // Shooter Toggle
         operator.getXButton().toggleWhenPressed(
                 // 25%
-                new InstantCommand(Robot.getShooter()::stage1)
+             new InstantCommand(Robot.getShooter()::stage1)
         );
 
         // Toggle Intake Power
