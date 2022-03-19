@@ -24,10 +24,10 @@ public class DriveTrain extends SubsystemBase {
      * Has rear motors follow front motors, and sets all motors to coast when stopped.
      */
     public DriveTrain() {
-        frontLeft = new TalonFX(Constants.DT_FRONT_LEFT);
-        frontRight = new TalonFX(Constants.DT_FRONT_RIGHT);
-        rearLeft = new TalonFX(Constants.DT_REAR_LEFT);
-        rearRight = new TalonFX(Constants.DT_REAR_RIGHT);
+        frontLeft = new TalonFX(Constants.DriveTrain.DT_FRONT_LEFT);
+        frontRight = new TalonFX(Constants.DriveTrain.DT_FRONT_RIGHT);
+        rearLeft = new TalonFX(Constants.DriveTrain.DT_REAR_LEFT);
+        rearRight = new TalonFX(Constants.DriveTrain.DT_REAR_RIGHT);
 
         frontLeft.setSensorPhase(false);
         frontRight.setSensorPhase(false);
@@ -44,14 +44,14 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.configFeedbackNotContinuous(false, 4);
         rearRight.configFeedbackNotContinuous(false, 4);
 
-        frontRight.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        frontLeft.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        rearRight.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        rearLeft.configOpenloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        frontRight.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        frontLeft.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        rearRight.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
-        rearLeft.configClosedloopRamp(Constants.DT_NEUTRALTORAMPSECONDS);
+        frontRight.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        frontLeft.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        rearRight.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        rearLeft.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        frontRight.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        frontLeft.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        rearRight.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        rearLeft.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
 
         frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
         frontLeft.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
@@ -89,11 +89,11 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getLocation() {
-        return Constants.DT_kEncoderDistancePerPulse * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+        return Constants.DriveTrain.DT_kEncoderDistancePerPulse * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
     }
 
     public double getRevolutions() {
-        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2) / Constants.DT_kEncoderCPR;
+        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2) / Constants.DriveTrain.DT_kEncoderCPR;
     }
 
     public void zeroEncoders() {

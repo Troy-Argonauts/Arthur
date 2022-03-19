@@ -28,8 +28,8 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        driver = new Controller(Constants.DRIVER_PORT);
-        operator = new Controller(Constants.OPERATOR_PORT);
+        driver = new Controller(Constants.Controller.DRIVER_PORT);
+        operator = new Controller(Constants.Controller.OPERATOR_PORT);
 
         // Configure the button bindings
         configureButtonBindings();

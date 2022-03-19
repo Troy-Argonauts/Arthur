@@ -107,11 +107,11 @@ public class Limelight extends SubsystemBase {
     }
 
     public double getDistanceFromTargetInches()  {
-        double angle = Constants.LIMELIGHT_ANGLE + getTy();
+        double angle = Constants.Limelight.LIMELIGHT_ANGLE + getTy();
         if (angle < 1 || angle > 89)
             return 0;
         double tanTerm = Math.tan(Math.toRadians(angle));
-        return (Constants.VERTICAL_HUB_HEIGHT - Constants.LIMELIGHT_HEIGHT) / tanTerm;
+        return (Constants.Limelight.VERTICAL_HUB_HEIGHT - Constants.Limelight.LIMELIGHT_HEIGHT) / tanTerm;
     }
 
     /**

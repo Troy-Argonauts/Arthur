@@ -16,7 +16,7 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         active = false;
 
-        shooterMain = new TalonFX(Constants.SHOOTER);
+        shooterMain = new TalonFX(Constants.Shooter.SHOOTER);
 
         shooterMain.configFactoryDefault();
 
@@ -33,34 +33,28 @@ public class Shooter extends SubsystemBase {
 
         shooterMain.configStatorCurrentLimit(statorCurrentLimitConfiguration);
 
-        shooterMain.config_kF(0, Constants.SHOOTER_F);
-        shooterMain.config_kP(0, Constants.SHOOTER_P);
-        shooterMain.config_kI(0, Constants.SHOOTER_I);
-        shooterMain.config_kD(0, Constants.SHOOTER_D);
-
-        shooterMain.configClosedloopRamp(Constants.SHOOTER_NUETRALTORAMPSECONDS);
-        shooterMain.configOpenloopRamp(Constants.SHOOTER_NUETRALTORAMPSECONDS);
+        shooterMain.config_kF(0, Constants.Shooter.SHOOTER_F);
+        shooterMain.config_kP(0, Constants.Shooter.SHOOTER_P);
+        shooterMain.config_kI(0, Constants.Shooter.SHOOTER_I);
+        shooterMain.config_kD(0, Constants.Shooter.SHOOTER_D);
+      
+        shooterMain.configClosedloopRamp(Constants.Shooter.SHOOTER_NEUTRALTORAMPSECONDS);
+        shooterMain.configOpenloopRamp(Constants.Shooter.SHOOTER_NEUTRALTORAMPSECONDS);
     }
 
     @Override
     public void periodic() {
-//        if (active) {
-//            highGoal();
-//        } else {
-//            stop();
-//        }
-
         SmartDashboard.putNumber("Shooter RPM", getRPM());
         SmartDashboard.putNumber("Shooter Percentage", shooterMain.getMotorOutputPercent());
         SmartDashboard.putBoolean("Shooter Activated", active);
     }
 
     public double rpmToNativeUnits(double rpm) {
-        return rpm * Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION / 10.0 / 60.0;
+        return rpm * Constants.Shooter.ENCODER_TICKS_PER_MOTOR_REVOLUTION / 10.0 / 60.0;
     }
 
     public double getRPM() {
-        return shooterMain.getSelectedSensorPosition() / Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION;
+        return shooterMain.getSelectedSensorPosition() / Constants.Shooter.ENCODER_TICKS_PER_MOTOR_REVOLUTION;
     }
 
     public boolean lockOn() {
@@ -81,9 +75,5 @@ public class Shooter extends SubsystemBase {
     public void stop() {
         shooterMain.set(ControlMode.PercentOutput, 0);
         active = false;
-    }
-
-    public void toggle() {
-        active = !active;
     }
 }

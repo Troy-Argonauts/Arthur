@@ -14,8 +14,8 @@ public class Intake_Indexer extends SubsystemBase {
         floorForward = true;
         upForward = true;
 
-        floorMotor = new CANSparkMax(Constants.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
-        upMotor = new CANSparkMax(Constants.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
+        floorMotor = new CANSparkMax(Constants.Indexer.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
+        upMotor = new CANSparkMax(Constants.Indexer.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
 
         floorMotor.setInverted(false);
         upMotor.setInverted(false);
