@@ -15,7 +15,7 @@ public class MonkeyBars extends SubsystemBase {
     public static boolean active;
 
     public MonkeyBars() {
-        mainMotor = new TalonFX(Constants.MONKEY_BARS);
+        mainMotor = new TalonFX(Constants.MonkeyBars.MONKEY_BARS);
 
         mainMotor.setNeutralMode(NeutralMode.Brake);
 

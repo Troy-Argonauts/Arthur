@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.math.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -16,58 +16,64 @@ import edu.wpi.first.wpilibj.I2C;
  */
 public final class Constants {
 
-    // CAN Ports
+    public interface DriveTrain {
+        // DriveTrain Ports
+        int DT_FRONT_RIGHT = 3;
+        int DT_FRONT_LEFT = 1;
+        int DT_REAR_RIGHT = 4;
+        int DT_REAR_LEFT = 2;
 
-    // DriveTrain Ports
-    public static int DT_FRONT_RIGHT = 3;
-    public static int DT_FRONT_LEFT = 1;
-    public static int DT_REAR_RIGHT = 4;
-    public static int DT_REAR_LEFT = 2;
+        double DT_kWheelDiameterMeters = 0.2;
+        double DT_kEncoderCPR = 2048;
+        double DT_kEncoderDistancePerPulse = (DT_kWheelDiameterMeters * Math.PI)/ DT_kEncoderCPR;
+        double DT_kP = 0.02;
+        double DT_kI = 0;
+        double DT_kD = 0;
+        double DT_kS = 0.20094;
+        double DT_kV = 1.6658;
+        double DT_kA = 0.4515;
+        double DT_PIDTolerance = 0.5;
+        double ROBOT_WIDTH = Units.inchesToMeters(33); // Meters
+        double DT_NEUTRALTORAMPSECONDS = 0.75;
+    }
 
-    // Intake Ports
-    public static int I_INTAKE = 5;
-    public static I2C.Port[] INDEXER_SENSORS = new I2C.Port[2];
-    //Sensor Port TBD
+    public interface Intake {
+        int I_INTAKE = 5;
+    }
 
-    // Indexer Ports
-    public static int I_INDEXER_FLOOR = 6;
-    public static int I_INDEXER_UP = 7;
+    public interface Indexer {
+        int I_INDEXER_FLOOR = 6;
+        int I_INDEXER_UP = 7;
+    }
 
-    // Shifter Ports
-    public static int INTAKE_SHIFTER_1 = 0;
-    public static int INTAKE_SHIFTER_2 = 1;
+    public interface Pneumatics {
+        int INTAKE_SOLENOID_1 = 0;
+        int INTAKE_SOLENOID_2 = 1;
+    }
 
-    // Shooter Ports
-    public static int SHOOTER = 9;
+    public interface Shooter {
+        int SHOOTER = 9;
+        double SHOOTER_F = 0.05;
+        double SHOOTER_P = 0;
+        double SHOOTER_I = 0;
+        double SHOOTER_D = 0;
+        double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
+        double SHOOTER_NEUTRALTORAMPSECONDS = 1.75;
+    }
 
-    // Monkey Bars Ports
-    public static int MONKEY_BARS = 8;
+    public interface Limelight {
+        double LIMELIGHT_HEIGHT = 0;
+        double VERTICAL_HUB_HEIGHT = 0;
+        double LIMELIGHT_ANGLE = 0;
+    }
 
-    // Controller Variables
-    public static int DRIVER_PORT = 0;
-    public static int OPERATOR_PORT = 1;
-    public static double CONTROLLER_DRIFT = 0.07;
+    public interface MonkeyBars {
+        int MONKEY_BARS = 8;
+    }
 
-    // Limelight Variables
-    public static double LIMELIGHT_HEIGHT = 0;
-    public static double VERTICAL_HUB_HEIGHT = 0;
-    public static double LIMELIGHT_ANGLE = 0;
-
-    // Drive Train Variables
-    public static double DT_kWheelDiameterMeters = 0.2;
-    public static double DT_kEncoderCPR = 2048;
-    public static double DT_kEncoderDistancePerPulse = (DT_kWheelDiameterMeters * Math.PI)/ DT_kEncoderCPR;
-    public static double DT_kP = 0.02;
-    public static double DT_kI = 0;
-    public static double DT_kD = 0;
-    public static double DT_PIDTolerance = 0.5;
-    public static double DT_NEUTRALTORAMPSECONDS = 0.75;
-
-    // Shooter Variables
-    public static double SHOOTER_F = 0.05;
-    public static double SHOOTER_P = 0;
-    public static double SHOOTER_I = 0;
-    public static double SHOOTER_D = 0;
-    public static double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
-    public static double SHOOTER_NUETRALTORAMPSECONDS = 1.75;
+    public interface Controller {
+        int DRIVER_PORT = 0;
+        int OPERATOR_PORT = 1;
+        double CONTROLLER_DRIFT = 0.07;
+    }
 }

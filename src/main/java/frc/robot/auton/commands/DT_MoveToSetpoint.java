@@ -9,13 +9,13 @@ public class DT_MoveToSetpoint extends PIDCommand {
 
     public DT_MoveToSetpoint(double setpoint) {
         super(
-            new PIDController(Constants.DT_kP, Constants.DT_kI, Constants.DT_kD),
+            new PIDController(Constants.DriveTrain.DT_kP, Constants.DriveTrain.DT_kI, Constants.DriveTrain.DT_kD),
             Robot.getDriveTrain()::getLocation,
             -setpoint,
             output -> Robot.getDriveTrain().cheesyDrive(0, output),
             Robot.getDriveTrain()
         );
-        getController().setTolerance(Constants.DT_PIDTolerance);
+        getController().setTolerance(Constants.DriveTrain.DT_PIDTolerance);
     }
 
     @Override
