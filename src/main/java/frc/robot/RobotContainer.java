@@ -91,8 +91,8 @@ public class RobotContainer {
         operator.getRBButton().toggleWhenPressed(
                 new InstantCommand(
                         Robot.getPneumaticsSystem()::dropIntake)
-                        .alongWith(new InstantCommand(Robot.getIntake()::backward))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .andThen(new InstantCommand(Robot.getIntake()::backward))
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
         );
 
         operator.getLBButton().toggleWhenPressed(

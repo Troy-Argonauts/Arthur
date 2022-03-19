@@ -45,13 +45,13 @@ public class Intake extends SubsystemBase {
     }
 
     public void forward() {
-        intakeMotor.set(0.8);
+        intakeMotor.set(0.9);
         stopped = false;
         forward = true;
     }
 
     public void backward() {
-        intakeMotor.set(-0.8);
+        intakeMotor.set(-0.9);
         stopped = false;
         forward = false;
     }
