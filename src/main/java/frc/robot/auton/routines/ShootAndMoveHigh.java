@@ -10,21 +10,12 @@ import frc.robot.auton.commands.DT_MoveToSetpoint;
 import frc.robot.auton.commands.DT_ZeroEncoders;
 import frc.robot.auton.commands.S_ShooterHigh;
 
-<<<<<<< HEAD:src/main/java/frc/robot/auton/routines/ShootAndMoveHigh.java
 public class ShootAndMoveHigh extends SequentialCommandGroup {
 
   public ShootAndMoveHigh() {
     addCommands(
             new DT_ZeroEncoders(),
             new S_ShooterHigh(),
-=======
-public class ShootAndMove extends SequentialCommandGroup {
-
-  public ShootAndMove() {
-    addCommands(
-            new DT_ZeroEncoders(),
-            new S_Shooter(),
->>>>>>> feature/drivetrain-ramping:src/main/java/frc/robot/auton/routines/ShootAndMove.java
             new DT_MoveToSetpoint(-40)
     );
     addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());

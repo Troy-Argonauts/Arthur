@@ -37,7 +37,7 @@ public class Shooter extends SubsystemBase {
         shooterMain.config_kP(0, Constants.Shooter.SHOOTER_P);
         shooterMain.config_kI(0, Constants.Shooter.SHOOTER_I);
         shooterMain.config_kD(0, Constants.Shooter.SHOOTER_D);
-
+      
         shooterMain.configClosedloopRamp(Constants.Shooter.SHOOTER_NEUTRALTORAMPSECONDS);
         shooterMain.configOpenloopRamp(Constants.Shooter.SHOOTER_NEUTRALTORAMPSECONDS);
     }
