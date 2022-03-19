@@ -8,14 +8,15 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
 import frc.robot.auton.commands.DT_ZeroEncoders;
-import frc.robot.auton.commands.S_Shooter;
+import frc.robot.auton.commands.S_ShooterHigh;
+import frc.robot.auton.commands.S_ShooterLow;
 
-public class ShootAndMove extends SequentialCommandGroup {
+public class ShootAndMoveLow extends SequentialCommandGroup {
 
-  public ShootAndMove() {
+  public ShootAndMoveLow() {
     addCommands(
             new DT_ZeroEncoders(),
-            new S_Shooter(),
+            new S_ShooterLow(),
             new DT_MoveToSetpoint(-40)
     );
     addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());

@@ -23,7 +23,7 @@ public class Shoot2 extends SequentialCommandGroup {
             new I_StopIntake(),
 
             new DT_MoveToSetpoint(35),
-            new S_Shooter()
+            new S_ShooterHigh()
     );
     addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }

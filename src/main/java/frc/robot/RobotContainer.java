@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.Controller;
+import frc.libs.util.DPadButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -42,6 +44,10 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
+        Trigger operatorRightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
+        Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
+        double ramp = 0.1;
+
         // Driver Controls
 
         Robot.getDriveTrain().setDefaultCommand(
@@ -67,7 +73,7 @@ public class RobotContainer {
                         // Deactivate floor in case
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
                         // Rev up to full speed
-                        .andThen(new InstantCommand(Robot.getShooter()::activate))
+                        .andThen(new InstantCommand(Robot.getShooter()::highGoal))
                         // pause for 1 second
                         .andThen(new WaitCommand(1.25))
                         // Turn on up indexer (shoot 1st ball)
@@ -85,7 +91,7 @@ public class RobotContainer {
         operator.getRBButton().toggleWhenPressed(
                 new InstantCommand(
                         Robot.getPneumaticsSystem()::dropIntake)
-                        .alongWith(new InstantCommand(Robot.getIntake()::forward))
+                        .alongWith(new InstantCommand(Robot.getIntake()::backward))
                         .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
         );
 
@@ -99,8 +105,26 @@ public class RobotContainer {
 
         // Shooter Toggle
         operator.getXButton().toggleWhenPressed(
-                // 25%
-                new InstantCommand(Robot.getShooter()::stage1)
+                // Deactivate intake motor in case
+                new InstantCommand(Robot.getIntake()::disable)
+                        // Pickup intake just in case
+                        .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
+                        // Deactivate floor in case
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        // Rev up to full speed
+                        .andThen(new InstantCommand(Robot.getShooter()::lowGoal))
+                        // pause for 1 second
+                        .andThen(new WaitCommand(1.5))
+                        // Turn on up indexer (shoot 1st ball)
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
+                        .andThen(new WaitCommand(0.25))
+                        // Turn on floor indexer (shoot 2nd ball)
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .andThen(new WaitCommand(2))
+                        // Turn Off all motors
+                        .andThen(new InstantCommand(Robot.getShooter()::stop))
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
         );
 
         // Toggle Intake Power
@@ -118,12 +142,10 @@ public class RobotContainer {
                 new InstantCommand(Robot.getPneumaticsSystem()::toggleCompressor)
         );
 
-        // MonkeyBars Up
-        driver.getRBButton().whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
+        new DPadButton(operator, DPadButton.Direction.UP).whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
                 .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
 
-        // MonkeyBars Down
-        driver.getLBButton().whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
+        new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
                 .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
     }
 
