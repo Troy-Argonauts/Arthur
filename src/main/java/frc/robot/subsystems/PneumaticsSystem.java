@@ -9,15 +9,22 @@ import frc.robot.Constants;
 public class PneumaticsSystem extends SubsystemBase {
     
     private final Compressor compressor;
-    private final DoubleSolenoid solenoid;
-    private DoubleSolenoid.Value currentState;
+    private final DoubleSolenoid intakeSolenoid;
+    private final DoubleSolenoid climberSolenoid;
+    private DoubleSolenoid.Value intakeCurrentState;
+    private DoubleSolenoid.Value climberCurrentState;
 
     public PneumaticsSystem() { 
         compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
-        solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.INTAKE_SOLENOID_1, Constants.Pneumatics.INTAKE_SOLENOID_2);
-        currentState = DoubleSolenoid.Value.kForward;
-        updateState();
+        intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.INTAKE_SOLENOID_1, Constants.Pneumatics.INTAKE_SOLENOID_2);
+        intakeCurrentState = DoubleSolenoid.Value.kForward;
+
+        climberSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.CLIMBER_SOLENOID_1, Constants.Pneumatics.CLIMBER_SOLENOID_2);
+        climberCurrentState = DoubleSolenoid.Value.kForward;
+
+        updateIntakeState();
+        updateClimberState();
     }
 
     public void toggleCompressor() {
@@ -28,22 +35,41 @@ public class PneumaticsSystem extends SubsystemBase {
         }
     }
 
+    public void retractClimber(){
+        if (climberCurrentState == DoubleSolenoid.Value.kReverse) {
+            climberCurrentState = DoubleSolenoid.Value.kForward;
+            updateClimberState();
+        }
+    }
+
+    public void extendClimber() {
+        if (climberCurrentState == DoubleSolenoid.Value.kForward) {
+            climberCurrentState = DoubleSolenoid.Value.kReverse;
+            updateClimberState();
+        }
+    }
+
+
     public void pickupIntake(){
-        if (currentState == DoubleSolenoid.Value.kReverse) {
-            currentState = DoubleSolenoid.Value.kForward;
-            updateState();
+        if (intakeCurrentState == DoubleSolenoid.Value.kReverse) {
+            intakeCurrentState = DoubleSolenoid.Value.kForward;
+            updateIntakeState();
         }
     }
 
     public void dropIntake() {
-        if (currentState == DoubleSolenoid.Value.kForward) {
-            currentState = DoubleSolenoid.Value.kReverse;
-            updateState();
+        if (intakeCurrentState == DoubleSolenoid.Value.kForward) {
+            intakeCurrentState = DoubleSolenoid.Value.kReverse;
+            updateIntakeState();
         }
     }
 
-    public void updateState() {
-        solenoid.set(currentState);
+    public void updateIntakeState() {
+        intakeSolenoid.set(intakeCurrentState);
+    }
+
+    public void updateClimberState() {
+        climberSolenoid.set(climberCurrentState);
     }
 
 }
