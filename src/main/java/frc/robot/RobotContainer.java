@@ -135,21 +135,25 @@ public class RobotContainer {
 
         // Climber Motor Up
         new DPadButton(operator, DPadButton.Direction.UP)
-                .whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
-                .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
+                .whenActive(new InstantCommand(Robot.getClimber()::up))
+                .whenInactive(new InstantCommand(Robot.getClimber()::stop));
 
         // Climber Motor Down
         new DPadButton(operator, DPadButton.Direction.DOWN)
-                .whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
-                .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
+                .whenActive(new InstantCommand(Robot.getClimber()::down))
+                .whenInactive(new InstantCommand(Robot.getClimber()::stop));
 
         // Climber Pneumatic Retract
-        new DPadButton(operator, DPadButton.Direction.LEFT)
-                .whenActive(new InstantCommand(Robot.getPneumaticsSystem()::retractClimber));
+        new DPadButton(operator, DPadButton.Direction.LEFT).whenActive(
+                new InstantCommand(Robot.getPneumaticsSystem()::retractClimber)
+                        .alongWith(new InstantCommand(Robot.getClimber()::extended))
+                );
 
         // Climber Pneumatic Extend
-        new DPadButton(operator, DPadButton.Direction.RIGHT)
-                .whenActive(new InstantCommand(Robot.getPneumaticsSystem()::extendClimber));
+        new DPadButton(operator, DPadButton.Direction.RIGHT).whenActive(
+                new InstantCommand(Robot.getPneumaticsSystem()::extendClimber)
+                        .alongWith(new InstantCommand(Robot.getClimber()::retracted))
+                );
     }
 
     public Command getAutonomousCommand() {

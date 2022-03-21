@@ -70,7 +70,8 @@ public final class Constants {
     }
 
     public interface MonkeyBars {
-        int MONKEY_BARS = 8;
+        int CLIMBER_RIGHT = 8;
+        int CLIMBER_LEFT = 9;
     }
   
     public interface Controller {

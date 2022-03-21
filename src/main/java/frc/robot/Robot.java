@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
     private static DriveTrain driveTrain;
     private static Intake intake;
     private static Shooter shooter;
-    private static MonkeyBars monkeyBars;
+    private static Climber climber;
     private static PneumaticsSystem pneumaticsSystem;
     private static Intake_Indexer intake_indexer;
     public boolean robotOn;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
         driveTrain = new DriveTrain();
         intake = new Intake();
         shooter = new Shooter();
-        monkeyBars = new MonkeyBars();
+        climber = new Climber();
         pneumaticsSystem = new PneumaticsSystem();
         intake_indexer = new Intake_Indexer();
         // Instantiate our RobotContainer. This will perform all our button bindings
@@ -160,9 +160,9 @@ public class Robot extends TimedRobot {
         return shooter;
     }
 
-    public static MonkeyBars getMonkeyBars() {
-        if (monkeyBars == null) monkeyBars = new MonkeyBars();
-        return monkeyBars;
+    public static Climber getClimber() {
+        if (climber == null) climber = new Climber();
+        return climber;
     }
 
     public static PneumaticsSystem getPneumaticsSystem() {
