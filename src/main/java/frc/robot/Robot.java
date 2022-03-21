@@ -48,13 +48,13 @@ public class Robot extends TimedRobot {
         monkeyBars = new MonkeyBars();
         pneumaticsSystem = new PneumaticsSystem();
         intake_indexer = new Intake_Indexer();
-        // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-        // autonomous chooser on the dashboard.
+        // Instantiate our RobotContainer. This will perform all our button bindings
         robotContainer = new RobotContainer();
 
         driveTrain.zeroEncoders();
         SmartDashboard.putBoolean("Robot On", robotOn);
 
+        // This will place our autonomous chooser on the dashboard.
         SmartDashboard.putData("Autonomous modes", chooser);
         chooser.setDefaultOption("Shoot and Move Low", new ShootAndMoveLow().withTimeout(15));
         chooser.addOption("Shoot and Move High", new ShootAndMoveHigh().withTimeout(15));
@@ -97,19 +97,11 @@ public class Robot extends TimedRobot {
                 .alongWith(new InstantCommand(Robot.getShooter()::stop))
                 .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
                 .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp));
-
     }
 
     @Override
     public void disabledPeriodic() {
         robotOn = false;
-
-        //WIP
-        if (Robot.getMonkeyBars().getEncoderValue() > 0) {
-            new RunCommand(Robot.getMonkeyBars()::up).withTimeout(4);
-        } else {
-            Robot.getMonkeyBars().stop();
-        }
     }
 
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

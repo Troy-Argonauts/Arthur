@@ -21,8 +21,6 @@ import frc.libs.util.DPadButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    // The robot's subsystems and commands are defined here...
-
     public static Controller driver;
     public static Controller operator;
 
@@ -44,12 +42,6 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-        Trigger operatorRightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
-        Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
-        double ramp = 0.1;
-
-        // Driver Controls
-
         Robot.getDriveTrain().setDefaultCommand(
                 new RunCommand(
                         () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
@@ -65,7 +57,6 @@ public class RobotContainer {
         );
 
         operator.getAButton().toggleWhenPressed(
-                // Stage 1 ~ Accelerate
                 // Deactivate intake motor in case
                 new InstantCommand(Robot.getIntake()::disable)
                         // Pickup intake just in case
@@ -142,20 +133,26 @@ public class RobotContainer {
                 new InstantCommand(Robot.getPneumaticsSystem()::toggleCompressor)
         );
 
-        new DPadButton(operator, DPadButton.Direction.UP).whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
+        // Climber Motor Up
+        new DPadButton(operator, DPadButton.Direction.UP)
+                .whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
                 .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
 
-        new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
+        // Climber Motor Down
+        new DPadButton(operator, DPadButton.Direction.DOWN)
+                .whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
                 .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
+
+        // Climber Pneumatic Retract
+        new DPadButton(operator, DPadButton.Direction.LEFT)
+                .whenActive(new InstantCommand(Robot.getPneumaticsSystem()::retractClimber));
+
+        // Climber Pneumatic Extend
+        new DPadButton(operator, DPadButton.Direction.RIGHT)
+                .whenActive(new InstantCommand(Robot.getPneumaticsSystem()::extendClimber));
     }
 
-    /**
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     */
     public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
         return null;
     }
 
