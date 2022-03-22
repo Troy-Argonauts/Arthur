@@ -49,8 +49,8 @@ public final class Constants {
     public interface Pneumatics {
         int INTAKE_SOLENOID_1 = 0;
         int INTAKE_SOLENOID_2 = 1;
-        int CLIMBER_SOLENOID_1 = 0;
-        int CLIMBER_SOLENOID_2 = 1;
+        int CLIMBER_SOLENOID_1 = 2;
+        int CLIMBER_SOLENOID_2 = 3;
     }
 
     public interface Shooter {
