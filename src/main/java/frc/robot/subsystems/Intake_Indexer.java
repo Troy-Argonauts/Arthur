@@ -21,6 +21,7 @@ public class Intake_Indexer extends SubsystemBase {
         upMotor.setInverted(false);
 
         upMotor.setSmartCurrentLimit(20);
+        floorMotor.setSmartCurrentLimit(20);
     }
 
     @Override

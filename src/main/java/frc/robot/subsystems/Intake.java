@@ -19,8 +19,8 @@ public class Intake extends SubsystemBase {
         intakeMotor = new CANSparkMax(Constants.Intake.I_INTAKE, CANSparkMax.MotorType.kBrushless);
 
         intakeMotor.setInverted(false);
-
         intakeMotor.setIdleMode(IdleMode.kCoast);
+        intakeMotor.setSmartCurrentLimit(25);
     }
 
     @Override
