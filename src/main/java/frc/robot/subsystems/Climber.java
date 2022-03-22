@@ -22,7 +22,7 @@ public class Climber extends SubsystemBase {
         rightMotor.configFeedbackNotContinuous(false, 4);
         rightMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
 
-        leftMotor = new TalonFX(Constants.MonkeyBars.CLIMBER_RIGHT);
+        leftMotor = new TalonFX(Constants.MonkeyBars.CLIMBER_LEFT);
         leftMotor.setNeutralMode(NeutralMode.Brake);
         leftMotor.setInverted(false);
         leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
