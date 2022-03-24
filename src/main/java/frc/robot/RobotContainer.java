@@ -42,12 +42,12 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-//        Robot.getDriveTrain().setDefaultCommand(
-//                new RunCommand(
-//                        () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
-//                        Robot.getDriveTrain()
-//                )
-//        );
+        Robot.getDriveTrain().setDefaultCommand(
+                new RunCommand(
+                        () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
+                        Robot.getDriveTrain()
+                )
+        );
 
         driver.getBButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::disable)
@@ -66,7 +66,7 @@ public class RobotContainer {
                         // Rev up to full speed
                         .andThen(new InstantCommand(Robot.getShooter()::highGoal))
                         // pause for 1 second
-                        .andThen(new WaitCommand(1.25))
+                        .andThen(new WaitCommand(1.5))
                         // Turn on up indexer (shoot 1st ball)
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
                         .andThen(new WaitCommand(0.25))
