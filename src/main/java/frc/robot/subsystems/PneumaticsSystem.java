@@ -9,10 +9,8 @@ import frc.robot.Constants;
 public class PneumaticsSystem extends SubsystemBase {
     
     private final Compressor compressor;
-    private final DoubleSolenoid intakeSolenoid;
-    private final DoubleSolenoid climberSolenoid;
-    private DoubleSolenoid.Value intakeCurrentState;
-    private DoubleSolenoid.Value climberCurrentState;
+    private final DoubleSolenoid intakeSolenoid, climberSolenoid;
+    private DoubleSolenoid.Value intakeCurrentState,climberCurrentState;
 
     public PneumaticsSystem() { 
         compressor = new Compressor(PneumaticsModuleType.CTREPCM);
@@ -21,7 +19,7 @@ public class PneumaticsSystem extends SubsystemBase {
         intakeCurrentState = DoubleSolenoid.Value.kForward;
 
         climberSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.CLIMBER_SOLENOID_1, Constants.Pneumatics.CLIMBER_SOLENOID_2);
-        climberCurrentState = DoubleSolenoid.Value.kForward;
+        climberCurrentState = DoubleSolenoid.Value.kReverse;
 
         updateIntakeState();
         updateClimberState();
@@ -35,22 +33,22 @@ public class PneumaticsSystem extends SubsystemBase {
         }
     }
 
-    public void retractClimber(){
-        if (climberCurrentState == DoubleSolenoid.Value.kReverse) {
-            climberCurrentState = DoubleSolenoid.Value.kForward;
-            updateClimberState();
-        }
-    }
-
-    public void extendClimber() {
+    public void retractClimber() {
         if (climberCurrentState == DoubleSolenoid.Value.kForward) {
             climberCurrentState = DoubleSolenoid.Value.kReverse;
             updateClimberState();
         }
     }
 
+    public void extendClimber() {
+        if (climberCurrentState == DoubleSolenoid.Value.kReverse) {
+            climberCurrentState = DoubleSolenoid.Value.kForward;
+            updateClimberState();
+        }
+    }
 
-    public void pickupIntake(){
+
+    public void pickupIntake() {
         if (intakeCurrentState == DoubleSolenoid.Value.kReverse) {
             intakeCurrentState = DoubleSolenoid.Value.kForward;
             updateIntakeState();
@@ -71,5 +69,4 @@ public class PneumaticsSystem extends SubsystemBase {
     public void updateClimberState() {
         climberSolenoid.set(climberCurrentState);
     }
-
 }

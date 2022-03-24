@@ -42,12 +42,12 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-        Robot.getDriveTrain().setDefaultCommand(
-                new RunCommand(
-                        () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
-                        Robot.getDriveTrain()
-                )
-        );
+//        Robot.getDriveTrain().setDefaultCommand(
+//                new RunCommand(
+//                        () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
+//                        Robot.getDriveTrain()
+//                )
+//        );
 
         driver.getBButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::disable)
@@ -154,6 +154,10 @@ public class RobotContainer {
                 new InstantCommand(Robot.getPneumaticsSystem()::extendClimber)
                         .alongWith(new InstantCommand(Robot.getClimber()::retracted))
                 );
+
+        operator.getSTARTButton().whenActive(new InstantCommand(Robot.getClimber()::oldUp)).whenInactive(new InstantCommand(Robot.getClimber()::oldStop));
+
+        operator.getSELECTButton().whenActive(new InstantCommand(Robot.getClimber()::oldDown)).whenInactive(new InstantCommand(Robot.getClimber()::oldStop));
     }
 
     public Command getAutonomousCommand() {
