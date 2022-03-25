@@ -58,7 +58,7 @@ public final class Constants {
         double SHOOTER_I = 0;
         double SHOOTER_D = 0;
         double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
-        double SHOOTER_NEUTRALTORAMPSECONDS = 1.75;
+        double SHOOTER_NEUTRALTORAMPSECONDS = 1.5;
     }
 
     public interface Limelight {

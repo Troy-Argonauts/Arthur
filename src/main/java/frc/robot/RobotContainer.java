@@ -6,10 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.Controller;
 import frc.libs.util.DPadButton;
@@ -106,25 +103,27 @@ public class RobotContainer {
         // Shooter Toggle
         operator.getXButton().toggleWhenPressed(
                 // Deactivate intake motor in case
-                new InstantCommand(Robot.getIntake()::disable)
+                // Rev up to full speed
+                new InstantCommand(Robot.getShooter()::lowGoal)
+                        .andThen((new InstantCommand(Robot.getIntake()::disable)))
                         // Pickup intake just in case
                         .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
                         // Deactivate floor in case
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
-                        // Rev up to full speed
-                        .andThen(new InstantCommand(Robot.getShooter()::lowGoal))
                         // pause for 1 second
-                        .andThen(new WaitCommand(1.5))
+                        .andThen(new WaitCommand(1))
                         // Turn on up indexer (shoot 1st ball)
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
-                        .andThen(new WaitCommand(0.25))
+                        //.andThen(new Wait
+                        //Command(0.25))
                         // Turn on floor indexer (shoot 2nd ball)
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
                         .andThen(new WaitCommand(1))
                         // Turn Off all motors
-                        .andThen(new InstantCommand(Robot.getShooter()::stop))
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        .andThen(new ParallelCommandGroup(
+                                new InstantCommand(Robot.getShooter()::stop),
+                                new InstantCommand(Robot.getIntakeIndexer()::deactivateUp),
+                                new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor)))
         );
 
         operator.getBButton().whenActive(
