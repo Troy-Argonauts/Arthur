@@ -63,7 +63,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void lowGoal() {
-        shooterMain.set(ControlMode.PercentOutput, 0.55);
+        shooterMain.set(ControlMode.PercentOutput, 0.50);
         active = true;
     }
 

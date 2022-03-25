@@ -59,7 +59,7 @@ public class Intake_Indexer extends SubsystemBase {
     }
 
     public void activateUpForward() {
-        upMotor.set(0.55);
+        upMotor.set(0.7);
         upActive = true;
         upForward = true;
     }
@@ -71,7 +71,7 @@ public class Intake_Indexer extends SubsystemBase {
     }
 
     public void activateUpBackward() {
-        upMotor.set(-0.55);
+        upMotor.set(-0.7);
         upActive = true;
         upForward = false;
     }

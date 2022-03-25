@@ -99,7 +99,7 @@ public class RobotContainer {
                 new InstantCommand(
                         Robot.getPneumaticsSystem()::pickupIntake)
                         .andThen(new InstantCommand(Robot.getIntake()::disable))
-                        .andThen(new WaitCommand(1.25))
+                        //.andThen(new WaitCommand(1.25))
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
         );
 
@@ -120,7 +120,7 @@ public class RobotContainer {
                         .andThen(new WaitCommand(0.25))
                         // Turn on floor indexer (shoot 2nd ball)
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
-                        .andThen(new WaitCommand(2))
+                        .andThen(new WaitCommand(1))
                         // Turn Off all motors
                         .andThen(new InstantCommand(Robot.getShooter()::stop))
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
@@ -135,6 +135,10 @@ public class RobotContainer {
         // Toggle Intake Direction
         operator.getYButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::toggleDirection)
+        );
+
+        operator.getBButton().toggleWhenPressed(
+                new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward).withTimeout(3)
         );
 
         // Toggle Compressor
