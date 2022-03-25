@@ -127,23 +127,10 @@ public class RobotContainer {
                         .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
         );
 
-        // Toggle Intake Power
-        driver.getAButton().toggleWhenPressed(
-                new InstantCommand(Robot.getIntakeIndexer()::activateUpForward)
-        );
-
-        // Toggle Intake Direction
-        operator.getYButton().toggleWhenPressed(
-                new InstantCommand(Robot.getIntake()::toggleDirection)
-        );
-
-        operator.getBButton().toggleWhenPressed(
-                new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward).withTimeout(3)
-        );
-
-        // Toggle Compressor
-        operator.getSTARTButton().toggleWhenPressed(
-                new InstantCommand(Robot.getPneumaticsSystem()::toggleCompressor)
+        operator.getBButton().whenActive(
+                new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward)
+        ).whenInactive(
+                new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor)
         );
 
         new DPadButton(operator, DPadButton.Direction.UP).whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
@@ -151,16 +138,6 @@ public class RobotContainer {
 
         new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
                 .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
-    }
-
-    /**
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     */
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return null;
     }
 
     public static Controller getDriver() {
