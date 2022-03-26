@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
@@ -46,12 +47,15 @@ public class RobotContainer {
         double ramp = 0.1;
 
         // Driver Controls
-
         Robot.getDriveTrain().setDefaultCommand(
-                new RunCommand(
-                        () -> Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY()),
-                        Robot.getDriveTrain()
-                )
+                new RunCommand(() ->  {
+//                            if (Math.abs(driver.getRightJoystickX()) > 0.2) {
+//                                Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.45);
+//                            } else {
+//                                Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
+//                            }
+                            Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
+                        }, Robot.getDriveTrain())
         );
 
         driver.getBButton().toggleWhenPressed(
@@ -61,35 +65,23 @@ public class RobotContainer {
                         .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
         );
 
-        operator.getAButton().toggleWhenPressed(
-                // Stage 1 ~ Accelerate
-                // Deactivate intake motor in case
-                new InstantCommand(Robot.getIntake()::disable)
-                        // Pickup intake just in case
-                        .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
-                        // Deactivate floor in case
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
-                        // Rev up to full speed
-                        .andThen(new InstantCommand(Robot.getShooter()::highGoal))
-                        // pause for 1 second
-                        .andThen(new WaitCommand(1.5))
-                        // Turn on up indexer (shoot 1st ball)
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
-                        .andThen(new WaitCommand(0.25))
-                        // Turn on floor indexer (shoot 2nd ball)
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
-                        .andThen(new WaitCommand(2))
-                        // Turn Off all motors
-                        .andThen(new InstantCommand(Robot.getShooter()::stop))
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+        operator.getAButton().whenActive(
+                new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
+                        .alongWith(new InstantCommand(Robot.getIntake()::forward))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorBackward))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateUpBackward))
+        ).whenInactive(
+                new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
+                        .alongWith(new InstantCommand(Robot.getIntake()::disable))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
         );
 
         operator.getRBButton().toggleWhenPressed(
                 new InstantCommand(
                         Robot.getPneumaticsSystem()::dropIntake)
-                        .andThen(new InstantCommand(Robot.getIntake()::backward))
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .alongWith(new InstantCommand(Robot.getIntake()::backward))
+                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
         );
 
         operator.getLBButton().toggleWhenPressed(
@@ -137,6 +129,29 @@ public class RobotContainer {
 
         new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(new InstantCommand(Robot.getMonkeyBars()::down))
                 .whenInactive(new InstantCommand(Robot.getMonkeyBars()::stop));
+
+        new DPadButton(operator, DPadButton.Direction.LEFT).toggleWhenPressed(
+                new InstantCommand(Robot.getShooter()::highGoal)
+                        .andThen((new InstantCommand(Robot.getIntake()::disable)))
+                        // Pickup intake just in case
+                        .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
+                        // Deactivate floor in case
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        // pause for 1 second
+                        .andThen(new WaitCommand(1))
+                        // Turn on up indexer (shoot 1st ball)
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
+                        //.andThen(new Wait
+                        //Command(0.25))
+                        // Turn on floor indexer (shoot 2nd ball)
+                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .andThen(new WaitCommand(1))
+                        // Turn Off all motors
+                        .andThen(new ParallelCommandGroup(
+                                new InstantCommand(Robot.getShooter()::stop),
+                                new InstantCommand(Robot.getIntakeIndexer()::deactivateUp),
+                                new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor)))
+        );
     }
 
     public static Controller getDriver() {

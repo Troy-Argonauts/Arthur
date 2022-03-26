@@ -25,13 +25,13 @@ public class DT_MoveUsingEncoders2 extends CommandBase {
 
         if (revolutions > 0) {
             if (Robot.getDriveTrain().getRevolutions() < revolutions) {
-                Robot.getDriveTrain().cheesyDrive(0, 0.1);
+                Robot.getDriveTrain().cheesyDrive(0, 0.1, 0.7);
             } else {
                 end(true);
             }
         } else if (revolutions < 0) {
             if (Robot.getDriveTrain().getRevolutions() > revolutions) {
-                Robot.getDriveTrain().cheesyDrive(0, -0.1);
+                Robot.getDriveTrain().cheesyDrive(0, -0.1, 0.7);
             } else {
                 end(true);
             }
@@ -42,7 +42,7 @@ public class DT_MoveUsingEncoders2 extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        Robot.getDriveTrain().cheesyDrive(0,0);
+        Robot.getDriveTrain().cheesyDrive(0,0, 0.7);
     }
 
 }

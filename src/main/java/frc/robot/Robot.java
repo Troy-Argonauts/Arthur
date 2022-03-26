@@ -14,6 +14,7 @@ import frc.robot.auton.routines.ShootAndMoveHigh;
 import frc.robot.auton.routines.ShootAndMoveLow;
 import frc.robot.auton.routines.ShootAndPush;
 import frc.robot.subsystems.*;
+import frc.robot.vision.Webcam;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
     private static MonkeyBars monkeyBars;
     private static PneumaticsSystem pneumaticsSystem;
     private static Intake_Indexer intake_indexer;
+    private static Webcam webcam;
     public boolean robotOn;
 
     private final SendableChooser<Command> chooser = new SendableChooser<>();
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot {
         monkeyBars = new MonkeyBars();
         pneumaticsSystem = new PneumaticsSystem();
         intake_indexer = new Intake_Indexer();
+        webcam = new Webcam();
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
