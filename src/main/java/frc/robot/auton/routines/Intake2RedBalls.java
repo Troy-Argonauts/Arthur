@@ -27,7 +27,7 @@ public class Intake2RedBalls extends SequentialCommandGroup {
                 new I_StopIntake(),
                 new I_StopIndexer()
         );
-        addRequirements(Robot.getIntake(), Robot.getDriveTrain(), Robot.getIntakeIndexer(), Robot.getPneumaticsSystem(), Robot.getShooter());
+        addRequirements(Robot.getIntake(), Robot.getDriveTrain(), Robot.getIndexer(), Robot.getPneumaticsSystem(), Robot.getShooter());
     }
 
 }

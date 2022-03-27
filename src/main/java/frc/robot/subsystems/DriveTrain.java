@@ -75,9 +75,14 @@ public class DriveTrain extends SubsystemBase {
      * @param turn Amount to turn the robot
      * @param speed Speed of robot
      */
-    public void cheesyDrive(double turn, double speed) {
-        frontLeft.set(ControlMode.PercentOutput, (speed - turn) / 1.43);
-        frontRight.set(ControlMode.PercentOutput, (speed + turn) / 1.43);
+    public void cheesyDrive(double turn, double speed, double nerf) {
+        frontLeft.set(ControlMode.PercentOutput, (speed - turn) * nerf);
+        frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
+    }
+
+    public void tankDrive(double right, double left) {
+        frontRight.set(ControlMode.PercentOutput, right);
+        frontLeft.set(ControlMode.PercentOutput, left);
     }
 
     @Override
@@ -101,9 +106,5 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.setSelectedSensorPosition(0);
         rearRight.setSelectedSensorPosition(0);
         rearLeft.setSelectedSensorPosition(0);
-    }
-
-    @Override
-    public void simulationPeriodic() {
     }
 }

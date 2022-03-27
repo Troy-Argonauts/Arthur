@@ -18,6 +18,6 @@ public class ShootAndMoveHigh extends SequentialCommandGroup {
             new S_ShooterHigh(),
             new DT_MoveToSetpoint(-40)
     );
-    addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());
+    addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
   }
 }

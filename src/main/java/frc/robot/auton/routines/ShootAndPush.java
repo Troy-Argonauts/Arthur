@@ -17,6 +17,6 @@ public class ShootAndPush extends SequentialCommandGroup {
                 new DT_TurnToTarget(1,0.75),
                 new DT_MoveToSetpoint(33)
         );
-        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());
+        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
     }
 }

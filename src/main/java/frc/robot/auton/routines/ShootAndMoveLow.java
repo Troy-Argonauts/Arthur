@@ -19,6 +19,6 @@ public class ShootAndMoveLow extends SequentialCommandGroup {
             new S_ShooterLow(),
             new DT_MoveToSetpoint(-40)
     );
-    addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntakeIndexer());
+    addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
   }
 }
