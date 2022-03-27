@@ -16,9 +16,9 @@ public class S_ShooterHigh extends SequentialCommandGroup {
             //new WaitCommand(0.5),
             new InstantCommand(Robot.getShooter()::highGoal),
             new WaitCommand(1),
-            new InstantCommand(Robot.getIntakeIndexer()::activateUpForward),
+            new InstantCommand(Robot.getIndexer()::activateUpForward),
             new WaitCommand(2),
-            new InstantCommand(Robot.getIntakeIndexer()::deactivateUp),
+            new InstantCommand(Robot.getIndexer()::deactivateUp),
             new InstantCommand(Robot.getShooter()::stop)
     );
     addRequirements(Robot.getShooter());

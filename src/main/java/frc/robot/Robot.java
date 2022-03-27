@@ -14,7 +14,7 @@ import frc.robot.auton.routines.ShootAndMoveHigh;
 import frc.robot.auton.routines.ShootAndMoveLow;
 import frc.robot.auton.routines.ShootAndPush;
 import frc.robot.subsystems.*;
-import frc.robot.vision.Webcam;
+import frc.robot.vision.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -31,8 +31,8 @@ public class Robot extends TimedRobot {
     private static Shooter shooter;
     private static MonkeyBars monkeyBars;
     private static PneumaticsSystem pneumaticsSystem;
-    private static Intake_Indexer intake_indexer;
-    private static Webcam webcam;
+    private static Indexer indexer;
+    private static Limelight limeLight;
     public boolean robotOn;
 
     private final SendableChooser<Command> chooser = new SendableChooser<>();
@@ -49,8 +49,11 @@ public class Robot extends TimedRobot {
         shooter = new Shooter();
         monkeyBars = new MonkeyBars();
         pneumaticsSystem = new PneumaticsSystem();
-        intake_indexer = new Intake_Indexer();
-        webcam = new Webcam();
+        indexer = new Indexer();
+
+        limeLight = Limelight.getInstance();
+        limeLight.setCameraMode(Limelight.CameraMode.DRIVER);
+        limeLight.setLedMode(Limelight.LightMode.OFF);
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
@@ -89,7 +92,6 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putNumber("Driver Right Joystick X Value", RobotContainer.getDriver().getRightJoystickX());
         SmartDashboard.putNumber("Driver Left Joystick Y Value", RobotContainer.getDriver().getLeftJoystickY());
-
         robotOn = true;
     }
 
@@ -98,8 +100,8 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         new InstantCommand(Robot.getIntake()::disable)
                 .alongWith(new InstantCommand(Robot.getShooter()::stop))
-                .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
-                .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp));
+                .alongWith(new InstantCommand(Robot.getIndexer()::deactivateFloor))
+                .alongWith(new InstantCommand(Robot.getIndexer()::deactivateUp));
 
     }
 
@@ -181,8 +183,8 @@ public class Robot extends TimedRobot {
         return pneumaticsSystem;
     }
 
-    public static Intake_Indexer getIntakeIndexer() {
-        if (intake_indexer == null) intake_indexer = new Intake_Indexer();
-        return intake_indexer;
+    public static Indexer getIndexer() {
+        if (indexer == null) indexer = new Indexer();
+        return indexer;
     }
 }

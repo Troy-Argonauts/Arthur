@@ -29,6 +29,6 @@ public class Shoot3 extends SequentialCommandGroup {
       new DT_MoveToSetpoint(1),
       new S_ShooterHigh()
     );
-    addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
+    addRequirements(Robot.getDriveTrain(), Robot.getIntake(), Robot.getIndexer(), Robot.getShooter(), Robot.getPneumaticsSystem());
   }
 }

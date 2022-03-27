@@ -107,8 +107,4 @@ public class DriveTrain extends SubsystemBase {
         rearRight.setSelectedSensorPosition(0);
         rearLeft.setSelectedSensorPosition(0);
     }
-
-    @Override
-    public void simulationPeriodic() {
-    }
 }

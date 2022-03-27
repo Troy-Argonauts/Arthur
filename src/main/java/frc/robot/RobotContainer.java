@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.Controller;
 import frc.libs.util.DPadButton;
+import frc.robot.subsystems.Indexer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -61,27 +62,26 @@ public class RobotContainer {
         driver.getBButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::disable)
                         .alongWith(new InstantCommand(Robot.getShooter()::stop))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
+                        .alongWith(new InstantCommand(() -> Robot.getIndexer().activate(Indexer.Action.DISABLED)))
         );
 
         operator.getAButton().whenActive(
                 new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
                         .alongWith(new InstantCommand(Robot.getIntake()::forward))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorBackward))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateUpBackward))
+                        .alongWith(new InstantCommand(Robot.getIndexer()::activateFloorBackward))
+                        .alongWith(new InstantCommand(Robot.getIndexer()::activateUpBackward))
         ).whenInactive(
                 new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
-                        .alongWith(new InstantCommand(Robot.getIntake()::disable))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateUp))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        .alongWith(Robot.getIndexer().test())
+                        .alongWith(new InstantCommand(Robot.getIndexer()::deactivateUp))
+                        .alongWith(new InstantCommand(Robot.getIndexer()::deactivateFloor))
         );
 
         operator.getRBButton().toggleWhenPressed(
                 new InstantCommand(
                         Robot.getPneumaticsSystem()::dropIntake)
                         .alongWith(new InstantCommand(Robot.getIntake()::backward))
-                        .alongWith(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .alongWith(new InstantCommand(Robot.getIndexer()::activateFloorForward))
         );
 
         operator.getLBButton().toggleWhenPressed(
@@ -89,7 +89,7 @@ public class RobotContainer {
                         Robot.getPneumaticsSystem()::pickupIntake)
                         .andThen(new InstantCommand(Robot.getIntake()::disable))
                         //.andThen(new WaitCommand(1.25))
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        .andThen(new InstantCommand(Robot.getIndexer()::deactivateFloor))
         );
 
         // Shooter Toggle
@@ -101,27 +101,27 @@ public class RobotContainer {
                         // Pickup intake just in case
                         .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
                         // Deactivate floor in case
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        .andThen(new InstantCommand(Robot.getIndexer()::deactivateFloor))
                         // pause for 1 second
                         .andThen(new WaitCommand(1))
                         // Turn on up indexer (shoot 1st ball)
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
+                        .andThen(new InstantCommand(Robot.getIndexer()::activateUpForward))
                         //.andThen(new Wait
                         //Command(0.25))
                         // Turn on floor indexer (shoot 2nd ball)
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .andThen(new InstantCommand(Robot.getIndexer()::activateFloorForward))
                         .andThen(new WaitCommand(1))
                         // Turn Off all motors
                         .andThen(new ParallelCommandGroup(
                                 new InstantCommand(Robot.getShooter()::stop),
-                                new InstantCommand(Robot.getIntakeIndexer()::deactivateUp),
-                                new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor)))
+                                new InstantCommand(Robot.getIndexer()::deactivateUp),
+                                new InstantCommand(Robot.getIndexer()::deactivateFloor)))
         );
 
         operator.getBButton().whenActive(
-                new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward)
+                new InstantCommand(Robot.getIndexer()::activateFloorForward)
         ).whenInactive(
-                new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor)
+                new InstantCommand(Robot.getIndexer()::deactivateFloor)
         );
 
         new DPadButton(operator, DPadButton.Direction.UP).whenActive(new InstantCommand(Robot.getMonkeyBars()::up))
@@ -136,21 +136,18 @@ public class RobotContainer {
                         // Pickup intake just in case
                         .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
                         // Deactivate floor in case
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor))
+                        .andThen(new InstantCommand(Robot.getIndexer()::deactivateFloor))
                         // pause for 1 second
-                        .andThen(new WaitCommand(1))
+                        .andThen(new WaitCommand(1.5))
                         // Turn on up indexer (shoot 1st ball)
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateUpForward))
-                        //.andThen(new Wait
-                        //Command(0.25))
-                        // Turn on floor indexer (shoot 2nd ball)
-                        .andThen(new InstantCommand(Robot.getIntakeIndexer()::activateFloorForward))
+                        .andThen(new InstantCommand(Robot.getIndexer()::activateUpForward))
+                        .andThen(new InstantCommand(Robot.getIndexer()::activateFloorForward))
                         .andThen(new WaitCommand(1))
                         // Turn Off all motors
                         .andThen(new ParallelCommandGroup(
                                 new InstantCommand(Robot.getShooter()::stop),
-                                new InstantCommand(Robot.getIntakeIndexer()::deactivateUp),
-                                new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor)))
+                                new InstantCommand(Robot.getIndexer()::deactivateUp),
+                                new InstantCommand(Robot.getIndexer()::deactivateFloor)))
         );
     }
 

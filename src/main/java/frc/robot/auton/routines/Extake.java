@@ -16,6 +16,6 @@ public class Extake extends SequentialCommandGroup {
             new I_StopIntake(),
             new I_StopIndexer()
         );
-        addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake(), Robot.getIntakeIndexer(), Robot.getDriveTrain());
+        addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake(), Robot.getIndexer(), Robot.getDriveTrain());
     }
 }

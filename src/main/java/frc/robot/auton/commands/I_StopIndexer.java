@@ -10,9 +10,9 @@ import frc.robot.Robot;
 public class I_StopIndexer extends SequentialCommandGroup {
   public I_StopIndexer() {
     addCommands(
-            new InstantCommand(Robot.getIntakeIndexer()::deactivateFloor),
-            new InstantCommand(Robot.getIntakeIndexer()::deactivateUp)
+            new InstantCommand(Robot.getIndexer()::deactivateFloor),
+            new InstantCommand(Robot.getIndexer()::deactivateUp)
     );
-    addRequirements(Robot.getIntakeIndexer());
+    addRequirements(Robot.getIndexer());
   }
 }
