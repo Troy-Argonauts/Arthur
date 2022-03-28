@@ -7,12 +7,12 @@ package frc.robot.auton.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
+import frc.robot.subsystems.Indexer;
 
 public class I_StartIndexer extends SequentialCommandGroup {
   public I_StartIndexer() {
     addCommands(
-            new InstantCommand(Robot.getIndexer()::activateFloorForward),
-            new InstantCommand(Robot.getIndexer()::activateUpForward)
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer())
     );
     addRequirements(Robot.getIndexer());
   }

@@ -1,13 +1,11 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -24,10 +22,10 @@ public class DriveTrain extends SubsystemBase {
      * Has rear motors follow front motors, and sets all motors to coast when stopped.
      */
     public DriveTrain() {
-        frontLeft = new TalonFX(Constants.DriveTrain.DT_FRONT_LEFT);
-        frontRight = new TalonFX(Constants.DriveTrain.DT_FRONT_RIGHT);
-        rearLeft = new TalonFX(Constants.DriveTrain.DT_REAR_LEFT);
-        rearRight = new TalonFX(Constants.DriveTrain.DT_REAR_RIGHT);
+        frontLeft = new TalonFX(Constants.DriveTrain.FRONT_LEFT);
+        frontRight = new TalonFX(Constants.DriveTrain.FRONT_RIGHT);
+        rearLeft = new TalonFX(Constants.DriveTrain.REAR_LEFT);
+        rearRight = new TalonFX(Constants.DriveTrain.REAR_RIGHT);
 
         frontLeft.setSensorPhase(false);
         frontRight.setSensorPhase(false);
@@ -44,14 +42,14 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.configFeedbackNotContinuous(false, 4);
         rearRight.configFeedbackNotContinuous(false, 4);
 
-        frontRight.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        frontLeft.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        rearRight.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        rearLeft.configOpenloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        frontRight.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        frontLeft.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        rearRight.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
-        rearLeft.configClosedloopRamp(Constants.DriveTrain.DT_NEUTRALTORAMPSECONDS);
+        frontRight.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        frontLeft.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        rearRight.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        rearLeft.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        frontRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        frontLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        rearRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        rearLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
 
         frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
         frontLeft.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
@@ -80,25 +78,8 @@ public class DriveTrain extends SubsystemBase {
         frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
     }
 
-    public void tankDrive(double right, double left) {
-        frontRight.set(ControlMode.PercentOutput, right);
-        frontLeft.set(ControlMode.PercentOutput, left);
-    }
-
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Front Right Position" , frontRight.getSelectedSensorPosition());
-        SmartDashboard.putNumber("Front Left Position" , frontLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("Rear Right Position" , rearRight.getSelectedSensorPosition());
-        SmartDashboard.putNumber("Rear Left Position" , rearLeft.getSelectedSensorPosition());
-    }
-
     public double getLocation() {
-        return Constants.DriveTrain.DT_kEncoderDistancePerPulse * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
-    }
-
-    public double getRevolutions() {
-        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2) / Constants.DriveTrain.DT_kEncoderCPR;
+        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
     }
 
     public void zeroEncoders() {
