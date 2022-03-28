@@ -56,11 +56,11 @@ public class Shooter extends SubsystemBase {
     public void setState(ShooterState state) {
         switch (state) {
             case LOW:
-                shooterMain.set(ControlMode.PercentOutput, 0.50);
+                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.LOW_SPEED);
                 active = true;
                 break;
             case HIGH:
-                shooterMain.set(ControlMode.PercentOutput, 0.95);
+                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.HIGH_SPEED);
                 active = true;
                 break;
             case STOPPED:

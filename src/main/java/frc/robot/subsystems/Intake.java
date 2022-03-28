@@ -35,11 +35,11 @@ public class Intake extends SubsystemBase {
     public void setState(IntakeState state) {
         switch (state) {
             case OUT:
-                intakeMotor.set(0.9);
+                intakeMotor.set(Constants.Intake.SPEED);
                 stopped = false;
                 break;
             case IN:
-                intakeMotor.set(-0.9);
+                intakeMotor.set(-Constants.Intake.SPEED);
                 stopped = false;
                 break;
             case STOPPED:

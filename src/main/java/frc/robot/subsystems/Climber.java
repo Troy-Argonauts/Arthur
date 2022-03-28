@@ -37,11 +37,11 @@ public class Climber extends SubsystemBase {
     public void setState(ClimberState state) {
         switch (state) {
             case UP:
-                mainMotor.set(ControlMode.PercentOutput, 0.5);
+                mainMotor.set(ControlMode.PercentOutput, Constants.Climber.UP_SPEED);
                 active = true;
                 break;
             case DOWN:
-                mainMotor.set(ControlMode.PercentOutput, -0.35);
+                mainMotor.set(ControlMode.PercentOutput, -Constants.Climber.DOWN_SPEED);
                 active = true;
                 break;
             case STOPPED:

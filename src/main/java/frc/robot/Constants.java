@@ -31,6 +31,7 @@ public final class Constants {
 
     public interface Intake {
         int PORT = 5;
+        double SPEED = 0.9;
     }
 
     public interface Indexer {
@@ -53,6 +54,8 @@ public final class Constants {
         double D = 0;
         double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
         double RAMP_SECONDS = 1.5;
+        double LOW_SPEED = 0.5;
+        double HIGH_SPEED = 0.95;
     }
 
     public interface Limelight {
@@ -63,6 +66,8 @@ public final class Constants {
 
     public interface Climber {
         int PORT = 8;
+        double UP_SPEED = 0.7;
+        double DOWN_SPEED = 0.3;
     }
   
     public interface Controller {
