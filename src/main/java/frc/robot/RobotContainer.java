@@ -7,16 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.ArgoController;
 import frc.libs.util.DPadButton;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+import frc.robot.ControllerCommands.*;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -65,77 +61,59 @@ public class RobotContainer {
         );
 
         driver.getBButton().toggleWhenPressed(
-                new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())
-                        .alongWith(new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()))
-                        .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
+            new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())
+                .alongWith(new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()))
+                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
 
         operator.getAButton().whenActive(
-                new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
-                        .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIntake()))
-                        .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.OUT), Robot.getIndexer()))
+            new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
+                .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIntake()))
+                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.OUT), Robot.getIndexer()))
         ).whenInactive(
-                new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
-                        .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()))
-                        .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
+            new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
+                .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()))
+                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
 
         operator.getRBButton().toggleWhenPressed(
-                new InstantCommand(
-                        Robot.getPneumaticsSystem()::dropIntake)
-                        .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.IN), Robot.getIntake()))
-                        .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer()))
+            new InstantCommand(
+                Robot.getPneumaticsSystem()::dropIntake)
+                .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.IN), Robot.getIntake()))
+                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer()))
         );
 
         operator.getLBButton().toggleWhenPressed(
-                new InstantCommand(
-                        Robot.getPneumaticsSystem()::pickupIntake)
-                        .andThen(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()))
-                        .andThen(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
+            new InstantCommand(
+                Robot.getPneumaticsSystem()::pickupIntake)
+                .andThen(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()))
+                .andThen(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
 
         operator.getXButton().toggleWhenPressed(
-                new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.LOW), Robot.getShooter())
-                        .andThen((new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())))
-                        .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
-                        .andThen(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
-                        .andThen(new WaitCommand(1))
-                        .andThen(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer()))
-                        .andThen(new WaitCommand(1))
-                        .andThen(new ParallelCommandGroup(
-                                new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()),
-                                new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())))
+            new ShooterLow()
         );
 
         operator.getBButton().whenActive(
-                new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer())
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer())
         ).whenInactive(
-                new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
         );
 
         new DPadButton(operator, DPadButton.Direction.UP).whenActive(
-                new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.UP), Robot.getClimber())
+            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.UP), Robot.getClimber())
         ).whenInactive(
-                new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
+            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
         );
 
         new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(
-                new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.DOWN), Robot.getClimber())
+            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.DOWN), Robot.getClimber())
         ).whenInactive(
-                new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
+            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
         );
 
         new DPadButton(operator, DPadButton.Direction.LEFT).toggleWhenPressed(
-                new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.HIGH))
-                        .andThen((new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())))
-                        .andThen(new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake))
-                        .andThen(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
-                        .andThen(new WaitCommand(1.5))
-                        .andThen(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer()))
-                        .andThen(new WaitCommand(1))
-                        .andThen(new ParallelCommandGroup(
-                                new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()),
-                                new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())))
+            new ShooterHigh()
         );
     }
 
