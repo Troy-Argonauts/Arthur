@@ -7,6 +7,8 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -18,6 +20,7 @@ public class DriveTrain extends SubsystemBase {
      */
 
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
+    private ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
@@ -68,6 +71,8 @@ public class DriveTrain extends SubsystemBase {
         frontRight.setNeutralMode(NeutralMode.Coast);
         rearLeft.setNeutralMode(NeutralMode.Coast);
         rearRight.setNeutralMode(NeutralMode.Coast);
+
+        gyro.calibrate();
     }
 
     /**
