@@ -39,40 +39,6 @@ public class Indexer extends SubsystemBase {
         SmartDashboard.putBoolean("Indexer Up Active", upActive);
     }
 
-    public void activate(Action action, Motor motor) {
-        switch (action) {
-            case IN:
-                switch (motor) {
-                    case FLOOR:
-                        activateFloorBackward();
-                        break;
-                    case UP:
-                        activateUpBackward();
-                        break;
-                }
-                break;
-            case OUT:
-                switch (motor) {
-                    case FLOOR:
-                        activateFloorForward();
-                        break;
-                    case UP:
-                        activateUpForward();
-                        break;
-                }
-                break;
-            case DISABLED:
-                deactivateFloor();
-                deactivateUp();
-                break;
-        }
-    }
-
-    public void activate(Action action) {
-        activate(action, Motor.UP);
-        activate(action, Motor.FLOOR);
-    }
-
     public void activateFloorForward() {
         floorMotor.set(0.3);
         floorActive = true;
@@ -101,9 +67,5 @@ public class Indexer extends SubsystemBase {
     public void deactivateUp() {
         upMotor.set(0);
         upActive = false;
-    }
-
-    public InstantCommand test() {
-        return new InstantCommand(() -> Robot.getIndexer().activate(Action.IN, Motor.FLOOR));
     }
 }

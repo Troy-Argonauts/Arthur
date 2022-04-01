@@ -62,7 +62,8 @@ public class RobotContainer {
         driver.getBButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::disable)
                         .alongWith(new InstantCommand(Robot.getShooter()::stop))
-                        .alongWith(new InstantCommand(() -> Robot.getIndexer().activate(Indexer.Action.DISABLED)))
+                        .alongWith(new InstantCommand(() -> Robot.getIndexer().deactivateFloor()))
+                        .alongWith(new InstantCommand(() -> Robot.getIndexer().deactivateUp()))
         );
 
         operator.getAButton().whenActive(
@@ -72,7 +73,7 @@ public class RobotContainer {
                         .alongWith(new InstantCommand(Robot.getIndexer()::activateUpBackward))
         ).whenInactive(
                 new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
-                        .alongWith(Robot.getIndexer().test())
+                        .alongWith(new InstantCommand(Robot.getIntake()::disable))
                         .alongWith(new InstantCommand(Robot.getIndexer()::deactivateUp))
                         .alongWith(new InstantCommand(Robot.getIndexer()::deactivateFloor))
         );
