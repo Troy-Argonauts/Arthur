@@ -12,14 +12,6 @@ public class Indexer extends SubsystemBase {
     private final CANSparkMax floorMotor, upMotor;
     private boolean floorActive, upActive;
 
-    public enum Action {
-        IN, OUT, DISABLED
-    }
-
-    public enum Motor {
-        FLOOR, UP
-    }
-
     public Indexer() {
         floorMotor = new CANSparkMax(Constants.Indexer.I_INDEXER_FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.Indexer.I_INDEXER_UP, CANSparkMax.MotorType.kBrushless);
