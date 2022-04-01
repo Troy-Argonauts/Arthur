@@ -14,7 +14,7 @@ public class ShootAndMoveLow extends SequentialCommandGroup {
 
   public ShootAndMoveLow() {
     addCommands(
-            new DT_ZeroEncoders(),
+            new InstantCommand(Robot.getDriveTrain()::zeroEncoders)
             new S_ShooterLow(),
             new DT_MoveToSetpoint(-40)
     );

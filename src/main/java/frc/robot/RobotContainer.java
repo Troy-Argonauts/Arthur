@@ -46,16 +46,10 @@ public class RobotContainer {
     private void configureButtonBindings() {
         Trigger operatorRightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
         Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
-        double ramp = 0.1;
 
         // Driver Controls
         Robot.getDriveTrain().setDefaultCommand(
                 new RunCommand(() ->  {
-//                            if (Math.abs(driver.getRightJoystickX()) > 0.2) {
-//                                Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.45);
-//                            } else {
-//                                Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
-//                            }
                             Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
                         }, Robot.getDriveTrain())
         );

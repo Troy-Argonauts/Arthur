@@ -48,9 +48,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public enum ShooterState {
-        LOW,
-        HIGH,
-        STOPPED
+        LOW, HIGH, STOPPED
     }
 
     public void setState(ShooterState state) {

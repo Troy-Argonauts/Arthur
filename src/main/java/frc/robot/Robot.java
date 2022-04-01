@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
 
         driveTrain.zeroEncoders();
         SmartDashboard.putData("Autonomous modes", chooser);
+        chooser.setDefaulOption("Move off Tarmac", new DT_MoveToSetpoint(-40).withTimeout(15);
         chooser.setDefaultOption("Shoot and Move Low", new ShootAndMoveLow().withTimeout(15));
     }
 
