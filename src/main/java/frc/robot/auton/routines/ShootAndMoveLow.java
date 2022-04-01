@@ -12,12 +12,12 @@ import frc.robot.auton.commands.S_ShooterLow;
 
 public class ShootAndMoveLow extends SequentialCommandGroup {
 
-  public ShootAndMoveLow() {
-    addCommands(
-            new InstantCommand(Robot.getDriveTrain()::zeroEncoders)
-            new S_ShooterLow(),
-            new DT_MoveToSetpoint(-40)
-    );
-    addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
-  }
+    public ShootAndMoveLow() {
+        addCommands(
+                new InstantCommand(Robot.getDriveTrain()::zeroEncoders),
+                new S_ShooterLow(),
+                new DT_MoveToSetpoint(-40)
+        );
+        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
+    }
 }
