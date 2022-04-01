@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -111,5 +110,15 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.setSelectedSensorPosition(0);
         rearRight.setSelectedSensorPosition(0);
         rearLeft.setSelectedSensorPosition(0);
+    }
+
+    public double getAngle() {
+        double angle = -gyro.getAngle() % 360;
+        double out = (angle < -180) ? angle + 360 : angle;
+        return (out > 180) ? out - 360 : out;
+    }
+
+    public void zeroGyro() {
+        gyro.reset();
     }
 }
