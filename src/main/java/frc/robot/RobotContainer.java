@@ -11,8 +11,12 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.ArgoController;
 import frc.libs.util.DPadButton;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
+import frc.robot.commands.ShooterHigh;
+import frc.robot.commands.ShooterLow;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
