@@ -16,7 +16,7 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         active = false;
 
-        shooterMain = new TalonFX(Constants.Shooter.SHOOTER);
+        shooterMain = new TalonFX(Constants.Shooter.PORT);
 
         shooterMain.configFactoryDefault();
 
@@ -33,47 +33,38 @@ public class Shooter extends SubsystemBase {
 
         shooterMain.configStatorCurrentLimit(statorCurrentLimitConfiguration);
 
-        shooterMain.config_kF(0, Constants.Shooter.SHOOTER_F);
-        shooterMain.config_kP(0, Constants.Shooter.SHOOTER_P);
-        shooterMain.config_kI(0, Constants.Shooter.SHOOTER_I);
-        shooterMain.config_kD(0, Constants.Shooter.SHOOTER_D);
+        shooterMain.config_kF(0, Constants.Shooter.F);
+        shooterMain.config_kP(0, Constants.Shooter.P);
+        shooterMain.config_kI(0, Constants.Shooter.I);
+        shooterMain.config_kD(0, Constants.Shooter.D);
       
-        shooterMain.configClosedloopRamp(Constants.Shooter.SHOOTER_NEUTRALTORAMPSECONDS);
-        shooterMain.configOpenloopRamp(Constants.Shooter.SHOOTER_NEUTRALTORAMPSECONDS);
+        shooterMain.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
+        shooterMain.configOpenloopRamp(Constants.Shooter.RAMP_SECONDS);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Shooter RPM", getRPM());
-        SmartDashboard.putNumber("Shooter Percentage", shooterMain.getMotorOutputPercent());
         SmartDashboard.putBoolean("Shooter Activated", active);
     }
 
-    public double rpmToNativeUnits(double rpm) {
-        return rpm * Constants.Shooter.ENCODER_TICKS_PER_MOTOR_REVOLUTION / 10.0 / 60.0;
+    public enum ShooterState {
+        LOW, HIGH, STOPPED
     }
 
-    public double getRPM() {
-        return shooterMain.getSelectedSensorPosition() / Constants.Shooter.ENCODER_TICKS_PER_MOTOR_REVOLUTION;
-    }
-
-    public boolean lockOn() {
-        // TODO: Make lock on method so shooter speed can be made so that it can shoot from anywhere on the field
-        return false;
-    }
-
-    public void lowGoal() {
-        shooterMain.set(ControlMode.PercentOutput, 0.50);
-        active = true;
-    }
-
-    public void highGoal() {
-        shooterMain.set(ControlMode.PercentOutput, 0.95);
-        active = true;
-    }
-
-    public void stop() {
-        shooterMain.set(ControlMode.PercentOutput, 0);
-        active = false;
+    public void setState(ShooterState state) {
+        switch (state) {
+            case LOW:
+                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.LOW_SPEED);
+                active = true;
+                break;
+            case HIGH:
+                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.HIGH_SPEED);
+                active = true;
+                break;
+            case STOPPED:
+                shooterMain.set(ControlMode.PercentOutput, 0);
+                active = false;
+                break;
+        }
     }
 }

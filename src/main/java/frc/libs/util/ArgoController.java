@@ -10,9 +10,9 @@ import frc.robot.Constants;
  * @author Shaun Dantas
  */
 
-public class Controller extends Joystick {
+public class ArgoController extends Joystick {
 
-    public Controller(int port) {
+    public ArgoController(int port) {
         super(port);
     }
 
@@ -67,50 +67,6 @@ public class Controller extends Joystick {
         return RS;
     }
 
-    public boolean getAButtonPressed() {
-        return getRawButton(1);
-    }
-
-    public boolean getBButtonPressed() {
-        return getRawButton(2);
-    }
-
-    public boolean getXButtonPressed() {
-        return getRawButton(3);
-    }
-
-    public boolean getYButtonPressed() {
-        return getRawButton(4);
-    }
-
-    public boolean getLBButtonPressed() {
-        return getRawButton(5);
-    }
-
-    public boolean getRBButtonPressed() {
-        return getRawButton(6);
-    }
-
-    public boolean getBACKButtonPressed() {
-        return getRawButton(7);
-    }
-
-    public boolean getSTARTButtonPressed() {
-        return getRawButton(8);
-    }
-
-    public boolean getLSButtonPressed() {
-        return getRawButton(9);
-    }
-
-    public boolean getRSButtonPressed() {
-        return getRawButton(10);
-    }
-
-    public double getLeftJoystickX() {
-        return getX();
-    }
-
     public double getLeftJoystickY() {
         if (Math.abs(getY()) < Constants.Controller.CONTROLLER_DRIFT) {
             return 0;
@@ -141,4 +97,6 @@ public class Controller extends Joystick {
     public double getTriggers() {
         return getRightTrigger() - getLeftTrigger();
     }
+
+
 }

@@ -9,14 +9,13 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean forward, stopped;
+    private boolean stopped;
     
 
     public Intake() {
-        forward = true;
         stopped = true;
 
-        intakeMotor = new CANSparkMax(Constants.Intake.I_INTAKE, CANSparkMax.MotorType.kBrushless);
+        intakeMotor = new CANSparkMax(Constants.Intake.PORT, CANSparkMax.MotorType.kBrushless);
 
         intakeMotor.setInverted(false);
 
@@ -25,40 +24,32 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (!stopped) {
-            if (forward) {
-                forward();
-            } else {
-                backward();
-            }
-        } else {
-            disable();
-        }
-
-        SmartDashboard.putNumber("Intake Percentage", (intakeMotor.get() * 100));
-        SmartDashboard.putBoolean("Intake Forward", forward);
         SmartDashboard.putBoolean("Intake Active", !stopped);
-    }
-
-    public void toggleDirection() {
-        forward = !forward;
-    }
-
-    public void forward() {
-        intakeMotor.set(0.9);
-        stopped = false;
-        forward = true;
-    }
-
-    public void backward() {
-        intakeMotor.set(-0.9);
-        stopped = false;
-        forward = false;
     }
 
     public void disable() {
         intakeMotor.set(0);
         stopped = true;
-        forward = true;
+    }
+
+    public void setState(IntakeState state) {
+        switch (state) {
+            case OUT:
+                intakeMotor.set(Constants.Intake.SPEED);
+                stopped = false;
+                break;
+            case IN:
+                intakeMotor.set(-Constants.Intake.SPEED);
+                stopped = false;
+                break;
+            case STOPPED:
+                intakeMotor.set(0);
+                stopped = true;
+                break;
+        }
+    }
+
+    public enum IntakeState {
+        IN, OUT, STOPPED
     }
 }

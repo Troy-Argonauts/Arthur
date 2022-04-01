@@ -9,13 +9,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class MonkeyBars extends SubsystemBase {
+public class Climber extends SubsystemBase {
 
     private final TalonFX mainMotor;
     public static boolean active;
 
-    public MonkeyBars() {
-        mainMotor = new TalonFX(Constants.MonkeyBars.MONKEY_BARS);
+    public enum ClimberState {
+        UP, DOWN, STOPPED
+    }
+
+    public Climber() {
+        mainMotor = new TalonFX(Constants.Climber.PORT);
 
         mainMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -27,24 +31,23 @@ public class MonkeyBars extends SubsystemBase {
     }
 
     public void periodic() {
-        SmartDashboard.putNumber("Climber Encoder", getEncoderValue());
         SmartDashboard.putBoolean("Climber Active", active);
     }
 
-    public void up() {
-        mainMotor.set(ControlMode.PercentOutput, 0.5);
-        active = true;
-    }
-    public void down() {
-        mainMotor.set(ControlMode.PercentOutput, -0.35);
-        active = true;
-    }
-    public void stop() {
-        mainMotor.set(ControlMode.PercentOutput, 0);
-        active = false;
-    }
-
-    public double getEncoderValue() {
-        return mainMotor.getSelectedSensorPosition();
+    public void setState(ClimberState state) {
+        switch (state) {
+            case UP:
+                mainMotor.set(ControlMode.PercentOutput, Constants.Climber.UP_SPEED);
+                active = true;
+                break;
+            case DOWN:
+                mainMotor.set(ControlMode.PercentOutput, -Constants.Climber.DOWN_SPEED);
+                active = true;
+                break;
+            case STOPPED:
+                mainMotor.set(ControlMode.PercentOutput, 0);
+                active = false;
+                break;
+        }
     }
 }

@@ -15,17 +15,9 @@ public class PneumaticsSystem extends SubsystemBase {
     public PneumaticsSystem() { 
         compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
-        solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.INTAKE_SOLENOID_1, Constants.Pneumatics.INTAKE_SOLENOID_2);
+        solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.SOLENOID_1, Constants.Pneumatics.SOLENOID_2);
         currentState = DoubleSolenoid.Value.kForward;
         updateState();
-    }
-
-    public void toggleCompressor() {
-        if(compressor.enabled()){
-            compressor.disable();
-        } else {
-            compressor.enableDigital();
-        }
     }
 
     public void pickupIntake(){
@@ -40,6 +32,10 @@ public class PneumaticsSystem extends SubsystemBase {
             currentState = DoubleSolenoid.Value.kReverse;
             updateState();
         }
+    }
+
+    public void setState() {
+
     }
 
     public void updateState() {
