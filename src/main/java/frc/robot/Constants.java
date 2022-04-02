@@ -29,6 +29,10 @@ public final class Constants {
         double DT_kP = 0.02;
         double DT_kI = 0;
         double DT_kD = 0;
+        double kTurnP = 0.1;
+        double kTurnI = 0;
+        double kTurnD = 0;
+        double kTurnToleranceDeg = 10;
         double DT_kS = 0.20094;
         double DT_kV = 1.6658;
         double DT_kA = 0.4515;
