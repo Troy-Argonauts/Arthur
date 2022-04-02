@@ -84,7 +84,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getLocation() {
-        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+        return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
     }
 
     public void zeroEncoders() {

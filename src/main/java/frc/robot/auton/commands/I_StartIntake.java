@@ -15,8 +15,8 @@ import frc.robot.subsystems.Intake;
 public class I_StartIntake extends ParallelCommandGroup {
   public I_StartIntake() {
     addCommands(
-            new InstantCommand(Robot.getPneumaticsSystem()::dropIntake),
-            new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.IN), Robot.getIntake())
+        new InstantCommand(Robot.getPneumaticsSystem()::dropIntake),
+        new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.IN), Robot.getIntake())
     );
     addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake());
   }

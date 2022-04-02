@@ -16,8 +16,8 @@ public class I_StopIntake extends ParallelCommandGroup {
 
     public I_StopIntake() {
         addCommands(
-                new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()),
-                new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
+            new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()),
+            new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
         );
         addRequirements(Robot.getPneumaticsSystem(), Robot.getIntake());
     }
