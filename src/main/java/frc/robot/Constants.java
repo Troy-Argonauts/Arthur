@@ -14,24 +14,18 @@ public final class Constants {
         int FRONT_LEFT = 1;
         int REAR_RIGHT = 4;
         int REAR_LEFT = 2;
-        double WHEEL_DIAMETER_METERS = 0.2;
-        double ENCODER_CPR = 2048;
-        double ENCODER_DISTANCE_PER_PULSE = (WHEEL_DIAMETER_METERS * Math.PI)/ ENCODER_CPR;
         double PIDTolerance = 0.5;
-        double DT_kWheelDiameterMeters = 0.2;
-        double DT_kEncoderCPR = 2048;
-        double DT_kEncoderDistancePerPulse = (DT_kWheelDiameterMeters * Math.PI)/ DT_kEncoderCPR;
+        double WHEEL_DIAMETER_INCHES = 6.0;
+        double ENCODER_NU_PER_WHEEL_REVOLUTION = 21033;
+        double WHEEL_REVOLUTION_DISTANCE_INCHES = WHEEL_DIAMETER_INCHES * Math.PI;
+        double INCHES_PER_NU = WHEEL_REVOLUTION_DISTANCE_INCHES / ENCODER_NU_PER_WHEEL_REVOLUTION;
         double kP = 0.02;
         double kI = 0;
         double kD = 0;
         double kTurnP = 0.1;
         double kTurnI = 0;
         double kTurnD = 0;
-        double kTurnToleranceDeg = 10;
-        double kS = 0.20094;
-        double kV = 1.6658;
-        double kA = 0.4515;
-        double ROBOT_WIDTH = Units.inchesToMeters(33); // Meters
+        double kTurnToleranceDeg = 1.0;
         double RAMP_SECONDS = 0.75;
     }
 
