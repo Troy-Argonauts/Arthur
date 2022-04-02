@@ -31,7 +31,6 @@ public final class Constants {
         double kS = 0.20094;
         double kV = 1.6658;
         double kA = 0.4515;
-        double PIDTolerance = 0.5;
         double ROBOT_WIDTH = Units.inchesToMeters(33); // Meters
         double RAMP_SECONDS = 0.75;
     }
