@@ -67,9 +67,10 @@ public class RobotContainer {
 
         driver.getAButton().whenActive(
             new InstantCommand(() -> driverCommand.end(false)) // End the command
-                .andThen(new InstantCommand(Robot.getDriveTrain()::brakeMode))
-                .alongWith(new RunCommand(Robot.getDriveTrain()::brakeMode))
-        ).whenInactive(
+                .andThen(new InstantCommand(Robot.getDriveTrain()::zeroEncoders) // Zero the encoders
+                .andThen(new RunCommand(Robot.getDriveTrain()::brakeMode))
+                ));
+        driver.getAButton().whenInactive(
             new InstantCommand(() -> driverCommand.execute())
         );
 
