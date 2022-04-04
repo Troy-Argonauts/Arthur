@@ -51,11 +51,13 @@ public class RobotContainer {
         Trigger operatorRightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
         Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
+        RunCommand driverCommand = new RunCommand(() ->  {Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
+        }, Robot.getDriveTrain());
+
         // Driver Controls
         Robot.getDriveTrain().setDefaultCommand(
-                new RunCommand(() ->  {
-                            Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
-                        }, Robot.getDriveTrain())
+
+                driverCommand
         );
 
         driver.getBButton().toggleWhenPressed(
@@ -63,6 +65,16 @@ public class RobotContainer {
                 .alongWith(new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()))
                 .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
+
+        driver.getAButton().whenActive(
+                new InstantCommand(() -> driverCommand.end(false))
+                        .andThen(new InstantCommand(() ->  Robot.getDriveTrain().brakeMode())
+                                .alongWith(new RunCommand(() -> Robot.getDriveTrain().brakeMode(), Robot.getDriveTrain()))));  // End the command
+
+
+        driver.getAButton().whenInactive(
+                new InstantCommand(() -> driverCommand.execute()));
+
 
         operator.getAButton().whenActive(
             new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
