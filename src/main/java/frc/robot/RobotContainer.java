@@ -56,8 +56,7 @@ public class RobotContainer {
 
         // Driver Controls
         Robot.getDriveTrain().setDefaultCommand(
-
-                driverCommand
+            driverCommand
         );
 
         driver.getBButton().toggleWhenPressed(
@@ -67,13 +66,12 @@ public class RobotContainer {
         );
 
         driver.getAButton().whenActive(
-                new InstantCommand(() -> driverCommand.end(false))
-                        .andThen(new InstantCommand(() ->  Robot.getDriveTrain().brakeMode())
-                                .alongWith(new RunCommand(() -> Robot.getDriveTrain().brakeMode(), Robot.getDriveTrain()))));  // End the command
-
-
-        driver.getAButton().whenInactive(
-                new InstantCommand(() -> driverCommand.execute()));
+            new InstantCommand(() -> driverCommand.end(false)) // End the command
+                .andThen(new InstantCommand(Robot.getDriveTrain()::brakeMode))
+                .alongWith(new RunCommand(Robot.getDriveTrain()::brakeMode))
+        ).whenInactive(
+            new InstantCommand(() -> driverCommand.execute())
+        );
 
 
         operator.getAButton().whenActive(

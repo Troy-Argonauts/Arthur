@@ -83,7 +83,6 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void brakeMode(){
-
         frontLeft.set(ControlMode.PercentOutput, pid.calculate(frontLeft.getSelectedSensorPosition(), 0));
         frontRight.set(ControlMode.PercentOutput, pid.calculate(frontRight.getSelectedSensorPosition(), 0));
         rearLeft.set(ControlMode.PercentOutput, pid.calculate(rearLeft.getSelectedSensorPosition(), 0));
@@ -91,7 +90,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getLocation() {
-        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
     }
 
     public void zeroEncoders() {
