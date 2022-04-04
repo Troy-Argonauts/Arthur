@@ -67,11 +67,10 @@ public class RobotContainer {
 
         driver.getAButton().whenActive(
             new InstantCommand(() -> driverCommand.end(false)) // End the command
-                .andThen(new InstantCommand(Robot.getDriveTrain()::zeroEncoders) // Zero the encoders
+                .andThen(new InstantCommand(Robot.getDriveTrain()::zeroEncoders)) // Zero the encoders
                 .andThen(new RunCommand(Robot.getDriveTrain()::brakeMode))
-                ));
-        driver.getAButton().whenInactive(
-            new InstantCommand(() -> driverCommand.execute())
+        ).whenInactive(
+                new InstantCommand(driverCommand::execute) // Start the command
         );
 
 
@@ -128,5 +127,8 @@ public class RobotContainer {
 
     public ArgoController getDriver() {
         return driver;
+    }
+    public ArgoController getOperator() {
+        return operator;
     }
 }
