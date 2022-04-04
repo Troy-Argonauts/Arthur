@@ -49,6 +49,7 @@ public class DriveTrain extends SubsystemBase {
         frontRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
         frontLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
         rearRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+
         rearLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
 
         frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
