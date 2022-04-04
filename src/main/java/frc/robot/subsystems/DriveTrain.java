@@ -19,7 +19,7 @@ public class DriveTrain extends SubsystemBase {
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
 
 
-    private final PIDController pid = new PIDController(0, 0, 0);
+    private final PIDController pid = new PIDController(Constants.DriveTrain.Brakemode_P ,Constants.DriveTrain.Brakemode_I, Constants.DriveTrain.Brakemode_D);
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
      * Has rear motors follow front motors, and sets all motors to coast when stopped.
@@ -83,10 +83,11 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void brakeMode(){
-        frontLeft.set(ControlMode.PercentOutput, pid.calculate(frontLeft.getSelectedSensorPosition(), 0));
-        frontRight.set(ControlMode.PercentOutput, pid.calculate(frontRight.getSelectedSensorPosition(), 0));
-        rearLeft.set(ControlMode.PercentOutput, pid.calculate(rearLeft.getSelectedSensorPosition(), 0));
-        rearRight.set(ControlMode.PercentOutput, pid.calculate(rearRight.getSelectedSensorPosition(), 0));
+
+        frontLeft.set(ControlMode.PercentOutput, pid.calculate(leftEncoders(), 0));
+        frontRight.set(ControlMode.PercentOutput, pid.calculate(rightEncoders(),0));
+        rearLeft.set(ControlMode.PercentOutput, pid.calculate(leftEncoders(), 0));
+        rearRight.set(ControlMode.PercentOutput, pid.calculate(rightEncoders(), 0));
     }
 
     public double getLocation() {
@@ -98,5 +99,13 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.setSelectedSensorPosition(0);
         rearRight.setSelectedSensorPosition(0);
         rearLeft.setSelectedSensorPosition(0);
+    }
+
+    public double leftEncoders() {
+        return (frontLeft.getSelectedSensorPosition()+rearLeft.getSelectedSensorPosition())/2;
+    }
+
+    public double rightEncoders() {
+        return (frontRight.getSelectedSensorPosition()+rearRight.getSelectedSensorPosition())/2;
     }
 }
