@@ -18,7 +18,7 @@ public class DriveTrain extends SubsystemBase {
      */
 
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
-    private ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
@@ -84,7 +84,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getLocation() {
-        return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+        return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
     }
 
     public void zeroEncoders() {
