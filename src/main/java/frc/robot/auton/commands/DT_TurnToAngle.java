@@ -2,7 +2,6 @@ package frc.robot.auton.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.Constants.DriveTrain;
 
