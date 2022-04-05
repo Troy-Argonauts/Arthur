@@ -33,10 +33,10 @@ public class Shooter extends SubsystemBase {
 
         shooterMain.configStatorCurrentLimit(statorCurrentLimitConfiguration);
 
-        shooterMain.config_kF(0, Constants.Shooter.F);
-        shooterMain.config_kP(0, Constants.Shooter.P);
-        shooterMain.config_kI(0, Constants.Shooter.I);
-        shooterMain.config_kD(0, Constants.Shooter.D);
+        shooterMain.config_kF(0, Constants.Shooter.kF);
+        shooterMain.config_kP(0, Constants.Shooter.kP);
+        shooterMain.config_kI(0, Constants.Shooter.kI);
+        shooterMain.config_kD(0, Constants.Shooter.kD);
       
         shooterMain.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
         shooterMain.configOpenloopRamp(Constants.Shooter.RAMP_SECONDS);

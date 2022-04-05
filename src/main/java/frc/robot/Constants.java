@@ -12,18 +12,19 @@ public final class Constants {
         int FRONT_LEFT = 1;
         int REAR_RIGHT = 4;
         int REAR_LEFT = 2;
-        double PIDTolerance = 0.5;
         double WHEEL_DIAMETER_INCHES = 6.0;
-        double ENCODER_NU_PER_WHEEL_REVOLUTION = 21033;
+        int ENCODER_NU_PER_WHEEL_REVOLUTION = 21033;
         double WHEEL_REVOLUTION_DISTANCE_INCHES = WHEEL_DIAMETER_INCHES * Math.PI;
         double INCHES_PER_NU = WHEEL_REVOLUTION_DISTANCE_INCHES / ENCODER_NU_PER_WHEEL_REVOLUTION;
+        double NU_PER_INCH = ENCODER_NU_PER_WHEEL_REVOLUTION / WHEEL_REVOLUTION_DISTANCE_INCHES;
         double kP = 0.02;
         double kI = 0;
         double kD = 0;
-        double kTurnP = 0.1;
-        double kTurnI = 0;
-        double kTurnD = 0;
-        double kTurnToleranceDeg = 1.0;
+        double kP_TURN = 0.1;
+        double kI_TURN = 0;
+        double kD_TURN = 0;
+        double TURN_TOLERANCE_DEGREES = 1.0;
+        double PID_TOLERANCE = 0.5;
         double RAMP_SECONDS = 0.75;
     }
 
@@ -46,10 +47,10 @@ public final class Constants {
 
     public interface Shooter {
         int PORT = 9;
-        double F = 0.05;
-        double P = 0;
-        double I = 0;
-        double D = 0;
+        double kF = 0.05;
+        double kP = 0;
+        double kI = 0;
+        double kD = 0;
         double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
         double RAMP_SECONDS = 1.5;
         double LOW_SPEED = 0.5;

@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -87,6 +88,10 @@ public class DriveTrain extends SubsystemBase {
         return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
     }
 
+    public double getEncoderPosition() {
+        return (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
+    }
+
     public void zeroEncoders() {
         frontRight.setSelectedSensorPosition(0);
         frontLeft.setSelectedSensorPosition(0);
@@ -102,5 +107,28 @@ public class DriveTrain extends SubsystemBase {
 
     public void zeroGyro() {
         gyro.reset();
+    }
+
+    public void driveStraight(double inches) {
+        double turningValue = (0 - gyro.getAngle()) * Constants.DriveTrain.kP_TURN;
+        // Invert the direction of the turn if we are going backwards
+        double distance = inches * Constants.DriveTrain.NU_PER_INCH;
+        turningValue = Math.copySign(turningValue, distance);
+
+        double finalTurningValue = turningValue;
+        RunCommand driveStraightBackward = new RunCommand(() -> cheesyDrive(finalTurningValue, -1, 1), this);
+        RunCommand driveStraightForward = new RunCommand(() -> cheesyDrive(finalTurningValue, 1, 1), this);
+
+        if (distance < 0) {
+            while (getEncoderPosition() > distance) {
+                driveStraightBackward.execute();
+            }
+            driveStraightBackward.end(false);
+        } else if (distance > 0) {
+            while (getEncoderPosition() < distance) {
+                driveStraightForward.execute();
+            }
+            driveStraightForward.end(false);
+        }
     }
 }

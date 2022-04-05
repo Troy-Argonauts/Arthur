@@ -5,6 +5,7 @@
 package frc.robot.auton.routines;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
@@ -16,7 +17,7 @@ public class ShootAndMoveLow extends SequentialCommandGroup {
         addCommands(
                 new InstantCommand(Robot.getDriveTrain()::zeroEncoders),
                 new S_ShooterLow(),
-                new DT_MoveToSetpoint(-40)
+                new RunCommand(() -> Robot.getDriveTrain().driveStraight(10))
         );
         addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
     }
