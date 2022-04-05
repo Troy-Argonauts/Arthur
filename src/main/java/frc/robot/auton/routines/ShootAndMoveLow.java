@@ -17,8 +17,8 @@ public class ShootAndMoveLow extends SequentialCommandGroup {
         addCommands(
                 new InstantCommand(Robot.getDriveTrain()::zeroEncoders),
                 new S_ShooterLow(),
-                new RunCommand(() -> Robot.getDriveTrain().driveStraight(10))
+                new RunCommand(() -> Robot.getDriveTrain().driveStraight(-10))
         );
-        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
+        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());
     }
 }
