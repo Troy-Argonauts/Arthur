@@ -7,11 +7,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -119,7 +116,6 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Angle", gyro.getAngle());
     }
 
-}
     public void driveStraight(double inches) {
         double turningValue = (0 - gyro.getAngle()) * Constants.DriveTrain.kP_TURN;
         // Invert the direction of the turn if we are going backwards
