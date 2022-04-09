@@ -7,7 +7,10 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -61,9 +64,9 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
 
-        frontLeft.setInverted(true);
+        frontLeft.setInverted(false);
         rearLeft.setInverted(InvertType.FollowMaster);
-        frontRight.setInverted(false);
+        frontRight.setInverted(true);
         rearRight.setInverted(InvertType.FollowMaster);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
@@ -80,8 +83,8 @@ public class DriveTrain extends SubsystemBase {
      * @param speed Speed of robot
      */
     public void cheesyDrive(double turn, double speed, double nerf) {
-        frontLeft.set(ControlMode.PercentOutput, (speed - turn) * nerf);
-        frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
+        frontLeft.set(ControlMode.PercentOutput, -(speed - turn) * nerf);
+        frontRight.set(ControlMode.PercentOutput, -(speed + turn) * nerf);
     }
 
     public double getLocation() {
@@ -89,7 +92,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getEncoderPosition() {
-        return (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
+        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2);
     }
 
     public void zeroEncoders() {
@@ -100,35 +103,56 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getAngle() {
-        double angle = -gyro.getAngle() % 360;
-        double out = (angle < -180) ? angle + 360 : angle;
-        return (out > 180) ? out - 360 : out;
+        return (gyro.getAngle() % 360);
     }
 
     public void zeroGyro() {
         gyro.reset();
     }
 
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("encoder", getEncoderPosition());
+
+        SmartDashboard.putNumber("Angle", gyro.getAngle());
+    }
+
+}
     public void driveStraight(double inches) {
         double turningValue = (0 - gyro.getAngle()) * Constants.DriveTrain.kP_TURN;
         // Invert the direction of the turn if we are going backwards
         double distance = inches * Constants.DriveTrain.NU_PER_INCH;
+        SmartDashboard.putNumber("Distance", distance);
         turningValue = Math.copySign(turningValue, distance);
 
         double finalTurningValue = turningValue;
-        RunCommand driveStraightBackward = new RunCommand(() -> cheesyDrive(finalTurningValue, -1, 1), this);
-        RunCommand driveStraightForward = new RunCommand(() -> cheesyDrive(finalTurningValue, 1, 1), this);
 
         if (distance < 0) {
             while (getEncoderPosition() > distance) {
-                driveStraightBackward.execute();
+                cheesyDrive(finalTurningValue, -1, 0.1);
+                SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
+                SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
+                SmartDashboard.putNumber("encoder", getEncoderPosition());
             }
-            driveStraightBackward.end(false);
+            cheesyDrive(0,0,1);
         } else if (distance > 0) {
             while (getEncoderPosition() < distance) {
-                driveStraightForward.execute();
+                cheesyDrive(finalTurningValue, 1, 0.1);
+                SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
+                SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
+                SmartDashboard.putNumber("encoder", getEncoderPosition());
             }
-            driveStraightForward.end(false);
+            cheesyDrive(0,0,1);
         }
+    }
+
+    public void turnToAngle(int angle) {
+        zeroEncoders();
+        double encoderValue = angle * 5.322;
+        
+        frontRight.set(ControlMode.Position, encoderValue);
+        frontLeft.set(ControlMode.Position, -encoderValue);
     }
 }

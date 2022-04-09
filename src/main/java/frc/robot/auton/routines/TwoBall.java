@@ -5,24 +5,21 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.auton.commands.DT_TurnToAngle;
-import frc.robot.auton.commands.I_StartIntake;
-import frc.robot.auton.commands.I_StopIntake;
-import frc.robot.auton.commands.S_ShooterHigh;
+import frc.robot.auton.commands.*;
 
 public class TwoBall extends SequentialCommandGroup {
     public TwoBall() {
         addCommands(
-                new InstantCommand(Robot.getDriveTrain()::zeroEncoders),
+                new DT_ResetSensors(),
 
-                new I_StartIntake(),
-                new RunCommand(() -> Robot.getDriveTrain().driveStraight(15)),
-
-                new DT_TurnToAngle(180),
-                new I_StopIntake(),
-                new RunCommand(() -> Robot.getDriveTrain().driveStraight(15)),
-
-                new S_ShooterHigh()
+//                new I_StartIntake(),
+//                new RunCommand(() -> Robot.getDriveTrain().driveStraight(60)),
+//
+//                new I_StopIntake(),
+                new InstantCommand(() -> Robot.getDriveTrain().turnToAngle(180))
+//                new RunCommand(() -> Robot.getDriveTrain().driveStraight(60)),
+//
+//                new S_ShooterLow()
         );
         addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());
     }

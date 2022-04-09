@@ -64,6 +64,10 @@ public class RobotContainer {
                 .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
 
+        driver.getAButton().toggleWhenPressed(
+                new InstantCommand(Robot.getDriveTrain()::zeroEncoders,Robot.getDriveTrain())
+        );
+
         operator.getAButton().whenActive(
             new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
                 .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIntake()))
