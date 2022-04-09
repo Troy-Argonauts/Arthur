@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
         driveTrain = new DriveTrain();
         intake = new Intake();
         shooter = new Shooter();
-        climber = new Climber();
+        //climber = new Climber();
         pneumaticsSystem = new PneumaticsSystem();
         indexer = new Indexer();
 

@@ -98,17 +98,17 @@ public class RobotContainer {
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
         );
 
-        new DPadButton(operator, DPadButton.Direction.UP).whenActive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.UP), Robot.getClimber())
-        ).whenInactive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
-        );
-
-        new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.DOWN), Robot.getClimber())
-        ).whenInactive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
-        );
+//        new DPadButton(operator, DPadButton.Direction.UP).whenActive(
+//            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.UP), Robot.getClimber())
+//        ).whenInactive(
+//            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
+//        );
+//
+//        new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(
+//            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.DOWN), Robot.getClimber())
+//        ).whenInactive(
+//            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
+//        );
 
         new DPadButton(operator, DPadButton.Direction.LEFT).toggleWhenPressed(
             new ShooterHigh()

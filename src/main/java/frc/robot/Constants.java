@@ -48,6 +48,7 @@ public final class Constants {
 
     public interface Shooter {
         int PORT = 9;
+        int SLAVE_PORT = 8;
         double F = 0.05;
         double P = 0;
         double I = 0;
