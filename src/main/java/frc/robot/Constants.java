@@ -38,7 +38,7 @@ public final class Constants {
         int FLOOR = 6;
         int UP = 7;
         double FLOOR_SPEED = 0.3;
-        double UP_SPEED = 0.7;
+        double UP_SPEED = 0.85;
     }
 
     public interface Pneumatics {
@@ -48,15 +48,17 @@ public final class Constants {
 
     public interface Shooter {
         int PORT = 9;
-        int SLAVE_PORT = 8;
+        int SLAVE_PORT = 10;
         double F = 0.05;
         double P = 0;
         double I = 0;
         double D = 0;
         double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
         double RAMP_SECONDS = 1.5;
-        double LOW_SPEED = 0.5;
-        double HIGH_SPEED = 0.95;
+        double MAIN_LOW_SPEED = 0.33;
+        double MAIN_HIGH_SPEED = 0.95;
+        double SLAVE_LOW_SPEED = 0.33;
+        double SLAVE_HIGH_SPEED = 0.95;
     }
 
     public interface Limelight {

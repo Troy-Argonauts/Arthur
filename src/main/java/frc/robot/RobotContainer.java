@@ -52,11 +52,11 @@ public class RobotContainer {
         Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
         // Driver Controls
-        Robot.getDriveTrain().setDefaultCommand(
-                new RunCommand(() ->  {
-                            Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
-                        }, Robot.getDriveTrain())
-        );
+        // Robot.getDriveTrain().setDefaultCommand(
+        //         new RunCommand(() ->  {
+        //                     Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
+        //                 }, Robot.getDriveTrain())
+        // );
 
         driver.getBButton().toggleWhenPressed(
             new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())
@@ -78,7 +78,7 @@ public class RobotContainer {
             new InstantCommand(
                 Robot.getPneumaticsSystem()::dropIntake)
                 .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.IN), Robot.getIntake()))
-                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer()))
+                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.FLOOR), Robot.getIndexer()))
         );
 
         operator.getLBButton().toggleWhenPressed(

@@ -29,7 +29,7 @@ public class Shooter extends SubsystemBase {
         shooterMain.setSensorPhase(false);
         shooterMain.setInverted(false);
         shooterSlave.setSensorPhase(false);
-        shooterSlave.setInverted(false);
+        shooterSlave.setInverted(true);
 
         StatorCurrentLimitConfiguration statorCurrentLimitConfiguration = new StatorCurrentLimitConfiguration();
         statorCurrentLimitConfiguration.currentLimit = 60;
@@ -67,13 +67,13 @@ public class Shooter extends SubsystemBase {
     public void setState(ShooterState state) {
         switch (state) {
             case LOW:
-                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.LOW_SPEED);
-                shooterSlave.set(ControlMode.PercentOutput, Constants.Shooter.LOW_SPEED);
+                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.MAIN_LOW_SPEED);
+                shooterSlave.set(ControlMode.PercentOutput, Constants.Shooter.SLAVE_LOW_SPEED);
                 active = true;
                 break;
             case HIGH:
-                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.HIGH_SPEED);
-                shooterSlave.set(ControlMode.PercentOutput, Constants.Shooter.HIGH_SPEED);
+                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.MAIN_HIGH_SPEED);
+                shooterSlave.set(ControlMode.PercentOutput, Constants.Shooter.SLAVE_HIGH_SPEED);
                 active = true;
                 break;
             case STOPPED:

@@ -22,8 +22,8 @@ public class Indexer extends SubsystemBase {
         floorMotor = new CANSparkMax(Constants.Indexer.FLOOR, CANSparkMax.MotorType.kBrushless);
         upMotor = new CANSparkMax(Constants.Indexer.UP, CANSparkMax.MotorType.kBrushless);
 
-        floorMotor.setInverted(false);
-        upMotor.setInverted(false);
+        floorMotor.setInverted(true);
+        upMotor.setInverted(true);
 
         floorMotor.setSmartCurrentLimit(20);
         upMotor.setSmartCurrentLimit(20);

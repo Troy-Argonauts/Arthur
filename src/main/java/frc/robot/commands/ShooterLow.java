@@ -27,8 +27,10 @@ public class ShooterLow extends SequentialCommandGroup {
             new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake),
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()),
             new WaitCommand(1),
-            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer()),
-            new WaitCommand(1),
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.UP), Robot.getIndexer()),
+            new WaitCommand(0.75),
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.FLOOR), Robot.getIndexer()),
+            new WaitCommand(2.5),
             new ParallelCommandGroup(
                 new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()),
                 new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
