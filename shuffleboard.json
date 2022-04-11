@@ -22,7 +22,7 @@
               "_title": "Auton"
             }
           },
-          "6,3": {
+          "3,1": {
             "size": [
               1,
               1
@@ -33,7 +33,7 @@
               "_title": "Front Right P"
             }
           },
-          "7,3": {
+          "4,1": {
             "size": [
               1,
               1
@@ -44,7 +44,7 @@
               "_title": "Front Left P"
             }
           },
-          "8,3": {
+          "5,1": {
             "size": [
               1,
               1
@@ -55,7 +55,7 @@
               "_title": "Rear Right P"
             }
           },
-          "9,3": {
+          "6,1": {
             "size": [
               1,
               1
@@ -194,7 +194,7 @@
               "_title": "Up Percentage"
             }
           },
-          "3,3": {
+          "3,2": {
             "size": [
               1,
               1
@@ -253,28 +253,6 @@
               "_title": "Indexer Floor Percentage:  "
             }
           },
-          "7,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turn",
-              "_title": "Turn"
-            }
-          },
-          "8,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Speed",
-              "_title": "Speed"
-            }
-          },
           "1,1": {
             "size": [
               1,
@@ -297,6 +275,61 @@
               "_title": "Shooter Activated",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Indexer Floor Temperature",
+              "_title": "Indexer Floor Temperature"
+            }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Limelight Distance",
+              "_title": "Limelight Distance"
+            }
+          },
+          "4,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
+              "_title": "limelight_PipelineName"
+            }
+          },
+          "5,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight_Interface",
+              "_title": "limelight_Interface"
+            }
+          },
+          "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight_Stream",
+              "_title": "limelight_Stream"
             }
           }
         }
@@ -465,9 +498,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -18.399999618530273,
-    "y": 0.0,
-    "width": 1551.199951171875,
-    "height": 831.2000122070312
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 838.4000244140625
   }
 }

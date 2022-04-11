@@ -7,13 +7,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PneumaticsSystem extends SubsystemBase {
-    
-    private final Compressor compressor;
+
     private final DoubleSolenoid intakeSolenoid, climberSolenoid;
     private DoubleSolenoid.Value intakeCurrentState,climberCurrentState;
 
-    public PneumaticsSystem() { 
-        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    public PneumaticsSystem() {
+        Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
         intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.INTAKE_SOLENOID_1, Constants.Pneumatics.INTAKE_SOLENOID_2);
         intakeCurrentState = DoubleSolenoid.Value.kForward;
