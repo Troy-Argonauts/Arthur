@@ -14,9 +14,7 @@ public class Climber extends SubsystemBase {
     private final TalonFX rightMotor, leftMotor;
 
     public enum ClimberState {
-        EXTEND,
-        RETRACT,
-        STOPPED
+        EXTEND, RETRACT, STOPPED
     }
 
     public Climber() {
