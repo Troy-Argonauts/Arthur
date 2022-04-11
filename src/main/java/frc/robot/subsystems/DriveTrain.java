@@ -89,13 +89,6 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getEncoderPosition() {
-        return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2);
-    }
-
-    public double getEncoderPosition(boolean backwards) {
-        if (backwards) {
-            return -(Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
-        }
         return (Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
     }
 
@@ -164,10 +157,8 @@ public class DriveTrain extends SubsystemBase {
         double nativeUnitsPosition = angle * 172.22;
         motorBreakMode(true);
 
-        while (getEncoderPosition(false) < nativeUnitsPosition) {
-            cheesyDrive(0.3, 0, 1);
-        }
-        cheesyDrive(0, 0, 1);
+        frontRight.set(ControlMode.Position, nativeUnitsPosition);
+        frontLeft.set(ControlMode.Position, nativeUnitsPosition);
         motorBreakMode(false);
     }
 }
