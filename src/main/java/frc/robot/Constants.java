@@ -69,10 +69,10 @@ public final class Constants {
         double LIMELIGHT_ANGLE = 0;
     }
 
-    public interface MonkeyBars {
+    public interface Climber {
         int CLIMBER_RIGHT = 10;
         int CLIMBER_LEFT = 11;
-        int CLIMBER_OLD = 8;
+        double CLIMBER_SPEED = 0.2;
     }
   
     public interface Controller {

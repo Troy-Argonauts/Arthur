@@ -25,14 +25,6 @@ public class PneumaticsSystem extends SubsystemBase {
         updateClimberState();
     }
 
-    public void toggleCompressor() {
-        if(compressor.enabled()){
-            compressor.disable();
-        } else {
-            compressor.enableDigital();
-        }
-    }
-
     public void retractClimber() {
         if (climberCurrentState == DoubleSolenoid.Value.kForward) {
             climberCurrentState = DoubleSolenoid.Value.kReverse;

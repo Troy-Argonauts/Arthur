@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.Controller;
 import frc.libs.util.DPadButton;
+import frc.robot.subsystems.Climber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -127,37 +128,6 @@ public class RobotContainer {
         operator.getYButton().toggleWhenPressed(
                 new InstantCommand(Robot.getIntake()::toggleDirection)
         );
-
-        // Toggle Compressor
-        operator.getSTARTButton().toggleWhenPressed(
-                new InstantCommand(Robot.getPneumaticsSystem()::toggleCompressor)
-        );
-
-        // Climber Motor Up
-        new DPadButton(operator, DPadButton.Direction.UP)
-                .whenActive(new InstantCommand(Robot.getClimber()::up))
-                .whenInactive(new InstantCommand(Robot.getClimber()::stop));
-
-        // Climber Motor Down
-        new DPadButton(operator, DPadButton.Direction.DOWN)
-                .whenActive(new InstantCommand(Robot.getClimber()::down))
-                .whenInactive(new InstantCommand(Robot.getClimber()::stop));
-
-        // Climber Pneumatic Retract
-        new DPadButton(operator, DPadButton.Direction.LEFT).whenActive(
-                new InstantCommand(Robot.getPneumaticsSystem()::retractClimber)
-                        .alongWith(new InstantCommand(Robot.getClimber()::extended))
-                );
-
-        // Climber Pneumatic Extend
-        new DPadButton(operator, DPadButton.Direction.RIGHT).whenActive(
-                new InstantCommand(Robot.getPneumaticsSystem()::extendClimber)
-                        .alongWith(new InstantCommand(Robot.getClimber()::retracted))
-                );
-
-        operator.getSTARTButton().whenActive(new InstantCommand(Robot.getClimber()::oldUp)).whenInactive(new InstantCommand(Robot.getClimber()::oldStop));
-
-        operator.getSELECTButton().whenActive(new InstantCommand(Robot.getClimber()::oldDown)).whenInactive(new InstantCommand(Robot.getClimber()::oldStop));
     }
 
     public Command getAutonomousCommand() {
