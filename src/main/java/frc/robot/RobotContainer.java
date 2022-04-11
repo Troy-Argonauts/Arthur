@@ -98,21 +98,24 @@ public class RobotContainer {
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
         );
 
-        new DPadButton(operator, DPadButton.Direction.UP).whenActive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.UP), Robot.getClimber())
-        ).whenInactive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
-        );
-
-        new DPadButton(operator, DPadButton.Direction.DOWN).whenActive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.DOWN), Robot.getClimber())
-        ).whenInactive(
-            new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED), Robot.getClimber())
-        );
-
-        new DPadButton(operator, DPadButton.Direction.LEFT).toggleWhenPressed(
+        new DPadButton(operator, DPadButton.Direction.UP).toggleWhenPressed(
             new ShooterHigh()
         );
+
+        new DPadButton(operator, DPadButton.Direction.RIGHT).whenHeld(
+                new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.EXTEND), Robot.getClimber())
+                        .alongWith(new InstantCommand(() -> Robot.getPneumaticsSystem().extendClimber(), Robot.getClimber()))
+        ).whenInactive(
+                new InstantCommand((() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED)), Robot.getClimber())
+        );
+
+        new DPadButton(operator, DPadButton.Direction.LEFT).whenHeld(
+                new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.RETRACT), Robot.getClimber())
+                        .alongWith(new InstantCommand(() -> Robot.getPneumaticsSystem().retractClimber(), Robot.getClimber()))
+        ).whenInactive(
+                new InstantCommand((() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED)), Robot.getClimber())
+        );
+
     }
 
     public ArgoController getDriver() {

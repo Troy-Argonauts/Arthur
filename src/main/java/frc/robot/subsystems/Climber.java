@@ -16,18 +16,18 @@ public class Climber extends SubsystemBase {
     public enum ClimberState {
         EXTEND,
         RETRACT,
-        STOP
+        STOPPED
     }
 
     public Climber() {
-        rightMotor = new TalonFX(Constants.Climber.CLIMBER_RIGHT);
+        rightMotor = new TalonFX(Constants.Climber.RIGHT_PORT);
         rightMotor.setNeutralMode(NeutralMode.Brake);
         rightMotor.setInverted(false);
         rightMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
         rightMotor.configFeedbackNotContinuous(false, 4);
         rightMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
 
-        leftMotor = new TalonFX(Constants.Climber.CLIMBER_LEFT);
+        leftMotor = new TalonFX(Constants.Climber.LEFT_PORT);
         leftMotor.setNeutralMode(NeutralMode.Brake);
         leftMotor.setInverted(true);
         leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 50);
@@ -45,7 +45,7 @@ public class Climber extends SubsystemBase {
                 rightMotor.set(ControlMode.PercentOutput, -Constants.Climber.CLIMBER_SPEED);
                 leftMotor.set(ControlMode.PercentOutput, -Constants.Climber.CLIMBER_SPEED);
                 break;
-            case STOP:
+            case STOPPED:
                 rightMotor.set(ControlMode.PercentOutput, 0);
                 leftMotor.set(ControlMode.PercentOutput, 0);
                 break;
