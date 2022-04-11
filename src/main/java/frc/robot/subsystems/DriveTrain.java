@@ -133,6 +133,8 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Distance", distance);
         turningValue = Math.copySign(turningValue, distance);
 
+        motorBreakMode(true);
+
         if (distance < 0) {
             while (getEncoderPosition() > distance) {
                 cheesyDrive(turningValue, -1, 0.1);
@@ -150,6 +152,8 @@ public class DriveTrain extends SubsystemBase {
             }
             cheesyDrive(0,0,1);
         }
+
+        motorBreakMode(false);
     }
 
     public void turnToAngle(double angle) {
