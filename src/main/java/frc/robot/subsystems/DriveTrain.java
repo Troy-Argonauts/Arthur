@@ -92,6 +92,13 @@ public class DriveTrain extends SubsystemBase {
         return ((frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2);
     }
 
+    public double getEncoderPosition(boolean backwards) {
+        if (backwards) {
+            return -(Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
+        }
+        return (Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
+    }
+
     public void zeroEncoders() {
         frontRight.setSelectedSensorPosition(0);
         frontLeft.setSelectedSensorPosition(0);
@@ -105,6 +112,16 @@ public class DriveTrain extends SubsystemBase {
 
     public void zeroGyro() {
         gyro.reset();
+    }
+
+    private void motorBreakMode(boolean enabled) {
+        if (enabled) {
+            frontLeft.setNeutralMode(NeutralMode.Brake);
+            frontRight.setNeutralMode(NeutralMode.Brake);
+        } else {
+            frontLeft.setNeutralMode(NeutralMode.Coast);
+            frontRight.setNeutralMode(NeutralMode.Coast);
+        }
     }
 
     @Override
@@ -123,11 +140,9 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Distance", distance);
         turningValue = Math.copySign(turningValue, distance);
 
-        double finalTurningValue = turningValue;
-
         if (distance < 0) {
             while (getEncoderPosition() > distance) {
-                cheesyDrive(finalTurningValue, -1, 0.1);
+                cheesyDrive(turningValue, -1, 0.1);
                 SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
                 SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
                 SmartDashboard.putNumber("encoder", getEncoderPosition());
@@ -135,7 +150,7 @@ public class DriveTrain extends SubsystemBase {
             cheesyDrive(0,0,1);
         } else if (distance > 0) {
             while (getEncoderPosition() < distance) {
-                cheesyDrive(finalTurningValue, 1, 0.1);
+                cheesyDrive(turningValue, 1, 0.1);
                 SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
                 SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
                 SmartDashboard.putNumber("encoder", getEncoderPosition());
@@ -144,11 +159,15 @@ public class DriveTrain extends SubsystemBase {
         }
     }
 
-    public void turnToAngle(int angle) {
+    public void turnToAngle(double angle) {
         zeroEncoders();
-        double encoderValue = angle * 5.322;
-        
-        frontRight.set(ControlMode.Position, encoderValue);
-        frontLeft.set(ControlMode.Position, -encoderValue);
+        double nativeUnitsPosition = angle * 172.22;
+        motorBreakMode(true);
+
+        while (getEncoderPosition(false) < nativeUnitsPosition) {
+            cheesyDrive(0.3, 0, 1);
+        }
+        cheesyDrive(0, 0, 1);
+        motorBreakMode(false);
     }
 }
