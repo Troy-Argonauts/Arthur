@@ -13,9 +13,13 @@ public class Shooter extends SubsystemBase {
     private final TalonFX shooterMain;
     private final TalonFX shooterSlave;
     private boolean active;
+    public static double MAIN_LOW_SPEED;
+    public static double SLAVE_LOW_SPEED;
 
     public Shooter() {
         active = false;
+        MAIN_LOW_SPEED = Constants.Shooter.MAIN_LOW_SPEED;
+        SLAVE_LOW_SPEED = Constants.Shooter.SLAVE_LOW_SPEED;
 
         shooterMain = new TalonFX(Constants.Shooter.PORT);
         shooterSlave = new TalonFX(Constants.Shooter.SLAVE_PORT);
@@ -67,8 +71,8 @@ public class Shooter extends SubsystemBase {
     public void setState(ShooterState state) {
         switch (state) {
             case LOW:
-                shooterMain.set(ControlMode.PercentOutput, Constants.Shooter.MAIN_LOW_SPEED);
-                shooterSlave.set(ControlMode.PercentOutput, Constants.Shooter.SLAVE_LOW_SPEED);
+                shooterMain.set(ControlMode.PercentOutput, MAIN_LOW_SPEED);
+                shooterSlave.set(ControlMode.PercentOutput, SLAVE_LOW_SPEED);
                 active = true;
                 break;
             case HIGH:
