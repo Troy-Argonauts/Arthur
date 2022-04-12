@@ -49,4 +49,23 @@ public class Climber extends SubsystemBase {
                 break;
         }
     }
+
+    public void rightMotorUp() {
+        rightMotor.set(ControlMode.PercentOutput, Constants.Climber.CLIMBER_SPEED);
+    }
+    public void leftMotorUp() {
+        leftMotor.set(ControlMode.PercentOutput, Constants.Climber.CLIMBER_SPEED);
+    }
+    public void rightMotorDown() {
+        rightMotor.set(ControlMode.PercentOutput, -Constants.Climber.CLIMBER_SPEED);
+    }
+    public void leftMotorDown() {
+        leftMotor.set(ControlMode.PercentOutput, -Constants.Climber.CLIMBER_SPEED);
+    }
+    public void rightMotorStop() {
+        rightMotor.set(ControlMode.PercentOutput, 0);
+    }
+    public void leftMotorStop() {
+        leftMotor.set(ControlMode.PercentOutput, 0);
+    }
 }

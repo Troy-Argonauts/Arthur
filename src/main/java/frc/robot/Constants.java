@@ -67,9 +67,9 @@ public final class Constants {
     }
 
     public interface Climber {
-        int RIGHT_PORT = 10;
-        int LEFT_PORT = 11;
-        double CLIMBER_SPEED = 0.2;
+        int RIGHT_PORT = 11;
+        int LEFT_PORT = 12;
+        double CLIMBER_SPEED = 0.7;
     }
   
     public interface Controller {

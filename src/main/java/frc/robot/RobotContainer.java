@@ -98,24 +98,53 @@ public class RobotContainer {
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
         );
 
-        new DPadButton(operator, DPadButton.Direction.UP).toggleWhenPressed(
+        new DPadButton(operator, DPadButton.Direction.RIGHT).toggleWhenPressed(
             new ShooterHigh()
         );
 
-        new DPadButton(operator, DPadButton.Direction.RIGHT).whenHeld(
+        new DPadButton(driver, DPadButton.Direction.RIGHT).whenHeld(
+                new InstantCommand(() -> Robot.getClimber().rightMotorUp())
+        ).whenInactive(
+                new InstantCommand((() -> Robot.getClimber().rightMotorStop()))
+        );
+
+        new DPadButton(driver, DPadButton.Direction.UP).whenHeld(
+                new InstantCommand(() -> Robot.getClimber().leftMotorUp())
+        ).whenInactive(
+                new InstantCommand((() -> Robot.getClimber().leftMotorStop()))
+        );
+
+        new DPadButton(driver, DPadButton.Direction.LEFT).whenHeld(
+                new InstantCommand(() -> Robot.getClimber().leftMotorDown())
+        ).whenInactive(
+                new InstantCommand((() -> Robot.getClimber().leftMotorStop()))
+        );
+
+        new DPadButton(driver, DPadButton.Direction.DOWN).whenHeld(
+                new InstantCommand(() -> Robot.getClimber().rightMotorDown())
+        ).whenInactive(
+                new InstantCommand((() -> Robot.getClimber().rightMotorStop()))
+        );
+
+        driver.getRBButton().toggleWhenPressed(
+                new InstantCommand(() -> Robot.getPneumaticsSystem().extendClimber())
+        );
+
+        driver.getLBButton().toggleWhenPressed(
+                new InstantCommand(() -> Robot.getPneumaticsSystem().retractClimber())
+        );
+
+        new DPadButton(operator, DPadButton.Direction.UP).whenHeld(
                 new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.EXTEND), Robot.getClimber())
-                        .alongWith(new InstantCommand(() -> Robot.getPneumaticsSystem().extendClimber(), Robot.getClimber()))
         ).whenInactive(
                 new InstantCommand((() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED)), Robot.getClimber())
         );
 
-        new DPadButton(operator, DPadButton.Direction.LEFT).whenHeld(
+        new DPadButton(operator, DPadButton.Direction.DOWN).whenHeld(
                 new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.RETRACT), Robot.getClimber())
-                        .alongWith(new InstantCommand(() -> Robot.getPneumaticsSystem().retractClimber(), Robot.getClimber()))
         ).whenInactive(
                 new InstantCommand((() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED)), Robot.getClimber())
         );
-
     }
 
     public ArgoController getDriver() {

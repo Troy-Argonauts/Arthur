@@ -18,22 +18,22 @@ public class PneumaticsSystem extends SubsystemBase {
         intakeCurrentState = DoubleSolenoid.Value.kForward;
 
         climberSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.CLIMBER_SOLENOID_1, Constants.Pneumatics.CLIMBER_SOLENOID_2);
-        climberCurrentState = DoubleSolenoid.Value.kReverse;
+        climberCurrentState = DoubleSolenoid.Value.kForward;
 
         updateIntakeState();
         updateClimberState();
     }
 
     public void retractClimber() {
-        if (climberCurrentState == DoubleSolenoid.Value.kForward) {
-            climberCurrentState = DoubleSolenoid.Value.kReverse;
+        if (climberCurrentState == DoubleSolenoid.Value.kReverse) {
+            climberCurrentState = DoubleSolenoid.Value.kForward;
             updateClimberState();
         }
     }
 
     public void extendClimber() {
-        if (climberCurrentState == DoubleSolenoid.Value.kReverse) {
-            climberCurrentState = DoubleSolenoid.Value.kForward;
+        if (climberCurrentState == DoubleSolenoid.Value.kForward) {
+            climberCurrentState = DoubleSolenoid.Value.kReverse;
             updateClimberState();
         }
     }
