@@ -27,6 +27,10 @@ public final class Constants {
         double PIDTolerance = 0.5;
         double ROBOT_WIDTH = Units.inchesToMeters(33); // Meters
         double RAMP_SECONDS = 0.75;
+
+        double Brakemode_P = 0;
+        double Brakemode_I = 0;
+        double Brakemode_D = 0;
     }
 
     public interface Intake {

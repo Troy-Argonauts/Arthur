@@ -51,11 +51,12 @@ public class RobotContainer {
         Trigger operatorRightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
         Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
 
+        RunCommand driverCommand = new RunCommand(() ->  {Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
+        }, Robot.getDriveTrain());
+
         // Driver Controls
         Robot.getDriveTrain().setDefaultCommand(
-                new RunCommand(() ->  {
-                            Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
-                        }, Robot.getDriveTrain())
+            driverCommand
         );
 
         driver.getBButton().toggleWhenPressed(
@@ -63,6 +64,15 @@ public class RobotContainer {
                 .alongWith(new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()))
                 .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
+
+        driver.getAButton().whenActive(
+            new InstantCommand(() -> driverCommand.end(false)) // End the command
+                .andThen(new InstantCommand(Robot.getDriveTrain()::zeroEncoders)) // Zero the encoders
+                .andThen(new RunCommand(Robot.getDriveTrain()::brakeMode))
+        ).whenInactive(
+                new InstantCommand(driverCommand::execute) // Start the command
+        );
+
 
         operator.getAButton().whenActive(
             new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
@@ -117,5 +127,8 @@ public class RobotContainer {
 
     public ArgoController getDriver() {
         return driver;
+    }
+    public ArgoController getOperator() {
+        return operator;
     }
 }

@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,6 +18,8 @@ public class DriveTrain extends SubsystemBase {
 
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
 
+
+    private final PIDController pid = new PIDController(Constants.DriveTrain.Brakemode_P ,Constants.DriveTrain.Brakemode_I, Constants.DriveTrain.Brakemode_D);
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
      * Has rear motors follow front motors, and sets all motors to coast when stopped.
@@ -49,6 +52,7 @@ public class DriveTrain extends SubsystemBase {
         frontRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
         frontLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
         rearRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+
         rearLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
 
         frontRight.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
@@ -78,8 +82,16 @@ public class DriveTrain extends SubsystemBase {
         frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
     }
 
+    public void brakeMode(){
+
+        frontLeft.set(ControlMode.PercentOutput, pid.calculate(leftEncoders(), 0));
+        frontRight.set(ControlMode.PercentOutput, pid.calculate(rightEncoders(),0));
+        rearLeft.set(ControlMode.PercentOutput, pid.calculate(leftEncoders(), 0));
+        rearRight.set(ControlMode.PercentOutput, pid.calculate(rightEncoders(), 0));
+    }
+
     public double getLocation() {
-        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
     }
 
     public void zeroEncoders() {
@@ -87,5 +99,13 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.setSelectedSensorPosition(0);
         rearRight.setSelectedSensorPosition(0);
         rearLeft.setSelectedSensorPosition(0);
+    }
+
+    public double leftEncoders() {
+        return (frontLeft.getSelectedSensorPosition()+rearLeft.getSelectedSensorPosition())/2;
+    }
+
+    public double rightEncoders() {
+        return (frontRight.getSelectedSensorPosition()+rearRight.getSelectedSensorPosition())/2;
     }
 }
