@@ -9,47 +9,37 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
-    private boolean stopped;
-    
+    private boolean active;
+
+    public enum IntakeState {
+        IN, OUT, STOPPED
+    }
 
     public Intake() {
-        stopped = true;
-
         intakeMotor = new CANSparkMax(Constants.Intake.PORT, CANSparkMax.MotorType.kBrushless);
-
         intakeMotor.setInverted(false);
-
         intakeMotor.setIdleMode(IdleMode.kCoast);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("Intake Active", !stopped);
-    }
-
-    public void disable() {
-        intakeMotor.set(0);
-        stopped = true;
+        SmartDashboard.putBoolean("Intake Active", active);
     }
 
     public void setState(IntakeState state) {
         switch (state) {
             case OUT:
                 intakeMotor.set(Constants.Intake.SPEED);
-                stopped = false;
+                active = true;
                 break;
             case IN:
                 intakeMotor.set(-Constants.Intake.SPEED);
-                stopped = false;
+                active = true;
                 break;
             case STOPPED:
                 intakeMotor.set(0);
-                stopped = true;
+                active = false;
                 break;
         }
-    }
-
-    public enum IntakeState {
-        IN, OUT, STOPPED
     }
 }

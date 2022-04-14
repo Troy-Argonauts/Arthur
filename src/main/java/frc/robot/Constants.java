@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.util.Units;
-
 public final class Constants {
 
     public interface DriveTrain {
@@ -14,19 +12,14 @@ public final class Constants {
         int FRONT_LEFT = 1;
         int REAR_RIGHT = 4;
         int REAR_LEFT = 2;
-
         double WHEEL_DIAMETER_METERS = 0.2;
         double ENCODER_CPR = 2048;
         double ENCODER_DISTANCE_PER_PULSE = (WHEEL_DIAMETER_METERS * Math.PI)/ ENCODER_CPR;
         double P = 0.02;
         double I = 0;
         double D = 0;
-        double S = 0.20094;
-        double V = 1.6658;
-        double A = 0.4515;
-        double PIDTolerance = 0.5;
-        double ROBOT_WIDTH = Units.inchesToMeters(33); // Meters
         double RAMP_SECONDS = 0.75;
+        double PID_TOLERANCE = 0.5;
     }
 
     public interface Intake {
@@ -53,12 +46,9 @@ public final class Constants {
         double P = 0;
         double I = 0;
         double D = 0;
-        double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
         double RAMP_SECONDS = 1.5;
-        double MAIN_LOW_SPEED = 0.33;
-        double MAIN_HIGH_SPEED = 0.95;
-        double SLAVE_LOW_SPEED = 0.33;
-        double SLAVE_HIGH_SPEED = 0.95;
+        double FRONT_DEFAULT_SPEED = 0.33;
+        double BACK_DEFAULT_SPEED = 0.33;
     }
 
     public interface Limelight {

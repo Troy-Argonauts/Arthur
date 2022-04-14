@@ -6,14 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.libs.util.ArgoController;
 import frc.libs.util.DPadButton;
-import frc.robot.commands.ShooterHigh;
-import frc.robot.commands.ShooterLow;
+import frc.robot.commands.ShootingSequence;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -49,9 +46,9 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-         Robot.getDriveTrain().setDefaultCommand(
-                 new RunCommand(() ->  {
-                             Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.8);
+        Robot.getDriveTrain().setDefaultCommand(
+                new RunCommand(() ->  {
+                    Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.8);
                          }, Robot.getDriveTrain())
          );
 
@@ -84,7 +81,7 @@ public class RobotContainer {
         );
 
         operator.getXButton().toggleWhenPressed(
-            new ShooterLow()
+            new ShootingSequence()
         );
 
         operator.getYButton().whenActive(
@@ -114,15 +111,15 @@ public class RobotContainer {
                 );
 
         new DPadButton(operator, DPadButton.Direction.LEFT).whenPressed(
-                        new InstantCommand(() -> Shooter.MAIN_LOW_SPEED -= 0.01)
-                                .alongWith(new InstantCommand(() -> Shooter.SLAVE_LOW_SPEED -= 0.01))
+                        new InstantCommand(() -> Shooter.FRONT_SPEED -= 0.01)
+                                .alongWith(new InstantCommand(() -> Shooter.BACK_SPEED -= 0.01))
 //                new InstantCommand(() -> Shooter.PRESET_POSITION -= 1)
 //                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
                 );
 
         new DPadButton(operator, DPadButton.Direction.RIGHT).whenPressed(
-                new InstantCommand(() -> Shooter.MAIN_LOW_SPEED += 0.01)
-                        .alongWith(new InstantCommand(() -> Shooter.SLAVE_LOW_SPEED += 0.01))
+                new InstantCommand(() -> Shooter.FRONT_SPEED += 0.01)
+                        .alongWith(new InstantCommand(() -> Shooter.BACK_SPEED += 0.01))
 //                new InstantCommand(() -> Shooter.PRESET_POSITION += 1)
 //                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
                 );

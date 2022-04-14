@@ -15,7 +15,7 @@ public class DT_MoveToSetpoint extends PIDCommand {
             output -> Robot.getDriveTrain().cheesyDrive(0, output, 0.7),
             Robot.getDriveTrain()
         );
-        getController().setTolerance(Constants.DriveTrain.PIDTolerance);
+        getController().setTolerance(Constants.DriveTrain.PID_TOLERANCE);
     }
 
     @Override

@@ -11,10 +11,6 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
-    /** 
-     * Creates all 2 main motors of the robot
-     */
-
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
 
     /**
