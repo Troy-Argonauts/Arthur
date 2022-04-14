@@ -66,6 +66,6 @@ public final class Constants {
     public interface Controller {
         int DRIVER_PORT = 0;
         int OPERATOR_PORT = 1;
-        double CONTROLLER_DRIFT = 0;
+        double CONTROLLER_DRIFT = 0.05;
     }
 }

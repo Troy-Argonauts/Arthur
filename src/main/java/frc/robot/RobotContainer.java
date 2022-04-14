@@ -48,7 +48,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         Robot.getDriveTrain().setDefaultCommand(
                 new RunCommand(() ->  {
-                    Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.8);
+                    Robot.getDriveTrain().cheesyDrive((driver.getRightJoystickX() * 0.5), driver.getLeftJoystickY(), 0.8);
                          }, Robot.getDriveTrain())
          );
 
@@ -91,7 +91,7 @@ public class RobotContainer {
         );
 
         operator.getBButton().whenActive(
-            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer())
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.FLOOR), Robot.getIndexer())
         ).whenInactive(
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
         );
@@ -111,17 +111,21 @@ public class RobotContainer {
                 );
 
         new DPadButton(operator, DPadButton.Direction.LEFT).whenPressed(
-                        new InstantCommand(() -> Shooter.FRONT_SPEED -= 0.01)
-                                .alongWith(new InstantCommand(() -> Shooter.BACK_SPEED -= 0.01))
-//                new InstantCommand(() -> Shooter.PRESET_POSITION -= 1)
-//                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
+//                        new InstantCommand(() -> Shooter.FRONT_SPEED -= 0.01)
+//                                .alongWith(new InstantCommand(() -> Shooter.BACK_SPEED -= 0.01))
+                new InstantCommand(() -> Shooter.PRESET_POSITION -= 1)
+                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
                 );
 
         new DPadButton(operator, DPadButton.Direction.RIGHT).whenPressed(
-                new InstantCommand(() -> Shooter.FRONT_SPEED += 0.01)
-                        .alongWith(new InstantCommand(() -> Shooter.BACK_SPEED += 0.01))
-//                new InstantCommand(() -> Shooter.PRESET_POSITION += 1)
-//                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
+//                new InstantCommand(() -> Shooter.FRONT_SPEED += 0.01)
+//                        .alongWith(new InstantCommand(() -> Shooter.BACK_SPEED += 0.01))
+                new InstantCommand(() -> Shooter.PRESET_POSITION += 1)
+                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
                 );
+    }
+
+    public static ArgoController getDriver() {
+        return driver;
     }
 }
