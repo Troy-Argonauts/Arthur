@@ -38,7 +38,7 @@ public final class Constants {
         int FLOOR = 6;
         int UP = 7;
         double FLOOR_SPEED = 0.3;
-        double UP_SPEED = 0.85;
+        double UP_SPEED = 0.95;
     }
 
     public interface Pneumatics {
@@ -70,7 +70,7 @@ public final class Constants {
     public interface Climber {
         int PORT = 8;
         double UP_SPEED = 0.7;
-        double DOWN_SPEED = 0.3;
+        double DOWN_SPEED = 0.7;
     }
   
     public interface Controller {

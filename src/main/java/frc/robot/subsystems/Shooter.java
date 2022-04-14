@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+import java.util.HashMap;
+
 public class Shooter extends SubsystemBase {
 
     private final TalonFX shooterMain;
     private final TalonFX shooterSlave;
     private boolean active;
-    public static double MAIN_LOW_SPEED;
-    public static double SLAVE_LOW_SPEED;
+    public static double MAIN_LOW_SPEED, SLAVE_LOW_SPEED;
+    public static int PRESET_POSITION;
 
     public Shooter() {
         active = false;
@@ -31,9 +33,9 @@ public class Shooter extends SubsystemBase {
         shooterSlave.setNeutralMode(NeutralMode.Coast);
 
         shooterMain.setSensorPhase(false);
-        shooterMain.setInverted(false);
+        shooterMain.setInverted(true);
         shooterSlave.setSensorPhase(false);
-        shooterSlave.setInverted(true);
+        shooterSlave.setInverted(false);
 
         StatorCurrentLimitConfiguration statorCurrentLimitConfiguration = new StatorCurrentLimitConfiguration();
         statorCurrentLimitConfiguration.currentLimit = 60;
@@ -52,7 +54,7 @@ public class Shooter extends SubsystemBase {
         shooterSlave.config_kP(0, Constants.Shooter.P);
         shooterSlave.config_kI(0, Constants.Shooter.I);
         shooterSlave.config_kD(0, Constants.Shooter.D);
-      
+
         shooterMain.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
         shooterMain.configOpenloopRamp(Constants.Shooter.RAMP_SECONDS);
         shooterSlave.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
@@ -62,6 +64,8 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putBoolean("Shooter Activated", active);
+        SmartDashboard.putString("Main High Speed", Shooter.MAIN_LOW_SPEED * 100 + "%");
+        SmartDashboard.putString("Slave High Speed", Shooter.SLAVE_LOW_SPEED * 100 + "%");
     }
 
     public enum ShooterState {
@@ -86,5 +90,21 @@ public class Shooter extends SubsystemBase {
                 active = false;
                 break;
         }
+    }
+
+    public void setPreset() {
+        if (PRESET_POSITION > 3) {
+            PRESET_POSITION = 0;
+        } else if (PRESET_POSITION < 0) {
+            PRESET_POSITION = 3;
+        }
+
+        String[] presetArray = {"Fender Low", "Fender High", "Tarmac High", "LaunchPad High"};
+        double[] presetMainSpeeds = {0.1, 0.33, 0.4, 0.67};
+        double[] presetSlaveSpeeds = {0.1, 0.33, 0.4, 0.67};
+
+        SmartDashboard.putString("Preset", presetArray[PRESET_POSITION]);
+        MAIN_LOW_SPEED = presetMainSpeeds[PRESET_POSITION];
+        SLAVE_LOW_SPEED = presetSlaveSpeeds[PRESET_POSITION];
     }
 }

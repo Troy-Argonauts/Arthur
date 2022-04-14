@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -48,15 +49,11 @@ public class RobotContainer {
      *
      */
     private void configureButtonBindings() {
-        Trigger operatorRightTrigger = new Trigger( () -> operator.getRightTrigger() > 0);
-        Trigger operatorLeftTrigger = new Trigger(() -> operator.getLeftTrigger() > 0 );
-
-        // Driver Controls
-        // Robot.getDriveTrain().setDefaultCommand(
-        //         new RunCommand(() ->  {
-        //                     Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.7);
-        //                 }, Robot.getDriveTrain())
-        // );
+         Robot.getDriveTrain().setDefaultCommand(
+                 new RunCommand(() ->  {
+                             Robot.getDriveTrain().cheesyDrive(driver.getRightJoystickX(), driver.getLeftJoystickY(), 0.8);
+                         }, Robot.getDriveTrain())
+         );
 
         driver.getBButton().toggleWhenPressed(
             new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())
@@ -67,11 +64,9 @@ public class RobotContainer {
         operator.getAButton().whenActive(
             new InstantCommand(Robot.getPneumaticsSystem()::dropIntake)
                 .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIntake()))
-                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.OUT), Robot.getIndexer()))
         ).whenInactive(
             new InstantCommand(Robot.getPneumaticsSystem()::pickupIntake)
                 .alongWith(new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake()))
-                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
         );
 
         operator.getRBButton().toggleWhenPressed(
@@ -92,29 +87,44 @@ public class RobotContainer {
             new ShooterLow()
         );
 
+        operator.getYButton().whenActive(
+                new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIndexer())
+        ).whenInactive(
+                new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
+        );
+
         operator.getBButton().whenActive(
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN), Robot.getIndexer())
         ).whenInactive(
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer())
         );
 
-        new DPadButton(operator, DPadButton.Direction.UP).whenPressed(
-                new InstantCommand(() -> Shooter.MAIN_LOW_SPEED += 0.05)
-                .alongWith(new InstantCommand(() -> Shooter.SLAVE_LOW_SPEED += 0.05))
-        );
+        new DPadButton(operator, DPadButton.Direction.UP)
+                .whenActive(
+                        new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.UP))
+                ).whenInactive(
+                        new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED))
+                );
 
-        new DPadButton(operator, DPadButton.Direction.DOWN).whenPressed(
-                new InstantCommand(() -> Shooter.MAIN_LOW_SPEED -= 0.05)
-                .alongWith(new InstantCommand(() -> Shooter.SLAVE_LOW_SPEED -= 0.05))
-        );
+        new DPadButton(operator, DPadButton.Direction.DOWN)
+                .whenActive(
+                        new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.DOWN))
+                ).whenInactive(
+                        new InstantCommand(() -> Robot.getClimber().setState(Climber.ClimberState.STOPPED))
+                );
 
+        new DPadButton(operator, DPadButton.Direction.LEFT).whenPressed(
+                        new InstantCommand(() -> Shooter.MAIN_LOW_SPEED -= 0.01)
+                                .alongWith(new InstantCommand(() -> Shooter.SLAVE_LOW_SPEED -= 0.01))
+//                new InstantCommand(() -> Shooter.PRESET_POSITION -= 1)
+//                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
+                );
 
-        new DPadButton(operator, DPadButton.Direction.LEFT).toggleWhenPressed(
-            new ShooterHigh()
-        );
-    }
-
-    public ArgoController getDriver() {
-        return driver;
+        new DPadButton(operator, DPadButton.Direction.RIGHT).whenPressed(
+                new InstantCommand(() -> Shooter.MAIN_LOW_SPEED += 0.01)
+                        .alongWith(new InstantCommand(() -> Shooter.SLAVE_LOW_SPEED += 0.01))
+//                new InstantCommand(() -> Shooter.PRESET_POSITION += 1)
+//                        .andThen(new InstantCommand(() -> Robot.getShooter().setPreset()))
+                );
     }
 }

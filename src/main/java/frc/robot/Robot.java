@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,7 +32,6 @@ public class Robot extends TimedRobot {
     private static Climber climber;
     private static PneumaticsSystem pneumaticsSystem;
     private static Indexer indexer;
-    private static Limelight limeLight;
 
     private final SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -45,13 +45,11 @@ public class Robot extends TimedRobot {
         driveTrain = new DriveTrain();
         intake = new Intake();
         shooter = new Shooter();
-        //climber = new Climber();
+        climber = new Climber();
         pneumaticsSystem = new PneumaticsSystem();
         indexer = new Indexer();
 
-        limeLight = Limelight.getInstance();
-        limeLight.setCameraMode(Limelight.CameraMode.DRIVER);
-        limeLight.setLedMode(Limelight.LightMode.OFF);
+        CameraServer.startAutomaticCapture();
 
         robotContainer = new RobotContainer();
 
