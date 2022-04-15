@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -80,15 +81,18 @@ public class DriveTrain extends SubsystemBase {
      * @param speed Speed of robot
      */
     public void cheesyDrive(double turn, double speed, double nerf) {
-        frontLeft.set(ControlMode.PercentOutput, -(speed - turn) * nerf);
-        frontRight.set(ControlMode.PercentOutput, -(speed + turn) * nerf);
+        frontLeft.set(ControlMode.PercentOutput, (speed - turn) * nerf);
+        frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
     }
 
     public double getLocation() {
         return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
     }
 
-    public double getEncoderPosition() {
+    public double getEncoderPosition(boolean backwards) {
+        if (backwards) {
+            return -(Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
+        }
         return (Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
     }
 
@@ -121,12 +125,12 @@ public class DriveTrain extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
         SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("encoder", getEncoderPosition());
+        SmartDashboard.putNumber("encoder", getEncoderPosition(false));
 
         SmartDashboard.putNumber("Angle", gyro.getAngle());
     }
 
-    public void driveStraight(double inches) {
+    public void driveStraight(double inches, boolean backwards) {
         double turningValue = (0 - gyro.getAngle()) * Constants.DriveTrain.kP_TURN;
         // Invert the direction of the turn if we are going backwards
         double distance = inches * Constants.DriveTrain.NU_PER_INCH;
@@ -136,19 +140,19 @@ public class DriveTrain extends SubsystemBase {
         motorBreakMode(true);
 
         if (distance < 0) {
-            while (getEncoderPosition() > distance) {
-                cheesyDrive(turningValue, -1, 0.1);
+            while (getEncoderPosition(backwards) > distance) {
+                cheesyDrive(turningValue, -1, 0.2);
                 SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
                 SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
-                SmartDashboard.putNumber("encoder", getEncoderPosition());
+                SmartDashboard.putNumber("encoder", getEncoderPosition(backwards));
             }
             cheesyDrive(0,0,1);
         } else if (distance > 0) {
-            while (getEncoderPosition() < distance) {
-                cheesyDrive(turningValue, 1, 0.1);
+            while (getEncoderPosition(backwards) < distance) {
+                cheesyDrive(turningValue, 1, 0.2);
                 SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
                 SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
-                SmartDashboard.putNumber("encoder", getEncoderPosition());
+                SmartDashboard.putNumber("encoder", getEncoderPosition(backwards));
             }
             cheesyDrive(0,0,1);
         }
@@ -157,12 +161,16 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void turnToAngle(double angle) {
-        zeroEncoders();
-        double nativeUnitsPosition = angle * 172.22;
-        motorBreakMode(true);
+        double time = 1.13 * (angle / 180);
 
-        frontRight.set(ControlMode.Position, nativeUnitsPosition);
-        frontLeft.set(ControlMode.Position, nativeUnitsPosition);
-        motorBreakMode(false);
+        Timer timer = new Timer();
+        timer.start();
+
+        while (timer.get() < time) {
+            cheesyDrive(1, 0, 0.25);
+        }
+
+        cheesyDrive(0,0,1);
+        timer.stop();
     }
 }

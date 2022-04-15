@@ -17,7 +17,7 @@ public class ShootAndMoveLow extends SequentialCommandGroup {
                 new DT_ResetSensors(),
 
                 new S_ShooterLow(),
-                new RunCommand(() -> Robot.getDriveTrain().driveStraight(-120))
+                new RunCommand(() -> Robot.getDriveTrain().driveStraight(-120, true))
         );
         addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());
     }
