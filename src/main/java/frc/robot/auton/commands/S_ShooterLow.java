@@ -14,12 +14,12 @@ import frc.robot.subsystems.Shooter;
 public class S_ShooterLow extends SequentialCommandGroup {
   public S_ShooterLow() {
     addCommands(
-        new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.LOW), Robot.getShooter()),
-        new WaitCommand(1),
-        new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.UP), Robot.getIndexer()),
-        new WaitCommand(2),
-        new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()),
-        new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter())
+            new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.SHOOT), Robot.getShooter()),
+            new WaitCommand(1),
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.UP), Robot.getIndexer()),
+            new WaitCommand(2),
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()),
+            new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter())
     );
     addRequirements(Robot.getShooter());
   }

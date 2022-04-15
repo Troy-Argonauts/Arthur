@@ -26,6 +26,7 @@ public final class Constants {
         double TURN_TOLERANCE_DEGREES = 1.0;
         double PID_TOLERANCE = 0.5;
         double RAMP_SECONDS = 0.75;
+        double PID_TOLERANCE = 0.5;
     }
 
     public interface Intake {
@@ -37,7 +38,7 @@ public final class Constants {
         int FLOOR = 6;
         int UP = 7;
         double FLOOR_SPEED = 0.3;
-        double UP_SPEED = 0.7;
+        double UP_SPEED = 0.95;
     }
 
     public interface Pneumatics {
@@ -47,14 +48,14 @@ public final class Constants {
 
     public interface Shooter {
         int PORT = 9;
+        int SLAVE_PORT = 10;
         double kF = 0.05;
         double kP = 0;
         double kI = 0;
         double kD = 0;
-        double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
         double RAMP_SECONDS = 1.5;
-        double LOW_SPEED = 0.5;
-        double HIGH_SPEED = 0.95;
+        double FRONT_DEFAULT_SPEED = 0.33;
+        double BACK_DEFAULT_SPEED = 0.33;
     }
 
     public interface Limelight {
@@ -66,12 +67,12 @@ public final class Constants {
     public interface Climber {
         int PORT = 8;
         double UP_SPEED = 0.7;
-        double DOWN_SPEED = 0.3;
+        double DOWN_SPEED = 0.7;
     }
   
     public interface Controller {
         int DRIVER_PORT = 0;
         int OPERATOR_PORT = 1;
-        double CONTROLLER_DRIFT = 0;
+        double CONTROLLER_DRIFT = 0.05;
     }
 }

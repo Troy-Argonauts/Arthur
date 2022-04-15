@@ -97,6 +97,4 @@ public class ArgoController extends Joystick {
     public double getTriggers() {
         return getRightTrigger() - getLeftTrigger();
     }
-
-
 }

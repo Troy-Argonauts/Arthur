@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,7 +33,6 @@ public class Robot extends TimedRobot {
     private static Climber climber;
     private static PneumaticsSystem pneumaticsSystem;
     private static Indexer indexer;
-    private static Limelight limeLight;
 
     private final SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -50,9 +50,7 @@ public class Robot extends TimedRobot {
         pneumaticsSystem = new PneumaticsSystem();
         indexer = new Indexer();
 
-        limeLight = Limelight.getInstance();
-        limeLight.setCameraMode(Limelight.CameraMode.DRIVER);
-        limeLight.setLedMode(Limelight.LightMode.OFF);
+        CameraServer.startAutomaticCapture();
 
         robotContainer = new RobotContainer();
 
@@ -66,6 +64,9 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
+
+        SmartDashboard.putNumber("Driver Right Joystick X Value", RobotContainer.getDriver().getRightJoystickX());
+        SmartDashboard.putNumber("Driver Left Joystick Y Value", RobotContainer.getDriver().getLeftJoystickY());
     }
 
     @Override
