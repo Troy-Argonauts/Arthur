@@ -11,10 +11,6 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
-    /** 
-     * Creates all 2 main motors of the robot
-     */
-
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
 
     /**
@@ -74,6 +70,25 @@ public class DriveTrain extends SubsystemBase {
      * @param speed Speed of robot
      */
     public void cheesyDrive(double turn, double speed, double nerf) {
+        if (turn >= 0.2) {
+            frontLeft.configOpenloopRamp(0);
+            frontRight.configOpenloopRamp(0);
+            rearRight.configOpenloopRamp(0);
+            rearLeft.configOpenloopRamp(0);
+            frontRight.configClosedloopRamp(0);
+            frontLeft.configClosedloopRamp(0);
+            rearRight.configClosedloopRamp(0);
+            rearLeft.configClosedloopRamp(0);
+        } else {
+            frontRight.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            frontLeft.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            rearRight.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            rearLeft.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            frontRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            frontLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            rearRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+            rearLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
+        }
         frontLeft.set(ControlMode.PercentOutput, (speed - turn) * nerf);
         frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
     }

@@ -14,7 +14,7 @@ import frc.robot.subsystems.Shooter;
 public class S_ShooterHigh extends SequentialCommandGroup {
   public S_ShooterHigh() {
     addCommands(
-            new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.HIGH), Robot.getShooter()),
+            new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.SHOOT), Robot.getShooter()),
             new WaitCommand(1),
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.UP), Robot.getIndexer()),
             new WaitCommand(2),

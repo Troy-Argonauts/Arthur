@@ -7,14 +7,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PneumaticsSystem extends SubsystemBase {
-    
-    private final Compressor compressor;
+
     private final DoubleSolenoid solenoid;
     private DoubleSolenoid.Value currentState;
 
-    public PneumaticsSystem() { 
-        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-
+    public PneumaticsSystem() {
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.SOLENOID_1, Constants.Pneumatics.SOLENOID_2);
         currentState = DoubleSolenoid.Value.kForward;
         updateState();
@@ -34,12 +31,7 @@ public class PneumaticsSystem extends SubsystemBase {
         }
     }
 
-    public void setState() {
-
-    }
-
     public void updateState() {
         solenoid.set(currentState);
     }
-
 }
