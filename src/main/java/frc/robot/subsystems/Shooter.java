@@ -45,22 +45,19 @@ public class Shooter extends SubsystemBase {
         shooterFront.configStatorCurrentLimit(statorCurrentLimitConfiguration);
         shooterBack.configStatorCurrentLimit(statorCurrentLimitConfiguration);
 
-        shooterFront.config_kF(0, Constants.Shooter.F);
-        shooterFront.config_kP(0, Constants.Shooter.P);
-        shooterFront.config_kI(0, Constants.Shooter.I);
-        shooterFront.config_kD(0, Constants.Shooter.D);
-        shooterBack.config_kF(0, Constants.Shooter.F);
-        shooterBack.config_kP(0, Constants.Shooter.P);
-        shooterBack.config_kI(0, Constants.Shooter.I);
-        shooterBack.config_kD(0, Constants.Shooter.D);
-
-        shooterMain.config_kF(0, Constants.Shooter.kF);
-        shooterMain.config_kP(0, Constants.Shooter.kP);
-        shooterMain.config_kI(0, Constants.Shooter.kI);
-        shooterMain.config_kD(0, Constants.Shooter.kD);
+        shooterFront.config_kF(0, Constants.Shooter.kF);
+        shooterFront.config_kP(0, Constants.Shooter.kP);
+        shooterFront.config_kI(0, Constants.Shooter.kI);
+        shooterFront.config_kD(0, Constants.Shooter.kD);
+        shooterBack.config_kF(0, Constants.Shooter.kF);
+        shooterBack.config_kP(0, Constants.Shooter.kP);
+        shooterBack.config_kI(0, Constants.Shooter.kI);
+        shooterBack.config_kD(0, Constants.Shooter.kD);
       
-        shooterMain.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
-        shooterMain.configOpenloopRamp(Constants.Shooter.RAMP_SECONDS);
+        shooterFront.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
+        shooterFront.configOpenloopRamp(Constants.Shooter.RAMP_SECONDS);
+        shooterBack.configClosedloopRamp(Constants.Shooter.RAMP_SECONDS);
+        shooterBack.configOpenloopRamp(Constants.Shooter.RAMP_SECONDS);
     }
 
     @Override
