@@ -15,21 +15,16 @@ public class TwoBall extends SequentialCommandGroup {
                 new DT_ResetSensors(),
 
                 new I_StartIntake(),
-                new InstantCommand(() -> Robot.getDriveTrain().driveStraight(44, false)),
-                new WaitCommand(0.5),
+                new DT_DriveStraight(44,0.5),
 
                 new I_StopIntake(),
                 new WaitCommand(1),
                 new InstantCommand(() -> Robot.getDriveTrain().turnToAngle(180)),
 
                 new WaitCommand(1),
-                new DT_ResetSensors(),
-                new InstantCommand(() -> Robot.getDriveTrain().driveStraight(110, false)),
+                new DT_DriveStraight(110, 1.75),
 
-                new WaitCommand(1.75),
-                new DT_ResetSensors(),
-                new InstantCommand(() -> Robot.getDriveTrain().driveStraight(-3, true))
-
+                new DT_DriveStraight(-3, 0.25)
 //                new S_ShooterLow()
         );
         addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());

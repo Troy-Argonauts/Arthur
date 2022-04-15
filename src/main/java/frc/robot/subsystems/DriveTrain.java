@@ -130,9 +130,14 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Angle", gyro.getAngle());
     }
 
-    public void driveStraight(double inches, boolean backwards) {
+    public void driveStraight(double inches) {
+        boolean backwards = false;
+        if (inches < 0) {
+            backwards = true;
+        }
+
         double turningValue = (0 - gyro.getAngle()) * Constants.DriveTrain.kP_TURN;
-        // Invert the direction of the turn if we are going backwards
+
         double distance = inches * Constants.DriveTrain.NU_PER_INCH;
         SmartDashboard.putNumber("Distance", distance);
         turningValue = Math.copySign(turningValue, distance);
