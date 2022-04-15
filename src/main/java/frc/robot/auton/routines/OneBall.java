@@ -4,16 +4,15 @@
 
 package frc.robot.auton.routines;
 
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.auton.commands.DT_DriveStraight;
 import frc.robot.auton.commands.DT_ResetSensors;
 import frc.robot.auton.commands.S_ShooterLow;
 
-public class ShootAndMoveLow extends SequentialCommandGroup {
+public class OneBall extends SequentialCommandGroup {
 
-    public ShootAndMoveLow() {
+    public OneBall() {
         addCommands(
                 new DT_ResetSensors(),
 

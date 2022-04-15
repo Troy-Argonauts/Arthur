@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.auton.commands.DT_MoveToSetpoint;
-import frc.robot.auton.routines.ShootAndMoveLow;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.auton.routines.OneBall;
 import frc.robot.auton.routines.TwoBall;
 import frc.robot.subsystems.*;
-import frc.robot.vision.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -56,9 +55,9 @@ public class Robot extends TimedRobot {
 
         driveTrain.zeroEncoders();
         SmartDashboard.putData("Autonomous modes", chooser);
-        chooser.setDefaultOption("Shoot and Move Low", new ShootAndMoveLow().withTimeout(15));
-        chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-40).withTimeout(15));
+        chooser.setDefaultOption("One Ball", new OneBall().withTimeout(15));
         chooser.addOption("Two Ball", new TwoBall().withTimeout(15));
+        chooser.addOption("Do Nothing", new WaitCommand(15));
     }
 
     @Override

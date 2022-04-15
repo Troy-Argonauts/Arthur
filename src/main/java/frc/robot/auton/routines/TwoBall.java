@@ -24,8 +24,8 @@ public class TwoBall extends SequentialCommandGroup {
                 new WaitCommand(1),
                 new DT_DriveStraight(110, 1.75),
 
-                new DT_DriveStraight(-3, 0.25)
-//                new S_ShooterLow()
+                new DT_DriveStraight(-3, 0.25),
+                new S_ShooterHigh()
         );
         addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());
     }
