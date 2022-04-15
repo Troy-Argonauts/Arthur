@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.auton.commands.DT_MoveToSetpoint;
 import frc.robot.auton.routines.ShootAndMoveLow;
+import frc.robot.auton.routines.TwoBall;
 import frc.robot.subsystems.*;
 import frc.robot.vision.Limelight;
 
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Autonomous modes", chooser);
         chooser.setDefaultOption("Shoot and Move Low", new ShootAndMoveLow().withTimeout(15));
         chooser.addOption("Move off Tarmac", new DT_MoveToSetpoint(-40).withTimeout(15));
+        chooser.addOption("Two Ball", new TwoBall().withTimeout(15));
     }
 
     @Override

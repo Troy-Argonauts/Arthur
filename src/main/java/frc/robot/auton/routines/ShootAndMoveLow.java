@@ -4,20 +4,22 @@
 
 package frc.robot.auton.routines;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.auton.commands.DT_MoveToSetpoint;
+import frc.robot.auton.commands.DT_DriveStraight;
+import frc.robot.auton.commands.DT_ResetSensors;
 import frc.robot.auton.commands.S_ShooterLow;
 
 public class ShootAndMoveLow extends SequentialCommandGroup {
 
     public ShootAndMoveLow() {
         addCommands(
-                new InstantCommand(Robot.getDriveTrain()::zeroEncoders),
+                new DT_ResetSensors(),
+
                 new S_ShooterLow(),
-                new DT_MoveToSetpoint(-40)
+                new DT_DriveStraight(-120, 2)
         );
-        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIndexer());
+        addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());
     }
 }

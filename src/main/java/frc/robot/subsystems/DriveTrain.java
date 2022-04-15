@@ -6,12 +6,17 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
     private final TalonFX frontLeft, frontRight, rearLeft, rearRight;
+    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 
     /**
      * Sets the values of the frontLeft and frontRight motors, and creates local rear motors.
@@ -53,15 +58,17 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
 
-        frontLeft.setInverted(true);
+        frontLeft.setInverted(false);
         rearLeft.setInverted(InvertType.FollowMaster);
-        frontRight.setInverted(false);
+        frontRight.setInverted(true);
         rearRight.setInverted(InvertType.FollowMaster);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
         frontRight.setNeutralMode(NeutralMode.Coast);
         rearLeft.setNeutralMode(NeutralMode.Coast);
         rearRight.setNeutralMode(NeutralMode.Coast);
+
+        gyro.calibrate();
     }
 
     /**
@@ -94,7 +101,14 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getLocation() {
-        return Constants.DriveTrain.ENCODER_DISTANCE_PER_PULSE * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition())/2;
+        return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
+    }
+
+    public double getEncoderPosition(boolean backwards) {
+        if (backwards) {
+            return -(Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
+        }
+        return (Math.abs(frontRight.getSelectedSensorPosition()) + Math.abs(frontLeft.getSelectedSensorPosition())) / 2;
     }
 
     public void zeroEncoders() {
@@ -102,5 +116,81 @@ public class DriveTrain extends SubsystemBase {
         frontLeft.setSelectedSensorPosition(0);
         rearRight.setSelectedSensorPosition(0);
         rearLeft.setSelectedSensorPosition(0);
+    }
+
+    public double getAngle() {
+        return (gyro.getAngle() % 360);
+    }
+
+    public void zeroGyro() {
+        gyro.reset();
+    }
+
+    private void motorBreakMode(boolean enabled) {
+        if (enabled) {
+            frontLeft.setNeutralMode(NeutralMode.Brake);
+            frontRight.setNeutralMode(NeutralMode.Brake);
+        } else {
+            frontLeft.setNeutralMode(NeutralMode.Coast);
+            frontRight.setNeutralMode(NeutralMode.Coast);
+        }
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("encoder", getEncoderPosition(false));
+
+        SmartDashboard.putNumber("Angle", gyro.getAngle());
+    }
+
+    public void driveStraight(double inches) {
+        boolean backwards = false;
+        if (inches < 0) {
+            backwards = true;
+        }
+
+        double turningValue = (0 - gyro.getAngle()) * Constants.DriveTrain.kP_TURN;
+
+        double distance = inches * Constants.DriveTrain.NU_PER_INCH;
+        SmartDashboard.putNumber("Distance", distance);
+        turningValue = Math.copySign(turningValue, distance);
+
+        motorBreakMode(true);
+
+        if (distance < 0) {
+            while (getEncoderPosition(backwards) > distance) {
+                cheesyDrive(turningValue, -1, 0.2);
+                SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
+                SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
+                SmartDashboard.putNumber("encoder", getEncoderPosition(backwards));
+            }
+            cheesyDrive(0,0,1);
+        } else if (distance > 0) {
+            while (getEncoderPosition(backwards) < distance) {
+                cheesyDrive(turningValue, 1, 0.2);
+                SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
+                SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
+                SmartDashboard.putNumber("encoder", getEncoderPosition(backwards));
+            }
+            cheesyDrive(0,0,1);
+        }
+
+        motorBreakMode(false);
+    }
+
+    public void turnToAngle(double angle) {
+        double time = 1.13 * (angle / 180);
+
+        Timer timer = new Timer();
+        timer.start();
+
+        while (timer.get() < time) {
+            cheesyDrive(1, 0, 0.25);
+        }
+
+        cheesyDrive(0,0,1);
+        timer.stop();
     }
 }

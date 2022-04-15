@@ -11,9 +11,9 @@ public class I_ReverseIntake extends ParallelCommandGroup {
 
     public I_ReverseIntake() {
         addCommands(
-                new InstantCommand(Robot.getPneumaticsSystem()::dropIntake),
-                new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIntake()),
-                new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.OUT), Robot.getIndexer())
+            new InstantCommand(Robot.getPneumaticsSystem()::dropIntake),
+            new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.OUT), Robot.getIntake()),
+            new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.OUT), Robot.getIndexer())
         );
         addRequirements(Robot.getIntake(), Robot.getPneumaticsSystem());
     }

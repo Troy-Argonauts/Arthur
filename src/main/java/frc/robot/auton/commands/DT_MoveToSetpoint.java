@@ -9,7 +9,7 @@ public class DT_MoveToSetpoint extends PIDCommand {
 
     public DT_MoveToSetpoint(double setpoint) {
         super(
-            new PIDController(Constants.DriveTrain.P, Constants.DriveTrain.I, Constants.DriveTrain.D),
+            new PIDController(Constants.DriveTrain.kP, Constants.DriveTrain.kI, Constants.DriveTrain.kD),
             Robot.getDriveTrain()::getLocation,
             -setpoint,
             output -> Robot.getDriveTrain().cheesyDrive(0, output, 0.7),
