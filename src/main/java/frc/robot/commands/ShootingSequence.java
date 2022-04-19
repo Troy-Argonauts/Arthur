@@ -28,7 +28,7 @@ public class ShootingSequence extends SequentialCommandGroup {
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()),
             new WaitCommand(1),
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.UP), Robot.getIndexer()),
-            new WaitCommand(0.75),
+            new WaitCommand(0.87),
             new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.IN, Indexer.Motor.FLOOR), Robot.getIndexer()),
             new WaitCommand(2.5),
             new ParallelCommandGroup(

@@ -58,9 +58,9 @@ public class DriveTrain extends SubsystemBase {
         rearLeft.follow(frontLeft);
         rearRight.follow(frontRight);
 
-        frontLeft.setInverted(false);
+        frontLeft.setInverted(true);
         rearLeft.setInverted(InvertType.FollowMaster);
-        frontRight.setInverted(true);
+        frontRight.setInverted(false);
         rearRight.setInverted(InvertType.FollowMaster);
 
         frontLeft.setNeutralMode(NeutralMode.Coast);
@@ -76,32 +76,14 @@ public class DriveTrain extends SubsystemBase {
      * @param turn Amount to turn the robot
      * @param speed Speed of robot
      */
-    public void cheesyDrive(double turn, double speed, double nerf) {
-        if (turn >= 0.2) {
-            frontLeft.configOpenloopRamp(0);
-            frontRight.configOpenloopRamp(0);
-            rearRight.configOpenloopRamp(0);
-            rearLeft.configOpenloopRamp(0);
-            frontRight.configClosedloopRamp(0);
-            frontLeft.configClosedloopRamp(0);
-            rearRight.configClosedloopRamp(0);
-            rearLeft.configClosedloopRamp(0);
-        } else {
-            frontRight.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            frontLeft.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            rearRight.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            rearLeft.configOpenloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            frontRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            frontLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            rearRight.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-            rearLeft.configClosedloopRamp(Constants.DriveTrain.RAMP_SECONDS);
-        }
-        frontLeft.set(ControlMode.PercentOutput, (speed - turn) * nerf);
-        frontRight.set(ControlMode.PercentOutput, (speed + turn) * nerf);
+    public void cheesyDriveAuton(double turn, double speed, double nerf) {
+        frontLeft.set(ControlMode.PercentOutput, -(speed - turn) * nerf);
+        frontRight.set(ControlMode.PercentOutput, -(speed + turn) * nerf);
     }
 
-    public double getLocation() {
-        return Constants.DriveTrain.INCHES_PER_NU * (frontRight.getSelectedSensorPosition() + frontLeft.getSelectedSensorPosition()) / 2;
+    public void cheesyDriveTeleop(double turn, double speed, double nerf) {
+        frontLeft.set(ControlMode.PercentOutput, (speed - turn * 0.8) * nerf);
+        frontRight.set(ControlMode.PercentOutput, (speed + turn * 0.8) * nerf);
     }
 
     public double getEncoderPosition(boolean backwards) {
@@ -145,7 +127,7 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Angle", gyro.getAngle());
     }
 
-    public void driveStraight(double inches) {
+    public void driveStraight(double inches, double speed) {
         boolean backwards = false;
         if (inches < 0) {
             backwards = true;
@@ -159,38 +141,36 @@ public class DriveTrain extends SubsystemBase {
 
         motorBreakMode(true);
 
-        if (distance < 0) {
             while (getEncoderPosition(backwards) > distance) {
-                cheesyDrive(turningValue, -1, 0.2);
+                cheesyDriveAuton(turningValue, -1, speed);
                 SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
                 SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
                 SmartDashboard.putNumber("encoder", getEncoderPosition(backwards));
             }
-            cheesyDrive(0,0,1);
-        } else if (distance > 0) {
+            cheesyDriveAuton(0,0,1);
+
             while (getEncoderPosition(backwards) < distance) {
-                cheesyDrive(turningValue, 1, 0.2);
+                cheesyDriveAuton(turningValue, 1, speed);
                 SmartDashboard.putNumber("Right Encoders", frontRight.getSelectedSensorPosition());
                 SmartDashboard.putNumber("Left Encoders", frontLeft.getSelectedSensorPosition());
                 SmartDashboard.putNumber("encoder", getEncoderPosition(backwards));
             }
-            cheesyDrive(0,0,1);
-        }
+            cheesyDriveAuton(0,0,1);
 
         motorBreakMode(false);
     }
 
     public void turnToAngle(double angle) {
-        double time = 1.13 * (angle / 180);
+        double time = 2.28 * (angle / 360);
 
         Timer timer = new Timer();
         timer.start();
 
         while (timer.get() < time) {
-            cheesyDrive(1, 0, 0.25);
+            cheesyDriveAuton(1, 0, 0.25);
         }
 
-        cheesyDrive(0,0,1);
+        cheesyDriveAuton(0,0,1);
         timer.stop();
     }
 }

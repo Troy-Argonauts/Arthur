@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
         driveTrain.zeroEncoders();
         SmartDashboard.putData("Autonomous modes", chooser);
         chooser.setDefaultOption("One Ball", new OneBall().withTimeout(15));
-        chooser.addOption("Two Ball", new TwoBall().withTimeout(15));
+        chooser.addOption("Two Ball", new TwoBall());
         chooser.addOption("Do Nothing", new WaitCommand(15));
     }
 

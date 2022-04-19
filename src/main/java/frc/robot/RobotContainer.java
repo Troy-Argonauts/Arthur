@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.libs.util.ArgoController;
 import frc.libs.util.DPadButton;
+import frc.robot.auton.commands.DT_ResetSensors;
+import frc.robot.commands.EmergencyStop;
 import frc.robot.commands.ShootingSequence;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
@@ -48,18 +50,16 @@ public class RobotContainer {
     private void configureButtonBindings() {
         Robot.getDriveTrain().setDefaultCommand(
                 new RunCommand(() ->  {
-                    Robot.getDriveTrain().cheesyDrive((driver.getRightJoystickX() * 0.5), driver.getLeftJoystickY(), 0.8);
+                    Robot.getDriveTrain().cheesyDriveTeleop((driver.getRightJoystickX() * 0.5), driver.getLeftJoystickY(), 0.8);
                          }, Robot.getDriveTrain())
          );
 
         driver.getBButton().toggleWhenPressed(
-            new InstantCommand(() -> Robot.getIntake().setState(Intake.IntakeState.STOPPED), Robot.getIntake())
-                .alongWith(new InstantCommand(() -> Robot.getShooter().setState(Shooter.ShooterState.STOPPED), Robot.getShooter()))
-                .alongWith(new InstantCommand(() -> Robot.getIndexer().setState(Indexer.IndexerState.STOPPED), Robot.getIndexer()))
+                new EmergencyStop()
         );
 
         driver.getAButton().toggleWhenPressed(
-                new InstantCommand(Robot.getDriveTrain()::zeroEncoders,Robot.getDriveTrain())
+                new DT_ResetSensors()
         );
 
         operator.getAButton().whenActive(

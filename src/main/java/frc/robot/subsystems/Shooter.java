@@ -101,4 +101,9 @@ public class Shooter extends SubsystemBase {
         FRONT_SPEED = presetFrontSpeeds[PRESET_POSITION];
         BACK_SPEED = presetBackSpeeds[PRESET_POSITION];
     }
+
+    public void resetPreset(int id) {
+        PRESET_POSITION = id;
+        setPreset();
+    }
 }

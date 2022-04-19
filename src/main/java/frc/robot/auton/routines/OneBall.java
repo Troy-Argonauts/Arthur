@@ -17,7 +17,7 @@ public class OneBall extends SequentialCommandGroup {
                 new DT_ResetSensors(),
 
                 new S_ShooterLow(),
-                new DT_DriveStraight(-120, 2)
+                new DT_DriveStraight(-120, 2, 0.3)
         );
         addRequirements(Robot.getDriveTrain(), Robot.getShooter(), Robot.getIntake(), Robot.getIndexer(), Robot.getPneumaticsSystem());
     }
