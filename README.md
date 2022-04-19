@@ -5,6 +5,7 @@ Without some teams who had previous years and even this year's game open source,
 some inspiration, linked below is all of their GitHubs.
 
 - [Team 217 Thunder Chickens](https://github.com/Team217/)
+- [Team 226 Hammerheads](https://github.com/hammerhead226/)
 - [Team 254 The CheesyPoofs](https://github.com/Team254/)
 - [Team 694 StuyPulse](https://github.com/StuyPulse/)
 - [Team 862 Lightning Robotics](https://github.com/frc-862/)
